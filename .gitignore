@@ -2,5 +2,7 @@
 *.o
 .*
 OBJS/
+minilibx-linux/
+cub3D
 
 !.gitignore
