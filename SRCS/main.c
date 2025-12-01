@@ -6,11 +6,12 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:26:47 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/01 15:56:13 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/02 02:40:36 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "inputs.h"
 
 static char	*create_title(char *title)
 {
@@ -55,6 +56,8 @@ static void	hook_events(t_gamedata *gamedata)
 {
 	mlx_loop_hook(gamedata->display, game_loop, gamedata);
 	mlx_hook(gamedata->window, DestroyNotify, 0, close_and_exit, gamedata);
+	mlx_hook(gamedata->window, KeyRelease, KeyReleaseMask,
+		handle_keyrelease, gamedata);
 }
 
 int	main(int argc, char *argv[])
@@ -72,6 +75,7 @@ int	main(int argc, char *argv[])
 	gamedata = (t_gamedata){0};
 	image = (t_image){0};
 	gamedata.image = &image;
+	init_gamedata(&gamedata, argv[1]);
 	init_mlx_displays(&gamedata, argv[1]);
 	hook_events(&gamedata);
 	mlx_loop(gamedata.display);

@@ -12,10 +12,16 @@ LIBS	=	$(LIBDIR)/libft.a $(MLXDIR)/libmlx.a
 
 ####################################===SOURCE FILES===####################################
 
-LOOP_DIR		=	game_loop
-LOOP_FILES		=	game_loop.c
+PARSE_DIR	=	parsing
+PARSE_FILES	=	init_gamedata.c
 
-MODULES		=	LOOP
+INPUT_DIR	=	inputs
+INPUT_FILES	=	handle_keyrelease.c
+
+LOOP_DIR	=	game_loop
+LOOP_FILES	=	game_loop.c
+
+MODULES		=	PARSE	INPUT	LOOP
 
 $(foreach M,$(MODULES), $(eval $(M)_SRCS = $(addprefix $($(M)_DIR)/, $($(M)_FILES))))
 

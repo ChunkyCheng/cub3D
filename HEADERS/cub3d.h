@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/01 15:43:40 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/02 02:29:18 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include <stdio.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <math.h>
@@ -32,6 +33,13 @@ typedef struct s_map_cell
 		DOOR
 	}	e_type;
 }	t_map_cell;
+
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	angle;
+}	t_player;
 
 typedef struct s_inputs
 {
@@ -55,9 +63,11 @@ typedef struct s_gamedata
 	void		*window;
 	t_image		*image;
 	t_map_cell	map[MAP_SIZE_MAX][MAP_SIZE_MAX];
+	t_player	player;
 	t_inputs	inputs;
 }	t_gamedata;
 
+void	init_gamedata(t_gamedata *gamedata, char *map_path);
 int		game_loop(t_gamedata *gamedata);
 int		close_and_exit(t_gamedata *gamedata);
 
