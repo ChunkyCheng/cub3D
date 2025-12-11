@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:26:47 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/02 02:40:36 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/03 14:20:49 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ static void	init_mlx_displays(t_gamedata *gamedata, char *title)
 		ft_putstr_fd("Error\nwindow init error", 2);
 		close_and_exit(gamedata);
 	}
-	gamedata->image->mlx_image
+	gamedata->img_main.mlx_image
 		= mlx_new_image(gamedata->display, WIN_WIDTH, WIN_HEIGHT);
-	if (!gamedata->image->mlx_image)
+	if (!gamedata->image.mlx_image)
 	{
 		ft_putstr_fd("Error\nimage init error", 2);
 		close_and_exit(gamedata);
 	}
-	gamedata->image->pixels = mlx_get_data_addr(gamedata->image->mlx_image,
-			&gamedata->image->bitsperpixel, &gamedata->image->row_len,
-			&gamedata->image->endian);
+	gamedata->img_main.pixels = mlx_get_data_addr(gamedata->img_main.mlx_image,
+			&gamedata->img_main.bitsperpixel, &gamedata->img_main.row_len,
+			&gamedata->img_main.endian);
 }
 
 static void	hook_events(t_gamedata *gamedata)
@@ -63,7 +63,6 @@ static void	hook_events(t_gamedata *gamedata)
 int	main(int argc, char *argv[])
 {
 	t_gamedata	gamedata;
-	t_image		image;
 
 	if (argc != 2)
 	{
@@ -73,8 +72,6 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	gamedata = (t_gamedata){0};
-	image = (t_image){0};
-	gamedata.image = &image;
 	init_gamedata(&gamedata, argv[1]);
 	init_mlx_displays(&gamedata, argv[1]);
 	hook_events(&gamedata);

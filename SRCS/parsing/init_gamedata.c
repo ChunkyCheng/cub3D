@@ -6,13 +6,14 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/02 02:30:49 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/03 14:15:17 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <fcntl.h>
 #include "cub3d.h"
+#include "parsing.h"
 
 static int	is_valid_path(char *map_path)
 {
@@ -54,8 +55,11 @@ static void	parse_map(t_gamedata *gamedata, int fd)
 			if (line[x] == 0 || line[x] == ' ')
 				gamedata->map[y][x].e_type = EMPTY;
 			else if (line[x] == 1)
+			{
 				gamedata->map[y][x].e_type = WALL;
-			else if (ft_strchr("NSEW", line[x]))
+				gamedata->map[y][x].texture = &gamedata->texture_pack.wall1;
+			}
+			else if (ft_strchr("NSWE", line[x]))
 				init_player(gamedata, x, y, line[x]);
 			x++;
 		}
@@ -63,6 +67,28 @@ static void	parse_map(t_gamedata *gamedata, int fd)
 		free(line);
 		line = get_next_line(fd);
 	}
+}
+
+static void	parse_texture_pack(t_gamedata *gamedata,
+t_texture_pack *texture_pack, int fd)
+{
+	(void)fd;
+	texture_pack->wall1.north.mlx_img
+		= mlx_xpm_file_to_image(gamedata->display, DFL_NORTH,
+			&texture_pack->wall1.north.width,
+			&textures_pack->wall1.north.height);
+	texture_pack->wall1.south.mlx_img
+			= mlx_xpm_file_to_image(gamedata->display, DFL_SOUTH,
+				&textures_pack->wall1.south.width,
+				&textures_pack->wall1.south.height);
+	textures_pack->wall1.west.mlx_img
+			= mlx_xpm_file_to_image(gamedata->display, DFL_WEST,
+				&textures_pack->wall1.west.width,
+				&textures_pack->wall1.west.height);
+	textures_pack->wall1.east.mlx_img
+			= mlx_xpm_file_to_image(gamedata->display, DFL_EAST,
+				&textures_pack->wall1.east.width,
+				&textures_pack->wall1.east.height);
 }
 
 void	init_gamedata(t_gamedata *gamedata, char *map_path)
@@ -80,6 +106,7 @@ void	init_gamedata(t_gamedata *gamedata, char *map_path)
 		perror("Error\ninit_gamedata");
 		exit(3);
 	}
+	parse_textures(gamedata, &gamedata->texture_pack, fd);
 	parse_map(gamedata, fd);
 	close(fd);
 }
