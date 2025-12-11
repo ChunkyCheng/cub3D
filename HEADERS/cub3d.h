@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/03 14:21:25 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/11 17:40:07 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ typedef struct s_texture
 	t_image	south;
 	t_image	west;
 	t_image	east;
-}	t_texture
+}	t_texture;
 
 typedef struct s_texture_pack
 {
 	t_texture	wall1;
-}
+}	t_texture_pack;
 
 typedef struct s_map_cell
 {
@@ -82,10 +82,12 @@ typedef struct s_gamedata
 	t_map_cell		map[MAP_SIZE_MAX][MAP_SIZE_MAX];
 	t_player		player;
 	t_inputs		inputs;
+	int				exit_code;
 }	t_gamedata;
 
 void	init_gamedata(t_gamedata *gamedata, char *map_path);
 int		game_loop(t_gamedata *gamedata);
 int		close_and_exit(t_gamedata *gamedata);
+void	close_with_exit_code(t_gamedata *gamedata, int exit_code);
 
 #endif

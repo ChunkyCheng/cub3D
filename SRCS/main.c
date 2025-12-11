@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:26:47 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/03 14:20:49 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/11 16:55:07 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	init_mlx_displays(t_gamedata *gamedata, char *title)
 	if (!gamedata->display)
 	{
 		ft_putstr_fd("Error\nmlx init error", 2);
-		close_and_exit(gamedata);
 	}
 	title = create_title(title);
 	gamedata->window
@@ -38,16 +37,16 @@ static void	init_mlx_displays(t_gamedata *gamedata, char *title)
 	if (!gamedata->window)
 	{
 		ft_putstr_fd("Error\nwindow init error", 2);
-		close_and_exit(gamedata);
+		close_with_exit_code(gamedata, 127);
 	}
-	gamedata->img_main.mlx_image
+	gamedata->img_main.mlx_img
 		= mlx_new_image(gamedata->display, WIN_WIDTH, WIN_HEIGHT);
-	if (!gamedata->image.mlx_image)
+	if (!gamedata->img_main.mlx_img)
 	{
 		ft_putstr_fd("Error\nimage init error", 2);
-		close_and_exit(gamedata);
+		close_with_exit_code(gamedata, 127);
 	}
-	gamedata->img_main.pixels = mlx_get_data_addr(gamedata->img_main.mlx_image,
+	gamedata->img_main.pixels = mlx_get_data_addr(gamedata->img_main.mlx_img,
 			&gamedata->img_main.bitsperpixel, &gamedata->img_main.row_len,
 			&gamedata->img_main.endian);
 }
@@ -72,8 +71,8 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	gamedata = (t_gamedata){0};
-	init_gamedata(&gamedata, argv[1]);
 	init_mlx_displays(&gamedata, argv[1]);
+	init_gamedata(&gamedata, argv[1]);
 	hook_events(&gamedata);
 	mlx_loop(gamedata.display);
 	close_and_exit(&gamedata);

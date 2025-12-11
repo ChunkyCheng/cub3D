@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/03 14:15:17 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/11 17:40:00 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,19 @@ t_texture_pack *texture_pack, int fd)
 	texture_pack->wall1.north.mlx_img
 		= mlx_xpm_file_to_image(gamedata->display, DFL_NORTH,
 			&texture_pack->wall1.north.width,
-			&textures_pack->wall1.north.height);
+			&texture_pack->wall1.north.height);
 	texture_pack->wall1.south.mlx_img
-			= mlx_xpm_file_to_image(gamedata->display, DFL_SOUTH,
-				&textures_pack->wall1.south.width,
-				&textures_pack->wall1.south.height);
-	textures_pack->wall1.west.mlx_img
-			= mlx_xpm_file_to_image(gamedata->display, DFL_WEST,
-				&textures_pack->wall1.west.width,
-				&textures_pack->wall1.west.height);
-	textures_pack->wall1.east.mlx_img
-			= mlx_xpm_file_to_image(gamedata->display, DFL_EAST,
-				&textures_pack->wall1.east.width,
-				&textures_pack->wall1.east.height);
+		= mlx_xpm_file_to_image(gamedata->display, DFL_SOUTH,
+			&texture_pack->wall1.south.width,
+			&texture_pack->wall1.south.height);
+	texture_pack->wall1.west.mlx_img
+		= mlx_xpm_file_to_image(gamedata->display, DFL_WEST,
+			&texture_pack->wall1.west.width,
+			&texture_pack->wall1.west.height);
+	texture_pack->wall1.east.mlx_img
+		= mlx_xpm_file_to_image(gamedata->display, DFL_EAST,
+			&texture_pack->wall1.east.width,
+			&texture_pack->wall1.east.height);
 }
 
 void	init_gamedata(t_gamedata *gamedata, char *map_path)
@@ -106,7 +106,7 @@ void	init_gamedata(t_gamedata *gamedata, char *map_path)
 		perror("Error\ninit_gamedata");
 		exit(3);
 	}
-	parse_textures(gamedata, &gamedata->texture_pack, fd);
+	parse_texture_pack(gamedata, &gamedata->texture_pack, fd);
 	parse_map(gamedata, fd);
 	close(fd);
 }
