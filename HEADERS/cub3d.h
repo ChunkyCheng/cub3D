@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/13 18:23:35 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/13 20:04:44 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WIN_WIDTH		1920
 # define WIN_HEIGHT		1080
 # define MAP_SIZE_MAX	128
+# define FOV			90.0
 
 typedef struct s_vect
 {
@@ -70,7 +71,7 @@ typedef struct s_player
 	t_vect	pos;
 	t_vect	dir;
 	t_vect	view_plane;
-	float	viee_plane_len;
+	float	view_plane_len;
 	float	fov;
 }	t_player;
 

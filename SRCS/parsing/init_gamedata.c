@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/13 18:23:54 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/13 19:04:36 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	init_player(t_gamedata *gamedata, int x, int y, char direction)
 		gamedata->player.dir.x = 1;
 	else
 		gamedata->player.dir.x = -1;
+	gamedata->player.fov = FOV;
 }
 
 static void	parse_map(t_gamedata *gamedata, int fd)
