@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/11 17:40:07 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/13 18:23:35 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 # define WIN_WIDTH		1920
 # define WIN_HEIGHT		1080
 # define MAP_SIZE_MAX	128
+
+typedef struct s_vect
+{
+	float	x;
+	float	y;
+}	t_vect;
 
 typedef struct s_image
 {
@@ -61,9 +67,11 @@ typedef struct s_map_cell
 
 typedef struct s_player
 {
-	float	x;
-	float	y;
-	float	angle;
+	t_vect	pos;
+	t_vect	dir;
+	t_vect	view_plane;
+	float	viee_plane_len;
+	float	fov;
 }	t_player;
 
 typedef struct s_inputs

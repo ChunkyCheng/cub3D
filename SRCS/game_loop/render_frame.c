@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:22:53 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/11 20:05:47 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/13 18:22:26 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,28 @@
 
 void	cast_ray(t_gamedata *gamedata, t_ray *ray, int col)
 {
-		
+
 
 }
 
-void render_frame(t_gamedata *gamedata)
+void render_frame(t_gamedata *gamedata, t_player *player)
 {
 	t_ray	ray;
 	int		col;
+	float	view_plane_pos;
 
-	ray.x = gamedata->player.x;
-	ray.y = gamedata->player.y;
+	player->view_plane_len = tan(player->fov / 2);
+	player->view_plane.x = -player->dir.y * player->view_plane_len;
+	player->view_plane.y = player->dir.x * player->view_plane_len;
+	ray.pos.x = player->pos.x;
+	ray.pos.y = player->pos.y;
 	col = 0;
 	while (col < WIN_WIDTH)
 	{
-		ray.angle = gamedata->player.angle;
-		ray.angle += (i - WIN_WIDTH / 2.0) * (FOV / WIN_WIDTH);
-		if (ray.angle < 0)
-			ray.angle = 360 - ray.angle;
-		if (ray.angle > 360
-		cast_ray(gamedata, &ray, col)
+		view_plane_pos = 2.0 * col / (WIN_WIDTH - 1.0) - 1;
+		ray.dir.x = player->dir.x + player->view_plane.x * view_plane_pos;
+		ray.dir.y = player->dir.y + player->view_plane.y * view_plane_pos;
+		cast_ray(gamedata, &ray, col);
 		col++;
 	}
 	mlx_put_image_to_window(gamedata->display, gamedata->window,

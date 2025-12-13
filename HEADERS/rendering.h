@@ -6,12 +6,14 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/11 17:48:34 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/13 17:37:18 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDERING_H
 # define RENDERING_H
+
+# include "cub3d.h"
 
 # define FOV			90.0
 # define DFL_FLOOR		0xDC6400
@@ -19,9 +21,8 @@
 
 typedef struct s_ray
 {
-	float	x;
-	float	y;
-	float	angle;
+	t_vect	pos;
+	t_vect	dir;
 }	t_ray;
 
 #endif

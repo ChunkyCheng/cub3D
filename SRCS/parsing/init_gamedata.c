@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/11 17:40:00 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/13 18:23:54 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ static int	is_valid_path(char *map_path)
 
 static void	init_player(t_gamedata *gamedata, int x, int y, char direction)
 {
-	gamedata->player.x = x;
-	gamedata->player.y = y;
+	gamedata->player.pos.x = x;
+	gamedata->player.pos.y = y;
 	if (direction == 'N')
-		gamedata->player.angle = 0;
+		gamedata->player.dir.y = -1;
 	else if (direction == 'S')
-		gamedata->player.angle = 180;
+		gamedata->player.dir.y = 1;
 	else if (direction == 'E')
-		gamedata->player.angle = 90;
+		gamedata->player.dir.x = 1;
 	else
-		gamedata->player.angle = 270;
+		gamedata->player.dir.x = -1;
 }
 
 static void	parse_map(t_gamedata *gamedata, int fd)
