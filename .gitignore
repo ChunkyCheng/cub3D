@@ -6,3 +6,4 @@ minilibx-linux/
 cub3D
 
 !.gitignore
+*.txt

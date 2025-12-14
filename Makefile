@@ -1,5 +1,5 @@
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -O3 -g3 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -O3 -g3 #-fsanitize=address
 
 LIBDIR	=	libft
 MLXDIR	=	minilibx-linux
@@ -19,7 +19,7 @@ INPUT_DIR	=	inputs
 INPUT_FILES	=	handle_keyrelease.c
 
 LOOP_DIR	=	game_loop
-LOOP_FILES	=	game_loop.c	render_frame.c	cast_ray.c
+LOOP_FILES	=	game_loop.c		render_frame.c		init_ray.c		cast_ray.c
 
 MODULES		=	PARSE	INPUT	LOOP
 

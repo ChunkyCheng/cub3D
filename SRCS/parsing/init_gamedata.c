@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/13 19:04:36 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/14 15:37:34 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static void	parse_map(t_gamedata *gamedata, int fd)
 		x = 0;
 		while (line[x])
 		{
-			if (line[x] == 0 || line[x] == ' ')
+			if (line[x] == '0' || line[x] == ' ')
 				gamedata->map[y][x].e_type = EMPTY;
-			else if (line[x] == 1)
+			else if (line[x] == '1')
 			{
 				gamedata->map[y][x].e_type = WALL;
 				gamedata->map[y][x].texture = &gamedata->texture_pack.wall1;
