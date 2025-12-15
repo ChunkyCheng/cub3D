@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:22:53 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 17:44:39 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/15 18:08:55 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	render_frame(t_gamedata *gamedata, t_player *player)
 	{
 		init_ray(&ray, player, col);
 		cast_ray(gamedata, &ray, player);
-		render_column(gamedata, &ray, col);
+		if (!ray.out_of_bounds)
+			render_column(gamedata, &ray, col);
 		col++;
 	}
 	mlx_put_image_to_window(gamedata->display, gamedata->window,

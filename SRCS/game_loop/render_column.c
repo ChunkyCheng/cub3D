@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:33:35 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 17:02:45 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/15 18:47:45 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,12 @@ t_pixel_col *pixel_col)
 		pixel_col->col = round(pixel_col->texture->width * ray_hit_pos);
 	else
 		pixel_col->col = round(pixel_col->texture->width * (1 - ray_hit_pos));
-	pixel_col->row = 0;
 	pixel_col->row_step = pixel_col->texture->height / (float)pixel_col->len;
+	if (pixel_col->len > WIN_HEIGHT)
+		pixel_col->row = (pixel_col->len - WIN_HEIGHT) / 2
+			* pixel_col->row_step;
+	else
+		pixel_col->row = 0;
 }
 
 void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col)
@@ -62,8 +66,12 @@ void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col)
 	int			pixel;
 
 	init_pixel_col(gamedata, ray, &pixel_col);
-	screen_row = (WIN_HEIGHT - pixel_col.len) / 2;
-	while (screen_row < (WIN_HEIGHT + pixel_col.len) / 2)
+	if (pixel_col.len > WIN_HEIGHT)
+		screen_row = 0;
+	else
+		screen_row = (WIN_HEIGHT - pixel_col.len) / 2;
+	while (screen_row < (WIN_HEIGHT + pixel_col.len) / 2
+		&& screen_row < WIN_HEIGHT)
 	{
 		pixel = image_get_pixel(pixel_col.texture,
 				pixel_col.col, round(pixel_col.row));

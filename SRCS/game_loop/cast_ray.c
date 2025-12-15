@@ -6,12 +6,23 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:52:21 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 16:35:27 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/15 18:07:13 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "rendering.h"
+
+static int	is_out_of_bounds(t_ray *ray)
+{
+	if (ray->pos.y < 0 || ray->pos.y >= MAP_SIZE_MAX
+		|| ray->pos.x < 0 || ray->pos.x >= MAP_SIZE_MAX)
+	{
+		ray->out_of_bounds = 1;
+		return (1);
+	}
+	return (0);
+}
 
 void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player)
 {
@@ -29,6 +40,8 @@ void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player)
 			ray->pos.y += ray->step.y;
 			ray->e_side = Y_SIDE;
 		}
+		if (is_out_of_bounds(ray))
+			return ;
 		if (gamedata->map[(int)ray->pos.y][(int)ray->pos.x].e_type == WALL)
 			break ;
 	}

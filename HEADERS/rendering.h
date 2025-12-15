@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 16:17:34 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/15 18:02:57 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_ray
 		X_SIDE,
 		Y_SIDE
 	}		e_side;
+	int		out_of_bounds;
 }	t_ray;
 
 typedef struct s_pixel_col
