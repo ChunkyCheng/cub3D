@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/13 20:04:44 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/15 17:45:33 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # define WIN_WIDTH		1920
 # define WIN_HEIGHT		1080
 # define MAP_SIZE_MAX	128
-# define FOV			90.0
 
 typedef struct s_vect
 {
@@ -52,6 +51,8 @@ typedef struct s_texture
 
 typedef struct s_texture_pack
 {
+	int			floor;
+	int			ceiling;
 	t_texture	wall1;
 }	t_texture_pack;
 
@@ -69,17 +70,20 @@ typedef struct s_map_cell
 typedef struct s_player
 {
 	t_vect	pos;
+	float	angle;
 	t_vect	dir;
 	t_vect	view_plane;
 	float	view_plane_len;
+	float	projection_dist;
 	float	fov;
 }	t_player;
 
 typedef struct s_inputs
 {
-	t_ullong	hold_flags;
-	int			mouse_x;
-	int			mouse_y;
+	int	move_flags;
+	int	rot_flags;
+	int	mouse_x;
+	int	mouse_y;
 }	t_inputs;
 
 typedef struct s_gamedata

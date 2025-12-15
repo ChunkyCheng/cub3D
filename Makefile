@@ -13,13 +13,14 @@ LIBS	=	$(LIBDIR)/libft.a $(MLXDIR)/libmlx.a
 ####################################===SOURCE FILES===####################################
 
 PARSE_DIR	=	parsing
-PARSE_FILES	=	init_gamedata.c
+PARSE_FILES	=	init_gamedata.c		init_image_data.c
 
 INPUT_DIR	=	inputs
-INPUT_FILES	=	handle_keyrelease.c
+INPUT_FILES	=	handle_keyevent.c	handle_movement.c	handle_rotation.c	check_inputs.c
 
 LOOP_DIR	=	game_loop
-LOOP_FILES	=	game_loop.c		render_frame.c		init_ray.c		cast_ray.c
+LOOP_FILES	=	game_loop.c			render_frame.c		init_ray.c		cast_ray.c		\
+				render_column.c		image_put_pixel.c	image_get_pixel.c
 
 MODULES		=	PARSE	INPUT	LOOP
 
@@ -76,7 +77,6 @@ $(MLXDIR):
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 	@$(eval SRCNUM := $(shell expr $(SRCNUM) + 1))
 	@$(eval CALCPERCENT := $(shell echo "scale=4; $(SRCNUM) / $(SRCTOTAL) * 100" | bc))
 	@$(eval PERCENT := $(shell printf "%.0f" $(CALCPERCENT)))
@@ -99,6 +99,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 		printf "$(BOLD)$(GREEN)"; fi;
 	@printf "%d%% $(RESET)\n" $(PERCENT)
 	@printf "Compiling %-34s" $(notdir $@)
+	@$(CC) $(CFLAGS) $(IFLAGS) $(DFLAGS) -c $< -o $@
 
 clean:
 	@printf "$(RED)"

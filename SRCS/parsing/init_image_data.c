@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_keyrelease.c                                :+:      :+:    :+:   */
+/*   init_image_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
+/*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 02:34:23 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/02 02:39:01 by jchuah           ###   ########.fr       */
+/*   Created: 2025/12/15 09:17:22 by jchuah            #+#    #+#             */
+/*   Updated: 2025/12/15 09:43:29 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "inputs.h"
+#include "parsing.h"
 
-int	handle_keyrelease(int key, t_gamedata *gamedata)
+void	init_image_data(t_image *image)
 {
-	if (key == XK_Escape)
-		close_and_exit(gamedata);
-	return (0);
+	if (!image->mlx_img)
+		printf("VOIDDD\n");
+	image->pixels = mlx_get_data_addr(image->mlx_img, &image->bitsperpixel,
+			&image->row_len, &image->endian);
 }

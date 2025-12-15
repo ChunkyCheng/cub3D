@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:52:21 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/14 15:42:20 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/15 16:35:27 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,4 @@ void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player)
 	else
 		ray->len = (ray->pos.y - player->pos.y + (1 - ray->step.y) / 2)
 			/ ray->dir.y;
-	if (ray->e_side == X_SIDE)
-		printf("ray hit x side at (%f, %f), distance of %f\n",
-				ray->pos.x, ray->pos.y, ray->len);
-	else
-		printf("ray hit y side at (%f, %f), distance of %f\n",
-				ray->pos.x, ray->pos.y, ray->len);
 }

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   check_inputs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
+/*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 15:12:36 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 17:38:51 by jchuah           ###   ########.fr       */
+/*   Created: 2025/12/15 16:54:11 by jchuah            #+#    #+#             */
+/*   Updated: 2025/12/15 17:41:11 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "inputs.h"
-#include "rendering.h"
 
-int	game_loop(t_gamedata *gamedata)
+void	check_inputs(t_gamedata *gamedata, t_inputs *inputs,
+t_player *player)
 {
-	check_inputs(gamedata, &gamedata->inputs, &gamedata->player);
-	render_frame(gamedata, &gamedata->player);
-	return (0);
+	(void)gamedata;
+	handle_movement(inputs, player);
+	handle_rotation(inputs, player);
 }

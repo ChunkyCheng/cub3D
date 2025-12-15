@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:26:47 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/11 16:55:07 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/15 17:04:08 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ static void	init_mlx_displays(t_gamedata *gamedata, char *title)
 		ft_putstr_fd("Error\nwindow init error", 2);
 		close_with_exit_code(gamedata, 127);
 	}
+}
+
+static void	init_mlx_img_main(t_gamedata *gamedata)
+{
 	gamedata->img_main.mlx_img
 		= mlx_new_image(gamedata->display, WIN_WIDTH, WIN_HEIGHT);
 	if (!gamedata->img_main.mlx_img)
@@ -49,12 +53,16 @@ static void	init_mlx_displays(t_gamedata *gamedata, char *title)
 	gamedata->img_main.pixels = mlx_get_data_addr(gamedata->img_main.mlx_img,
 			&gamedata->img_main.bitsperpixel, &gamedata->img_main.row_len,
 			&gamedata->img_main.endian);
+	gamedata->img_main.width = WIN_WIDTH;
+	gamedata->img_main.height = WIN_HEIGHT;
 }
 
 static void	hook_events(t_gamedata *gamedata)
 {
 	mlx_loop_hook(gamedata->display, game_loop, gamedata);
 	mlx_hook(gamedata->window, DestroyNotify, 0, close_and_exit, gamedata);
+	mlx_hook(gamedata->window, KeyPress, KeyPressMask,
+		handle_keypress, gamedata);
 	mlx_hook(gamedata->window, KeyRelease, KeyReleaseMask,
 		handle_keyrelease, gamedata);
 }
@@ -72,6 +80,7 @@ int	main(int argc, char *argv[])
 	}
 	gamedata = (t_gamedata){0};
 	init_mlx_displays(&gamedata, argv[1]);
+	init_mlx_img_main(&gamedata);
 	init_gamedata(&gamedata, argv[1]);
 	hook_events(&gamedata);
 	mlx_loop(gamedata.display);
