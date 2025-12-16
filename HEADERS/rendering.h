@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 18:02:57 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 07:46:27 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 
 typedef struct s_ray
 {
-	t_vect	pos;
+	int		norm_x;
+	int		norm_y;
 	t_vect	dir;
 	t_vect	step;
 	t_vect	delta_dist;

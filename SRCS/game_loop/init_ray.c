@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:22:53 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/14 16:21:21 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 08:08:19 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	init_ray_pos_and_dir(t_ray *ray, t_player *player, int col)
 {
 	float	view_plane_pos;
 
-	ray->pos.x = (int)player->pos.x;
-	ray->pos.y = (int)player->pos.y;
+	ray->norm_x = player->pos.x;
+	ray->norm_y = player->pos.y;
 	view_plane_pos = 2.0 * col / (WIN_WIDTH - 1.0) - 1;
 	ray->dir.x = player->dir.x + player->view_plane.x * view_plane_pos;
 	ray->dir.y = player->dir.y + player->view_plane.y * view_plane_pos;
@@ -42,22 +42,26 @@ static void	init_ray_steps(t_ray *ray, t_player *player)
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -1;
-		ray->side_dist.x = (player->pos.x - ray->pos.x) * ray->delta_dist.x;
+		ray->side_dist.x
+			= (player->pos.x - ray->norm_x) * ray->delta_dist.x;
 	}
 	else
 	{
 		ray->step.x = 1;
-		ray->side_dist.x = (ray->pos.x + 1 - player->pos.x) * ray->delta_dist.x;
+		ray->side_dist.x
+			= (ray->norm_x + 1 - player->pos.x) * ray->delta_dist.x;
 	}
 	if (ray->dir.y < 0)
 	{
 		ray->step.y = -1;
-		ray->side_dist.y = (player->pos.y - ray->pos.y) * ray->delta_dist.y;
+		ray->side_dist.y
+			= (player->pos.y - ray->norm_y) * ray->delta_dist.y;
 	}
 	else
 	{
 		ray->step.y = 1;
-		ray->side_dist.y = (ray->pos.y + 1 - player->pos.y) * ray->delta_dist.y;
+		ray->side_dist.y
+			= (ray->norm_y + 1 - player->pos.y) * ray->delta_dist.y;
 	}
 }
 

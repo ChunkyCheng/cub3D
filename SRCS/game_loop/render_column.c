@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:33:35 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 18:47:45 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 07:47:52 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_pixel_col *pixel_col)
 	t_texture	*texture;
 
 	ray_hit_pos = get_ray_hit_pos(ray, &gamedata->player);
-	texture = gamedata->map[(int)ray->pos.y][(int)ray->pos.x].texture;
+	texture = gamedata->map[ray->norm_y][ray->norm_x].texture;
 	if (ray->e_side == Y_SIDE && ray->dir.y > 0)
 		pixel_col->texture = &texture->north;
 	else if (ray->e_side == Y_SIDE)
