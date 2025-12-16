@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 09:32:38 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 09:34:46 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,7 @@ typedef struct s_player
 	float	fov;
 }	t_player;
 
-typedef struct s_inputs
-{
-	int	move_flags;
-	int	rot_flags;
-	int	click_flags;
-	int	mouse_x;
-	int	mouse_y;
-	int	x_move;
-	int	y_move;
-}	t_inputs;
+typedef struct s_inputs	t_inputs;
 
 typedef struct s_gamedata
 {
@@ -97,7 +88,7 @@ typedef struct s_gamedata
 	t_texture_pack	texture_pack;
 	t_map_cell		map[MAP_SIZE_MAX][MAP_SIZE_MAX];
 	t_player		player;
-	t_inputs		inputs;
+	t_inputs		*inputs;
 	int				exit_code;
 }	t_gamedata;
 

@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:26:47 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 17:04:08 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 09:57:33 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,21 @@ static void	hook_events(t_gamedata *gamedata)
 	mlx_loop_hook(gamedata->display, game_loop, gamedata);
 	mlx_hook(gamedata->window, DestroyNotify, 0, close_and_exit, gamedata);
 	mlx_hook(gamedata->window, KeyPress, KeyPressMask,
-		handle_keypress, gamedata);
+		handle_key_press, gamedata);
 	mlx_hook(gamedata->window, KeyRelease, KeyReleaseMask,
-		handle_keyrelease, gamedata);
+		handle_key_release, gamedata);
+	mlx_hook(gamedata->window, ButtonPress, ButtonPressMask,
+		handle_mouse_press, gamedata);
+	mlx_hook(gamedata->window, ButtonRelease, ButtonReleaseMask,
+		handle_mouse_release, gamedata);
+	mlx_hook(gamedata->window, MotionNotify, PointerMotionMask,
+		handle_mouse_move, gamedata);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_gamedata	gamedata;
+	t_inputs	inputs;
 
 	if (argc != 2)
 	{
@@ -79,6 +86,8 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	gamedata = (t_gamedata){0};
+	inputs = (t_inputs){0};
+	gamedata.inputs = &inputs;
 	init_mlx_displays(&gamedata, argv[1]);
 	init_mlx_img_main(&gamedata);
 	init_gamedata(&gamedata, argv[1]);

@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:33:35 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 07:47:52 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 09:25:43 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,9 @@ float	get_ray_hit_pos(t_ray *ray, t_player *player)
 	return (hit_pos);
 }
 
-static void	init_pixel_col(t_gamedata *gamedata, t_ray *ray,
+static void	set_pixel_col_texture(t_texture *texture, t_ray *ray,
 t_pixel_col *pixel_col)
 {
-	float		ray_hit_pos;
-	t_texture	*texture;
-
-	ray_hit_pos = get_ray_hit_pos(ray, &gamedata->player);
-	texture = gamedata->map[ray->norm_y][ray->norm_x].texture;
 	if (ray->e_side == Y_SIDE && ray->dir.y > 0)
 		pixel_col->texture = &texture->north;
 	else if (ray->e_side == Y_SIDE)
@@ -45,6 +40,17 @@ t_pixel_col *pixel_col)
 		pixel_col->texture = &texture->west;
 	else
 		pixel_col->texture = &texture->east;
+}
+
+static void	init_pixel_col(t_gamedata *gamedata, t_ray *ray,
+t_pixel_col *pixel_col)
+{
+	t_texture	*texture;
+	float		ray_hit_pos;
+
+	texture = gamedata->map[ray->norm_y][ray->norm_x].texture;
+	set_pixel_col_texture(texture, ray, pixel_col);
+	ray_hit_pos = get_ray_hit_pos(ray, &gamedata->player);
 	pixel_col->len = round(gamedata->player.projection_dist / ray->len);
 	if ((ray->e_side == Y_SIDE && ray->dir.y < 0)
 		|| (ray->e_side == X_SIDE && ray->dir.x > 0))

@@ -16,7 +16,8 @@ PARSE_DIR	=	parsing
 PARSE_FILES	=	init_gamedata.c		init_image_data.c
 
 INPUT_DIR	=	inputs
-INPUT_FILES	=	handle_keyevent.c	handle_movement.c	handle_rotation.c	check_inputs.c
+INPUT_FILES	=	handle_key_event.c	handle_mouse_event.c		handle_movement.c		\
+				handle_rotation.c	check_inputs.c
 
 LOOP_DIR	=	game_loop
 LOOP_FILES	=	game_loop.c			render_frame.c		init_ray.c		cast_ray.c		\
