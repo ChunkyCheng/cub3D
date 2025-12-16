@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 17:45:33 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 09:32:38 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,11 @@ typedef struct s_inputs
 {
 	int	move_flags;
 	int	rot_flags;
+	int	click_flags;
 	int	mouse_x;
 	int	mouse_y;
+	int	x_move;
+	int	y_move;
 }	t_inputs;
 
 typedef struct s_gamedata
