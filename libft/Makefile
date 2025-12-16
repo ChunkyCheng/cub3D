@@ -8,7 +8,6 @@ LFLAGS	=
 CHAR_DIR		=	char
 CHAR_FILES		=	ft_isalpha.c	ft_isdigit.c		ft_isalnum.c	ft_isascii.c	\
 					ft_isprint.c	ft_iswhitespace.c	ft_toupper.c	ft_tolower.c
-CHAR_SRCS		=	$(addprefix $(CHAR_DIR)/, $(CHAR_FILES))
 
 STR_DIR			=	str
 STR_FILES		=	ft_strtolower.c		ft_strlen.c		ft_strlcpy.c	ft_strcat.c		\
@@ -18,33 +17,27 @@ STR_FILES		=	ft_strtolower.c		ft_strlen.c		ft_strlcpy.c	ft_strcat.c		\
 					ft_atoll_safe.c		ft_itoa.c		ft_strdup.c		ft_strndup.c	\
 					ft_substr.c			ft_strjoin.c	ft_strnjoin.c	ft_strtrim.c	\
 					ft_strmapi.c		ft_striteri.c
-STR_SRCS		=	$(addprefix $(STR_DIR)/, $(STR_FILES))
 
 PTRARR_DIR		=	ptrarr
 PTRARR_FILES	=	ft_ptrarr_len.c		ft_ptrarr_dup.c		ft_ptrarr_join.c	
-PTRARR_SRCS		=	$(addprefix $(PTRARR_DIR)/, $(PTRARR_FILES))
 
 STRARR_DIR		=	strarr
 STRARR_FILES	=	ft_split.c			ft_qsplit.c			ft_strarr_free.c			\
 					ft_strarr_len.c		ft_strarr_dup.c		ft_strarr_join.c
-STRARR_SRCS		=	$(addprefix $(STRARR_DIR)/, $(STRARR_FILES))
 
 
 MEM_DIR			=	mem
 MEM_FILES		=	ft_memset.c		ft_bzero.c		ft_memcpy.c		ft_memmove.c		\
 					ft_memchr.c		ft_memcmp.c		ft_memswap.c	ft_calloc.c 
-MEM_SRCS		=	$(addprefix $(MEM_DIR)/, $(MEM_FILES))
 
 PUTS_DIR		=	puts
 PUTS_FILES		=	ft_putchar_fd.c		ft_putstr_fd.c		ft_putendl_fd.c				\
 					ft_putnbr_fd.c		ft_putstrarr_fd.c
-PUTS_SRCS		=	$(addprefix $(PUTS_DIR)/, $(PUTS_FILES))
 
 LST_DIR			=	lst
 LST_FILES		=	ft_lstnew.c			ft_lstadd_front.c		ft_lstsize.c			\
 					ft_lstlast.c		ft_lstadd_back.c		ft_lstdelone.c			\
 					ft_lstclear.c		ft_lstiter.c			ft_lstmap.c
-LST_SRCS		=	$(addprefix	$(LST_DIR)/, $(LST_FILES))
 
 ALGO_DIR		=	algo
 ALGO_FILES		=	ft_qsort.c
@@ -52,7 +45,6 @@ ALGO_SRCS		=	$(addprefix $(ALGO_DIR)/, $(ALGO_FILES))
 
 GNL_DIR			=	get_next_line
 GNL_FILES		=	get_next_line.c		get_next_line_utils.c
-GNL_SRCS		=	$(addprefix $(GNL_DIR)/, $(GNL_FILES))
 
 MODULES			=	CHAR	STR		PTRARR	STRARR	MEM		PUTS	LST		ALGO	GNL
 $(foreach M,$(MODULES), $(eval $(M)_SRCS = $(addprefix $($(M)_DIR)/, $($(M)_FILES))))
