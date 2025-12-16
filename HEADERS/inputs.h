@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 02:35:05 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 09:55:04 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 12:45:34 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 
 # define LCLICK_HOLD	0b01
 
-# define MOVE_SPEED	0.01
-# define ROT_SPEED	0.8
+# define MOVE_SPEED			0.01
+# define ROT_SPEED_KEY		0.8
+# define ROT_SPEED_MOUSE	0.4
 
 typedef struct s_inputs
 {
@@ -37,13 +38,19 @@ typedef struct s_inputs
 	int	mouse_y;
 	int	x_move;
 	int	y_move;
+	int	focused;
 }	t_inputs;
+
+void	hide_cursor(void *display, void *window, int activate);
+void	lock_mouse(void	*display, void *window);
 
 int		handle_key_press(int key, t_gamedata *gamedata);
 int		handle_key_release(int key, t_gamedata *gamedata);
 int		handle_mouse_press(int button, int x, int y, t_gamedata *gamedata);
 int		handle_mouse_release(int button, int x, int y, t_gamedata *gamedata);
 int		handle_mouse_move(int x, int y, t_gamedata *gamedata);
+int		handle_focus_in(t_gamedata *gamedata);
+int		handle_focus_out(t_gamedata *gamedata);
 
 void	check_inputs(t_gamedata *gamedata, t_inputs *inputs,
 			t_player *player);

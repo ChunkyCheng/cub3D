@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 17:45:50 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 15:01:07 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,9 @@
 # define DFL_WEST		"textures/wall-default-west.xpm"
 # define DFL_EAST		"textures/wall-default-east.xpm"
 
+typedef struct s_render_vals	t_render_vals;
+
+void	init_render_vals(t_render_vals *render_vals);
 void	init_image_data(t_image *image);
+
 #endif

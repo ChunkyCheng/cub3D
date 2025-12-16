@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 09:34:46 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 16:14:10 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@
 # include <X11/keysym.h>
 # include <math.h>
 
-# define WIN_WIDTH		1920
-# define WIN_HEIGHT		1080
+# define DEBUG			1
+
+# define WIN_WIDTH		3840
+# define WIN_HEIGHT		2160
+# define IMG_WIDTH		320
+# define IMG_HEIGHT		200
 # define MAP_SIZE_MAX	128
 
 typedef struct s_vect
@@ -78,20 +82,24 @@ typedef struct s_player
 	float	fov;
 }	t_player;
 
-typedef struct s_inputs	t_inputs;
+typedef struct s_inputs			t_inputs;
+typedef struct s_render_vals	t_render_vals;
 
 typedef struct s_gamedata
 {
 	void			*display;
 	void			*window;
 	t_image			img_main;
+	t_image			img_buff;
 	t_texture_pack	texture_pack;
 	t_map_cell		map[MAP_SIZE_MAX][MAP_SIZE_MAX];
 	t_player		player;
 	t_inputs		*inputs;
+	t_render_vals	*render_vals;
 	int				exit_code;
 }	t_gamedata;
 
+void	init_render_vals(t_render_vals *render_vals);
 void	init_gamedata(t_gamedata *gamedata, char *map_path);
 int		game_loop(t_gamedata *gamedata);
 int		close_and_exit(t_gamedata *gamedata);

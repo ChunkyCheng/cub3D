@@ -6,11 +6,12 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:58:36 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/11 17:06:42 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 14:09:24 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "inputs.h"
 
 static void	free_texture(t_gamedata *gamedata, t_texture *texture)
 {
@@ -33,6 +34,8 @@ t_texture_pack *texture_pack)
 int	close_and_exit(t_gamedata *gamedata)
 {
 	free_texture_pack(gamedata, &gamedata->texture_pack);
+	if (gamedata->img_buff.mlx_img)
+		mlx_destroy_image(gamedata->display, gamedata->img_buff.mlx_img);
 	if (gamedata->img_main.mlx_img)
 		mlx_destroy_image(gamedata->display, gamedata->img_main.mlx_img);
 	if (gamedata->window)

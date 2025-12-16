@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 17:31:16 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 17:41:47 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 10:06:35 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 void	handle_rotation(t_inputs *inputs, t_player *player)
 {
-	if (inputs->rot_flags == LEFT_HOLD)
-		player->angle -= ROT_SPEED;
+	if (inputs->x_move)
+		player->angle += inputs->x_move * ROT_SPEED_MOUSE;
+	else if (inputs->rot_flags == LEFT_HOLD)
+		player->angle -= ROT_SPEED_KEY;
 	else if (inputs->rot_flags == RIGHT_HOLD)
-		player->angle += ROT_SPEED;
+		player->angle += ROT_SPEED_KEY;
 	else
 		return ;
 	if (player->angle < 0)

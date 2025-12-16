@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/15 17:45:54 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/16 15:01:34 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,4 +128,5 @@ void	init_gamedata(t_gamedata *gamedata, char *map_path)
 	parse_texture_pack(gamedata, &gamedata->texture_pack, fd);
 	parse_map(gamedata, fd);
 	close(fd);
+	init_render_vals(gamedata->render_vals);
 }
