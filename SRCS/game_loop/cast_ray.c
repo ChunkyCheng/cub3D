@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:52:21 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 09:03:13 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 10:48:18 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,23 @@ static int	is_out_of_bounds(t_ray *ray)
 	return (0);
 }
 
+static void	set_perpendicular_distance(t_ray *ray, t_player *player)
+{
+	if (ray->e_side == X_SIDE)
+		ray->len = (ray->norm_x - player->pos.x + (1 - ray->step.x) / 2)
+			/ ray->dir.x;
+	else
+		ray->len = (ray->norm_y - player->pos.y + (1 - ray->step.y) / 2)
+			/ ray->dir.y;
+}
+
 void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player)
 {
+	int	x_count;
+	int	y_count;
+
+	x_count = 0;
+	y_count = 0;
 	while (1)
 	{
 		if (ray->side_dist.x < ray->side_dist.y || ray->e_type == HORIZONTAL)
@@ -42,13 +57,8 @@ void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player)
 		}
 		if (is_out_of_bounds(ray))
 			return ;
-		if (gamedata->map[(int)ray->norm_y][(int)ray->norm_x].e_type == WALL)
+		if (gamedata->map[ray->norm_y][ray->norm_x].e_type == WALL)
 			break ;
 	}
-	if (ray->e_side == X_SIDE)
-		ray->len = (ray->norm_x - player->pos.x + (1 - ray->step.x) / 2)
-			/ ray->dir.x;
-	else
-		ray->len = (ray->norm_y - player->pos.y + (1 - ray->step.y) / 2)
-			/ ray->dir.y;
+	set_perpendicular_distance(ray, player);
 }

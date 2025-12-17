@@ -6,14 +6,14 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 08:26:09 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 12:48:04 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDERING_H
 # define RENDERING_H
 
-# define FRAMERATE	60
+# define FRAMERATE	30
 # include "cub3d.h"
 
 typedef struct s_ray
@@ -42,7 +42,7 @@ typedef struct s_ray
 typedef struct s_pixel_col
 {
 	t_image	*texture;
-	int		len;
+	double	len;
 	int		col;
 	double	row;
 	double	row_step;
@@ -51,8 +51,12 @@ typedef struct s_pixel_col
 typedef struct s_render_vals
 {
 	float	scale;
+	int		x_bound;
+	int		y_bound;
 	int		x_offset;
 	int		y_offset;
+	int		scale_map_x[WIN_WIDTH];
+	int		scale_map_y[WIN_HEIGHT];
 }	t_render_vals;
 
 void	render_frame(t_gamedata *gamedata, t_player *player);

@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:20:07 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 09:17:11 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 12:25:36 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,20 @@ t_render_vals *render_vals)
 {
 	int		main_x;
 	int		main_y;
-	float	buff_x;
-	float	buff_y;
+	int		buff_x;
+	int		buff_y;
 	int		pixel;
 
 	main_y = 0;
-	while (main_y < WIN_HEIGHT)
+	while (main_y < WIN_HEIGHT - render_vals->y_bound)
 	{
 		main_x = 0;
-		buff_y = main_y * render_vals->scale;
-		while (main_x < WIN_WIDTH)
+		buff_y = render_vals->scale_map_y[main_y];
+		while (main_x < WIN_WIDTH - render_vals->x_bound)
 		{
-			buff_x = main_x * render_vals->scale;
-			pixel = image_get_pixel(buff, round(buff_x), round(buff_y));
-			image_put_pixel(main, main_x + render_vals->x_offset,
-				main_y + render_vals->y_offset, pixel);
+			buff_x = render_vals->scale_map_x[main_x];
+			pixel = image_get_pixel(buff, buff_x, buff_y);
+			image_put_pixel(main, main_x, main_y, pixel);
 			main_x++;
 		}
 		main_y++;
@@ -91,6 +90,7 @@ void	render_frame(t_gamedata *gamedata, t_player *player)
 	scale_image(&gamedata->img_main, &gamedata->img_buff,
 		gamedata->render_vals);
 	mlx_put_image_to_window(gamedata->display, gamedata->window,
-		gamedata->img_main.mlx_img, 0, 0);
+		gamedata->img_main.mlx_img,
+		gamedata->render_vals->x_offset, gamedata->render_vals->y_offset);
 	limit_framerate();
 }

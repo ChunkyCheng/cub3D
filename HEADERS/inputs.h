@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 02:35:05 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 09:13:41 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 12:51:15 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 
 # define LCLICK_HOLD	0b01
 
-# define MOVE_SPEED			0.01
+# define MOVE_SPEED			0.04
 # define ROT_SPEED_KEY		0.8
-# define ROT_SPEED_MOUSE	0.4
+# define ROT_SPEED_MOUSE	0.07
 
 typedef struct s_inputs
 {

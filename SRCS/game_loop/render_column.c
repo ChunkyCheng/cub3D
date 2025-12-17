@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:33:35 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 09:05:54 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 12:49:34 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,18 @@ static void	init_pixel_col(t_gamedata *gamedata, t_ray *ray,
 t_pixel_col *pixel_col)
 {
 	t_texture	*texture;
-	double	ray_hit_pos;
+	double		ray_hit_pos;
 
 	texture = gamedata->map[ray->norm_y][ray->norm_x].texture;
 	set_pixel_col_texture(texture, ray, pixel_col);
 	ray_hit_pos = get_ray_hit_pos(ray, &gamedata->player);
-	pixel_col->len = round(gamedata->player.projection_dist / ray->len);
+	pixel_col->len = gamedata->player.projection_dist / ray->len;
 	if ((ray->e_side == Y_SIDE && ray->dir.y < 0)
 		|| (ray->e_side == X_SIDE && ray->dir.x > 0))
-		pixel_col->col = round(pixel_col->texture->width * ray_hit_pos);
+		pixel_col->col = (int)(pixel_col->texture->width * ray_hit_pos);
 	else
-		pixel_col->col = round(pixel_col->texture->width * (1 - ray_hit_pos));
-	pixel_col->row_step = pixel_col->texture->height / (float)pixel_col->len;
+		pixel_col->col = (int)(pixel_col->texture->width * (1 - ray_hit_pos));
+	pixel_col->row_step = pixel_col->texture->height / pixel_col->len;
 	if (pixel_col->len > IMG_HEIGHT)
 		pixel_col->row = (pixel_col->len - IMG_HEIGHT) / 2
 			* pixel_col->row_step;
@@ -70,19 +70,21 @@ void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col)
 	t_pixel_col	pixel_col;
 	int			screen_row;
 	int			pixel;
+	int			i;
 
 	init_pixel_col(gamedata, ray, &pixel_col);
 	if (pixel_col.len > IMG_HEIGHT)
 		screen_row = 0;
 	else
-		screen_row = (IMG_HEIGHT - pixel_col.len) / 2;
+		screen_row = round((IMG_HEIGHT - pixel_col.len) / 2);
+	i = 0;
 	while (screen_row < (IMG_HEIGHT + pixel_col.len) / 2
 		&& screen_row < IMG_HEIGHT)
 	{
 		pixel = image_get_pixel(pixel_col.texture,
-				pixel_col.col, round(pixel_col.row));
+				pixel_col.col, (int)(pixel_col.row + i * pixel_col.row_step));
 		image_put_pixel(&gamedata->img_buff, screen_col, screen_row, pixel);
+		i++;
 		screen_row++;
-		pixel_col.row += pixel_col.row_step;
 	}
 }

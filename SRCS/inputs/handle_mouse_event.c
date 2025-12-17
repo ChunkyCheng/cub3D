@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 08:30:39 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 09:16:12 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 12:27:01 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	handle_mouse_move(int x, int y, t_gamedata *gamedata)
 
 	inputs = gamedata->inputs;
 	inputs->x_move = x - WIN_WIDTH / 2;
-	inputs->y_move = y - WIN_HEIGHT /2;
+	inputs->y_move = y - WIN_HEIGHT / 2;
 	if (inputs->focused)
 		mlx_mouse_move(gamedata->display, gamedata->window,
 			WIN_WIDTH / 2, WIN_HEIGHT / 2);
