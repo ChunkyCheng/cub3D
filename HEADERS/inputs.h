@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 02:35:05 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 12:51:15 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 17:44:05 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,32 @@ typedef struct s_inputs
 	int	focused;
 }	t_inputs;
 
-void	hide_cursor(void *display, void *window, int activate);
-void	lock_mouse(void	*display, void *window);
+typedef struct s_hitbox
+{
+	t_vect	topleft;
+	t_vect	botright;
+}	t_hitbox;
 
-int		handle_key_press(int key, t_gamedata *gamedata);
-int		handle_key_release(int key, t_gamedata *gamedata);
-int		handle_mouse_press(int button, int x, int y, t_gamedata *gamedata);
-int		handle_mouse_release(int button, int x, int y, t_gamedata *gamedata);
-int		handle_mouse_move(int x, int y, t_gamedata *gamedata);
-int		handle_focus_in(t_gamedata *gamedata);
-int		handle_focus_out(t_gamedata *gamedata);
+void		hide_cursor(void *display, void *window, int activate);
+void		lock_mouse(void	*display, void *window);
 
-void	check_inputs(t_gamedata *gamedata, t_inputs *inputs,
-			t_player *player);
-void	handle_movement(t_inputs *inputs, t_player *player);
-void	handle_rotation(t_inputs *inputs, t_player *player);
+int			handle_key_press(int key, t_gamedata *gamedata);
+int			handle_key_release(int key, t_gamedata *gamedata);
+int			handle_mouse_press(int button, int x, int y, t_gamedata *gamedata);
+int			handle_mouse_release(int button, int x, int y,
+				t_gamedata *gamedata);
+int			handle_mouse_move(int x, int y, t_gamedata *gamedata);
+int			handle_focus_in(t_gamedata *gamedata);
+int			handle_focus_out(t_gamedata *gamedata);
+
+void		check_inputs(t_gamedata *gamedata,
+				t_inputs *inputs, t_player *player);
+void		handle_movement(t_gamedata *gamedata,
+				t_inputs *inputs, t_player *player);
+void		handle_rotation(t_inputs *inputs, t_player *player);
+
+t_hitbox	player_hitbox(t_vect pos);
+t_hitbox	cell_hitbox(int x, int y);
+int			is_collision(t_hitbox hitbox1, t_hitbox hitbox2);
 
 #endif

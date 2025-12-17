@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 12:48:45 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 18:06:35 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@
 
 # define DEBUG			1
 
-# define WIN_WIDTH		3840
-# define WIN_HEIGHT		2160
+# define WIN_WIDTH		960
+# define WIN_HEIGHT		540
 # define IMG_WIDTH		768
 # define IMG_HEIGHT		480
 # define MAP_SIZE_MAX	128
+
+# define PLAYER_SIZE	0.8
 
 typedef struct s_vect
 {
@@ -73,13 +75,13 @@ typedef struct s_map_cell
 
 typedef struct s_player
 {
-	t_vect	pos;
-	float	angle;
-	t_vect	dir;
-	t_vect	view_plane;
-	double	view_plane_len;
-	double	projection_dist;
-	double	fov;
+	t_vect		pos;
+	float		angle;
+	t_vect		dir;
+	t_vect		view_plane;
+	double		view_plane_len;
+	double		projection_dist;
+	double		fov;
 }	t_player;
 
 typedef struct s_inputs			t_inputs;
@@ -99,10 +101,10 @@ typedef struct s_gamedata
 	int				exit_code;
 }	t_gamedata;
 
-void	init_render_vals(t_render_vals *render_vals);
-void	init_gamedata(t_gamedata *gamedata, char *map_path);
-int		game_loop(t_gamedata *gamedata);
-int		close_and_exit(t_gamedata *gamedata);
-void	close_with_exit_code(t_gamedata *gamedata, int exit_code);
+void		init_render_vals(t_render_vals *render_vals);
+void		init_gamedata(t_gamedata *gamedata, char *map_path);
+int			game_loop(t_gamedata *gamedata);
+int			close_and_exit(t_gamedata *gamedata);
+void		close_with_exit_code(t_gamedata *gamedata, int exit_code);
 
 #endif

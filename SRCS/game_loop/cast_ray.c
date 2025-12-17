@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:52:21 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 10:48:18 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 15:44:01 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ static void	set_perpendicular_distance(t_ray *ray, t_player *player)
 
 void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player)
 {
-	int	x_count;
-	int	y_count;
-
-	x_count = 0;
-	y_count = 0;
 	while (1)
 	{
 		if (ray->side_dist.x < ray->side_dist.y || ray->e_type == HORIZONTAL)
