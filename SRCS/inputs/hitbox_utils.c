@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:34:54 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 17:53:10 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 19:06:34 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	is_collision(t_hitbox hitbox1, t_hitbox hitbox2)
 {
 	if (hitbox1.topleft.x < hitbox2.botright.x
 		&& hitbox1.botright.x > hitbox2.topleft.x
-		&& hitbox2.topleft.y < hitbox2.botright.y
-		&& hitbox2.botright.y > hitbox2.topleft.y)
+		&& hitbox1.topleft.y < hitbox2.botright.y
+		&& hitbox1.botright.y > hitbox2.topleft.y)
 		return (1);
 	return (0);
 }
