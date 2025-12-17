@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:55:17 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 18:37:14 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/18 00:11:33 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,18 @@ t_vect move_dir)
 
 	new_pos.x = player->pos.x + move_dir.x;
 	new_pos.y = player->pos.y;
-	if (player->dir.x < 0)
+	if (move_dir.x < 0)
 		x = (int)player->pos.x - 1;
 	else
-		x = (int)player->pos.x + 1; 
-	y = (int)player->pos.y - 1;
-	while (y <= (int)player->pos.y + 1)
+		x = (int)player->pos.x + 1;
+	y = (int)player->pos.y;
+	if (y >= 0 && y < MAP_SIZE_MAX)
 	{
-		if (y >= 0 && y < MAP_SIZE_MAX)
+		if (gamedata->map[y][x].e_type == WALL)
 		{
-			if (gamedata->map[y][x].e_type == WALL)
-			{
-				if (is_collision(player_hitbox(new_pos), cell_hitbox(x, y)))
-					return (1);
-			}
+			if (is_collision(player_hitbox(new_pos), cell_hitbox(x, y)))
+				return (1);
 		}
-		y++;
 	}
 	return (0);
 }
@@ -90,22 +86,18 @@ t_vect move_dir)
 
 	new_pos.x = player->pos.x;
 	new_pos.y = player->pos.y + move_dir.y;
-	if (player->dir.y < 0)
+	if (move_dir.y < 0)
 		y = (int)player->pos.y - 1;
 	else
-		y = (int)player->pos.y + 1; 
-	x = (int)player->pos.x - 1;
-	while (x <= (int)player->pos.x + 1)
+		y = (int)player->pos.y + 1;
+	x = (int)player->pos.x;
+	if (x >= 0 && x < MAP_SIZE_MAX)
 	{
-		if (x >= 0 && x < MAP_SIZE_MAX)
+		if (gamedata->map[y][x].e_type == WALL)
 		{
-			if (gamedata->map[y][x].e_type == WALL)
-			{
-				if (is_collision(player_hitbox(new_pos), cell_hitbox(x, y)))
-					return (1);
-			}
+			if (is_collision(player_hitbox(new_pos), cell_hitbox(x, y)))
+				return (1);
 		}
-		x++;
 	}
 	return (0);
 }
@@ -114,27 +106,28 @@ void	handle_movement(t_gamedata *gamedata,
 t_inputs *inputs, t_player *player)
 {
 	const t_vect	move_dir = get_movement_vector(inputs->move_flags, player);
+	t_vect			new_pos;
 
 	if (move_dir.x == 0 && move_dir.y == 0)
 		return ;
 	if (is_x_collision(gamedata, player, move_dir))
 	{
-		printf("x collide\n");
 		if (move_dir.x < 0)
-			player->pos.x = (int)player->pos.x + PLAYER_SIZE / 2.0;
+			new_pos.x = ((int)player->pos.x + PLAYER_RADIUS);
 		else
-			player->pos.x = (int)player->pos.x + 1 - PLAYER_SIZE / 2.0;
+			new_pos.x = ((int)player->pos.x + 1 - PLAYER_RADIUS);
 	}
 	else
-		player->pos.x += move_dir.x;
+		new_pos.x = player->pos.x + move_dir.x;
 	if (is_y_collision(gamedata, player, move_dir))
 	{
-		printf("y collide\n");
 		if (move_dir.y < 0)
-			player->pos.y = (int)player->pos.y + PLAYER_SIZE / 2.0;
+			new_pos.y = (int)player->pos.y + PLAYER_RADIUS;
 		else
-			player->pos.y = (int)player->pos.y + 1 - PLAYER_SIZE / 2.0;
+			new_pos.y = (int)player->pos.y + 1 - PLAYER_RADIUS;
 	}
 	else
-		player->pos.y += move_dir.y;
+		new_pos.y = player->pos.y + move_dir.y;
+	player->pos.x = new_pos.x;
+	player->pos.y = new_pos.y;
 }

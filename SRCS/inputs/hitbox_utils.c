@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:34:54 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 19:06:34 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 22:55:04 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ t_hitbox	player_hitbox(t_vect pos)
 {
 	t_hitbox	hitbox;
 
-	hitbox.topleft.x = pos.x - PLAYER_SIZE / 2.0;
-	hitbox.topleft.y = pos.y - PLAYER_SIZE / 2.0;
-	hitbox.botright.x = pos.x + PLAYER_SIZE / 2.0;
-	hitbox.botright.y = pos.y + PLAYER_SIZE / 2.0;
+	hitbox.topleft.x = pos.x - PLAYER_RADIUS;
+	hitbox.topleft.y = pos.y - PLAYER_RADIUS;
+	hitbox.botright.x = pos.x + PLAYER_RADIUS;
+	hitbox.botright.y = pos.y + PLAYER_RADIUS;
 	return (hitbox);
 }
 
