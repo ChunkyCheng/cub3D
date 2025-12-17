@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:20:07 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 15:53:11 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 09:17:11 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	render_frame(t_gamedata *gamedata, t_player *player)
 	int		col;
 
 	render_background(&gamedata->img_buff, &gamedata->texture_pack);
-	player->view_plane_len = tan(player->fov * M_PI / 360);
+	player->view_plane_len = tan(120 * M_PI / 360);
 	player->projection_dist = IMG_WIDTH / 2 / player->view_plane_len;
 	player->view_plane.x = -player->dir.y * player->view_plane_len;
 	player->view_plane.y = player->dir.x * player->view_plane_len;

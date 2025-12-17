@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 15:01:34 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 09:18:58 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,6 @@ void	init_gamedata(t_gamedata *gamedata, char *map_path)
 	parse_map(gamedata, fd);
 	close(fd);
 	init_render_vals(gamedata->render_vals);
+	mlx_mouse_move(gamedata->display, gamedata->window,
+		WIN_WIDTH / 2, WIN_HEIGHT / 2);
 }

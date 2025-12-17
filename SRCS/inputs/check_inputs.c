@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:54:11 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 14:10:33 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 09:16:26 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@
 void	check_inputs(t_gamedata *gamedata, t_inputs *inputs,
 t_player *player)
 {
-	if (inputs->focused)
-		mlx_mouse_move(gamedata->display, gamedata->window,
-			WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	(void)gamedata;
 	handle_movement(inputs, player);
 	handle_rotation(inputs, player);
 }

@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 08:26:48 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 09:08:48 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ typedef struct s_player
 	float	angle;
 	t_vect	dir;
 	t_vect	view_plane;
-	float	view_plane_len;
-	float	projection_dist;
-	float	fov;
+	double	view_plane_len;
+	double	projection_dist;
+	double	fov;
 }	t_player;
 
 typedef struct s_inputs			t_inputs;
