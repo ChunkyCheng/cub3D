@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 17:22:53 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 12:13:23 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 09:05:15 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	init_ray_pos_and_dir(t_ray *ray, t_player *player, int col)
 {
-	float	view_plane_pos;
+	double	view_plane_pos;
 
 	ray->norm_x = player->pos.x;
 	ray->norm_y = player->pos.y;

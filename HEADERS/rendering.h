@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 16:07:46 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 08:26:09 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_ray
 	t_vect	step;
 	t_vect	delta_dist;
 	t_vect	side_dist;
-	float	len;
+	double	len;
 	enum
 	{
 		ANGLED,
@@ -44,8 +44,8 @@ typedef struct s_pixel_col
 	t_image	*texture;
 	int		len;
 	int		col;
-	float	row;
-	float	row_step;
+	double	row;
+	double	row_step;
 }	t_pixel_col;
 
 typedef struct s_render_vals

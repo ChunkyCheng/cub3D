@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 15:01:07 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 08:43:31 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define DFL_FLOOR		0x393A40
 # define DFL_CEILING	0x1A1C20
-# define DFL_FOV		90
+# define DFL_FOV		100
 
 # define DFL_NORTH		"textures/wall-default-north.xpm"
 # define DFL_SOUTH		"textures/wall-default-south.xpm"

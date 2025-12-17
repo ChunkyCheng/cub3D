@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 16:14:10 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 08:26:48 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@
 
 # define DEBUG			1
 
-# define WIN_WIDTH		3840
-# define WIN_HEIGHT		2160
+# define WIN_WIDTH		1920
+# define WIN_HEIGHT		1080
 # define IMG_WIDTH		320
 # define IMG_HEIGHT		200
 # define MAP_SIZE_MAX	128
 
 typedef struct s_vect
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_vect;
 
 typedef struct s_image

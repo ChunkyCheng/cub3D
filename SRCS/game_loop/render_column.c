@@ -6,16 +6,16 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:33:35 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 16:10:54 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/17 09:05:54 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "rendering.h"
 
-float	get_ray_hit_pos(t_ray *ray, t_player *player)
+static double	get_ray_hit_pos(t_ray *ray, t_player *player)
 {
-	float	hit_pos;
+	double	hit_pos;
 
 	if (ray->e_type == VERTICAL)
 		hit_pos = player->pos.x;
@@ -46,7 +46,7 @@ static void	init_pixel_col(t_gamedata *gamedata, t_ray *ray,
 t_pixel_col *pixel_col)
 {
 	t_texture	*texture;
-	float		ray_hit_pos;
+	double	ray_hit_pos;
 
 	texture = gamedata->map[ray->norm_y][ray->norm_x].texture;
 	set_pixel_col_texture(texture, ray, pixel_col);
