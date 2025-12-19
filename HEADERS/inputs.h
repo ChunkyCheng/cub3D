@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 02:35:05 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/18 18:45:36 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/19 17:58:23 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,11 @@ void		handle_rotation(t_inputs *inputs, t_player *player);
 t_hitbox	player_hitbox(t_vect pos);
 t_hitbox	cell_hitbox(int x, int y);
 int			is_collision(t_hitbox hitbox1, t_hitbox hitbox2);
+int			is_xy_collision(t_gamedata *gaedata, t_player *player,
+				t_vect move_dir);
+int			is_x_collision(t_gamedata *gaedata, t_player *player,
+				t_vect move_dir);
+int			is_y_collision(t_gamedata *gaedata, t_player *player,
+				t_vect move_dir);
 
 #endif

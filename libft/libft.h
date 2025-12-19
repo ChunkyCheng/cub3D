@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:17:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/01 15:04:28 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/19 17:37:41 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,12 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_qsort(void *base, size_t nmemb, size_t size,
 			int (*compare)(const void *, const void *));
 
+//math
+double	ft_round_to(double nbr, double place_value);
+double	ft_deg_to_rad(double angle);
+int		ft_get_sign(double nbr);
+
 //more complex functions
-int		ft_printf(const char *format, ...);
 char	*get_next_line(int fd);
 
 #endif

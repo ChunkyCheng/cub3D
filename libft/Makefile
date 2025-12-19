@@ -41,12 +41,14 @@ LST_FILES		=	ft_lstnew.c			ft_lstadd_front.c		ft_lstsize.c			\
 
 ALGO_DIR		=	algo
 ALGO_FILES		=	ft_qsort.c
-ALGO_SRCS		=	$(addprefix $(ALGO_DIR)/, $(ALGO_FILES))
+
+MATH_DIR		=	math
+MATH_FILES		=	ft_round_to.c		ft_get_sign.c			ft_deg_to_rad.c
 
 GNL_DIR			=	get_next_line
 GNL_FILES		=	get_next_line.c		get_next_line_utils.c
 
-MODULES			=	CHAR	STR		PTRARR	STRARR	MEM		PUTS	LST		ALGO	GNL
+MODULES			=	CHAR	STR		PTRARR	STRARR	MEM		PUTS	LST		ALGO	MATH	GNL
 $(foreach M,$(MODULES), $(eval $(M)_SRCS = $(addprefix $($(M)_DIR)/, $($(M)_FILES))))
 
 SRCS			=	$(foreach M,$(MODULES), $($(M)_SRCS))

@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 23:38:47 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/19 17:59:05 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define MAP_SIZE_MAX	128
 
 # define PLAYER_RADIUS	0.4
+# define QUANTIZE_STEP	0.01
 
 typedef struct s_vect
 {
