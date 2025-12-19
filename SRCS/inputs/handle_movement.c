@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:55:17 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/18 00:11:33 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/18 18:41:13 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,18 @@ t_vect move_dir)
 		x = (int)player->pos.x - 1;
 	else
 		x = (int)player->pos.x + 1;
-	y = (int)player->pos.y;
-	if (y >= 0 && y < MAP_SIZE_MAX)
+	y = (int)player->pos.y - 1;
+	while (y <= (int)player->pos.y + 1)
 	{
-		if (gamedata->map[y][x].e_type == WALL)
+		if (y >= 0 && y < MAP_SIZE_MAX)
 		{
-			if (is_collision(player_hitbox(new_pos), cell_hitbox(x, y)))
-				return (1);
+			if (gamedata->map[y][x].e_type == WALL)
+			{
+				if (is_collision(player_hitbox(new_pos), cell_hitbox(x, y)))
+					return (1);
+			}
 		}
+		y++;
 	}
 	return (0);
 }
@@ -90,14 +94,18 @@ t_vect move_dir)
 		y = (int)player->pos.y - 1;
 	else
 		y = (int)player->pos.y + 1;
-	x = (int)player->pos.x;
-	if (x >= 0 && x < MAP_SIZE_MAX)
+	x = (int)player->pos.x - 1;
+	while (x <= (int)player->pos.x + 1)
 	{
-		if (gamedata->map[y][x].e_type == WALL)
+		if (x >= 0 && x < MAP_SIZE_MAX)
 		{
-			if (is_collision(player_hitbox(new_pos), cell_hitbox(x, y)))
-				return (1);
+			if (gamedata->map[y][x].e_type == WALL)
+			{
+				if (is_collision(player_hitbox(new_pos), cell_hitbox(x, y)))
+					return (1);
+			}
 		}
+		x++;
 	}
 	return (0);
 }
@@ -110,7 +118,7 @@ t_inputs *inputs, t_player *player)
 
 	if (move_dir.x == 0 && move_dir.y == 0)
 		return ;
-	if (is_x_collision(gamedata, player, move_dir))
+	if (move_dir.x && is_x_collision(gamedata, player, move_dir))
 	{
 		if (move_dir.x < 0)
 			new_pos.x = ((int)player->pos.x + PLAYER_RADIUS);
@@ -119,7 +127,7 @@ t_inputs *inputs, t_player *player)
 	}
 	else
 		new_pos.x = player->pos.x + move_dir.x;
-	if (is_y_collision(gamedata, player, move_dir))
+	if (move_dir.y && is_y_collision(gamedata, player, move_dir))
 	{
 		if (move_dir.y < 0)
 			new_pos.y = (int)player->pos.y + PLAYER_RADIUS;
@@ -128,6 +136,6 @@ t_inputs *inputs, t_player *player)
 	}
 	else
 		new_pos.y = player->pos.y + move_dir.y;
-	player->pos.x = new_pos.x;
-	player->pos.y = new_pos.y;
+	player->pos.x = round(new_pos.x / QUANTIZE_STEP) * QUANTIZE_STEP;
+	player->pos.y = round(new_pos.y / QUANTIZE_STEP) * QUANTIZE_STEP;
 }
