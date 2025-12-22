@@ -6,14 +6,14 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 16:34:54 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/18 18:58:55 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/21 21:23:04 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "inputs.h"
 
-#define COLLISION_DEBUG 0
+#define COLLISION_DEBUG 1
 
 static void	print_hitbox(char *label, t_hitbox *hitbox)
 {

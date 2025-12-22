@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:55:17 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/19 18:00:08 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/21 18:18:58 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,16 @@ t_vect move_dir)
 	new_pos.x = player->pos.x + move_dir.x;
 	new_pos.y = player->pos.y + move_dir.y;
 	map_x = (int)player->pos.x + ft_get_sign(move_dir.x);
-	map_y = (int)player->pos.y + ft_get_sign(move_dir.y);
-	if (is_player_map_collision(gamedata, new_pos, map_x, map_y))
+	map_y = (int)player->pos.y;
+	if (is_player_map_collision(gamedata, new_pos, map_x, map_y - 1)
+		|| is_player_map_collision(gamedata, new_pos, map_x, map_y)
+		|| is_player_map_collision(gamedata, new_pos, map_x, map_y + 1))
 		return (1);
-	if (is_player_map_collision(gamedata, new_pos, map_x, (int)player->pos.y))
-		return (1);
-	if (is_player_map_collision(gamedata, new_pos, (int)player->pos.x, map_y))
+	map_x = (int)player->pos.x;
+	map_y += ft_get_sign(move_dir.y);
+	if (is_player_map_collision(gamedata, new_pos, map_x - 1, map_y)
+		|| is_player_map_collision(gamedata, new_pos, map_x, map_y)
+		|| is_player_map_collision(gamedata, new_pos, map_x + 1, map_y))
 		return (1);
 	return (0);
 }
@@ -78,11 +82,8 @@ t_vect move_dir)
 	map_y = (int)player->pos.y + ft_get_sign(move_dir.y);
 	while (map_x <= (int)player->pos.x + 1)
 	{
-		if (map_x >= 0 && map_x < MAP_SIZE_MAX)
-		{
-			if (is_player_map_collision(gamedata, new_pos, map_x, map_y))
-				return (1);
-		}
+		if (is_player_map_collision(gamedata, new_pos, map_x, map_y))
+			return (1);
 		map_x++;
 	}
 	return (0);

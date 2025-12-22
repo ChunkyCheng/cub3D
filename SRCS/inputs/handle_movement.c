@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:55:17 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/19 18:52:51 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/21 18:34:10 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,20 @@ t_inputs *inputs, t_player *player)
 	move_dir = get_movement_vector(inputs->move_flags, player);
 	if (move_dir.x == 0 && move_dir.y == 0)
 		return ;
+	new_pos.x = player->pos.x + move_dir.x;
+	new_pos.y = player->pos.y + move_dir.y;
 	if (is_xy_collision(gamedata, player, move_dir))
 	{
 		if (move_dir.x && is_x_collision(gamedata, player, move_dir))
 			new_pos.x = axis_post_collision(player->pos.x, move_dir.x);
-		else
-			new_pos.x = player->pos.x + move_dir.x;
 		if (move_dir.y && is_y_collision(gamedata, player, move_dir))
 			new_pos.y = axis_post_collision(player->pos.y, move_dir.y);
-		else
-			new_pos.y = player->pos.y + move_dir.y;
-	}
-	else
-	{
-		new_pos.x = player->pos.x + move_dir.x;
-		new_pos.y = player->pos.y + move_dir.y;
+		if (new_pos.x == player->pos.x + move_dir.x
+			&& new_pos.y == player->pos.y + move_dir.y)
+		{
+			new_pos.x = axis_post_collision(player->pos.x, move_dir.x);
+			new_pos.y = axis_post_collision(player->pos.y, move_dir.y);
+		}
 	}
 	player->pos.x = ft_round_to(new_pos.x, QUANTIZE_STEP);
 	player->pos.y = ft_round_to(new_pos.y, QUANTIZE_STEP);
