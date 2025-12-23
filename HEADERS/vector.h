@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_round_to.c                                      :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/19 15:35:47 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/22 12:55:43 by jchuah           ###   ########.fr       */
+/*   Created: 2025/12/22 15:13:38 by jchuah            #+#    #+#             */
+/*   Updated: 2025/12/22 16:02:32 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <math.h>
-#include <stdio.h>
+#ifndef VECTOR_H
+# define VECTOR_H
 
-//warning: do not use too small of a place value that could lead to
-//floating point rounding errors
-double	ft_round_to(double nbr, double place_value)
+typedef struct s_int_vect
 {
-	printf("%f\n", (round(nbr / place_value) * place_value));
-	return (round(nbr / place_value) * place_value);
-}
+	int	x;
+	int	y;
+}	t_int_vect;
+
+typedef struct s_llong_vect
+{
+	long long	x;
+	long long	y;
+}	t_llong_vect;
+
+typedef struct s_double_vect
+{
+	double	x;
+	double	y;
+}	t_double_vect;
+
+#endif
