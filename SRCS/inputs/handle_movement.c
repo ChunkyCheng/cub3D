@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:55:17 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/21 18:34:10 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/23 16:37:50 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,6 @@ t_inputs *inputs, t_player *player)
 			new_pos.y = axis_post_collision(player->pos.y, move_dir.y);
 		}
 	}
-	player->pos.x = ft_round_to(new_pos.x, QUANTIZE_STEP);
-	player->pos.y = ft_round_to(new_pos.y, QUANTIZE_STEP);
+	player->pos.x = ft_decimal_round(new_pos.x, 3);
+	player->pos.y = ft_decimal_round(new_pos.y, 3);
 }

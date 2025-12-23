@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 15:35:47 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/22 12:55:43 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/23 16:35:30 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 #include <math.h>
 #include <stdio.h>
 
-//warning: do not use too small of a place value that could lead to
-//floating point rounding errors
-double	ft_round_to(double nbr, double place_value)
+//warning: high number of decimals will lead to rounding errors
+double	ft_decimal_round(double nbr, int decimals)
 {
-	printf("%f\n", (round(nbr / place_value) * place_value));
-	return (round(nbr / place_value) * place_value);
+	int	place_value;
+
+	place_value = 1;
+	while (decimals--)
+		place_value *= 10;
+	return (round(nbr * place_value) / place_value);
 }
