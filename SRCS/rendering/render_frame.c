@@ -6,40 +6,12 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:20:07 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 12:25:36 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/23 23:38:25 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "rendering.h"
-
-static void	render_background(t_image *img_buff, t_texture_pack *texture_pack)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < IMG_HEIGHT / 2)
-	{
-		x = 0;
-		while (x < IMG_WIDTH)
-		{
-			image_put_pixel(img_buff, x, y, texture_pack->ceiling);
-			x++;
-		}
-		y++;
-	}
-	while (y < IMG_HEIGHT)
-	{
-		x = 0;
-		while (x < IMG_WIDTH)
-		{
-			image_put_pixel(img_buff, x, y, texture_pack->floor);
-			x++;
-		}
-		y++;
-	}
-}
 
 static void	scale_image(t_image *main, t_image *buff,
 t_render_vals *render_vals)

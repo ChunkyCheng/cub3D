@@ -20,17 +20,17 @@ INPUT_FILES	=	handle_key_event.c	handle_mouse_event.c	handle_focus_event.c		\
 				handle_movement.c	handle_rotation.c		check_inputs.c				\
 				hitbox_utils.c		check_collisions.c
 
-LOOP_DIR	=	game_loop
-LOOP_FILES	=	game_loop.c			render_frame.c		init_ray.c		cast_ray.c		\
-				render_column.c		image_put_pixel.c	image_get_pixel.c				\
-				limit_framerate.c
+RENDER_DIR	=	rendering
+RENDER_FILES=	render_frame.c		render_background.c		init_ray.c					\
+				cast_ray.c			render_column.c			image_put_pixel.c			\
+				image_get_pixel.c	limit_framerate.c		darken_pixel.c
 
-MODULES		=	PARSE	INPUT	LOOP
+MODULES		=	PARSE	INPUT	RENDER
 
 $(foreach M,$(MODULES), $(eval $(M)_SRCS = $(addprefix $($(M)_DIR)/, $($(M)_FILES))))
 
 SRCDIR		=	SRCS
-SRCFILES	=	main.c	close_and_exit.c
+SRCFILES	=	main.c				game_loop.c			close_and_exit.c
 SRCS		=	$(addprefix $(SRCDIR)/, $(SRCFILES)										\
 										$(foreach M,$(MODULES), $($(M)_SRCS)))
 

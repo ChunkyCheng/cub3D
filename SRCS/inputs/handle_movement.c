@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:55:17 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/23 16:37:50 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/23 16:59:23 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,33 @@ static float	get_move_dist(int move_flags)
 	return (MOVE_SPEED);
 }
 
-static t_vect	get_movement_vector(int move_flags, t_player *player)
+static void	set_movement_vector(t_vect *move_dir,
+int move_flags, t_player *player)
 {
-	const float	move_dist = get_move_dist(move_flags);
-	t_vect		move_dir;
+	double	move_dist;
 
-	move_dir = (t_vect){0};
+	move_dist = get_move_dist(move_flags);
+	*move_dir = (t_vect){0};
 	if (move_flags & W_HOLD)
 	{
-		move_dir.x += player->dir.x * move_dist;
-		move_dir.y += player->dir.y * move_dist;
+		move_dir->x += player->dir.x * move_dist;
+		move_dir->y += player->dir.y * move_dist;
 	}
 	if (move_flags & A_HOLD)
 	{
-		move_dir.x += player->dir.y * move_dist;
-		move_dir.y -= player->dir.x * move_dist;
+		move_dir->x += player->dir.y * move_dist;
+		move_dir->y -= player->dir.x * move_dist;
 	}
 	if (move_flags & S_HOLD)
 	{
-		move_dir.x -= player->dir.x * move_dist;
-		move_dir.y -= player->dir.y * move_dist;
+		move_dir->x -= player->dir.x * move_dist;
+		move_dir->y -= player->dir.y * move_dist;
 	}
 	if (move_flags & D_HOLD)
 	{
-		move_dir.x -= player->dir.y * move_dist;
-		move_dir.y += player->dir.x * move_dist;
+		move_dir->x -= player->dir.y * move_dist;
+		move_dir->y += player->dir.x * move_dist;
 	}
-	return (move_dir);
 }
 
 static double	axis_post_collision(double axis_val, double move_dir)
@@ -66,7 +66,7 @@ t_inputs *inputs, t_player *player)
 	t_vect	move_dir;
 	t_vect	new_pos;
 
-	move_dir = get_movement_vector(inputs->move_flags, player);
+	set_movement_vector(&move_dir, inputs->move_flags, player);
 	if (move_dir.x == 0 && move_dir.y == 0)
 		return ;
 	new_pos.x = player->pos.x + move_dir.x;

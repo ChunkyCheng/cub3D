@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:17:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/23 16:36:38 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/23 17:36:34 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef unsigned char		t_uchar;
 typedef long long			t_llong;
 typedef unsigned long long	t_ullong;
 typedef struct s_list

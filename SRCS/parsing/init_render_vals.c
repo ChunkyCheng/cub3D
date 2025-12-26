@@ -6,13 +6,14 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:53:30 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 12:26:17 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/24 00:43:10 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "rendering.h"
 
+//for rendering. Do not change in parsing but use in parsing
 static void	calculate_upscale_map(t_render_vals *render_vals)
 {
 	int	i;

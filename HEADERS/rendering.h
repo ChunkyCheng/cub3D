@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/18 00:12:49 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/23 23:47:59 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # define FRAMERATE	30
 # include "cub3d.h"
+
+# define ALPHA	0xFF000000
+# define RED	0x00FF0000
+# define GREEN	0x0000FF00
+# define BLUE	0x000000FF
+
+# define DARKNESS	1
 
 typedef struct s_ray
 {
@@ -59,12 +66,28 @@ typedef struct s_render_vals
 	int		scale_map_y[WIN_HEIGHT];
 }	t_render_vals;
 
+typedef struct s_rgb
+{
+	float	red;
+	float	green;
+	float	blue;
+}	t_rgb;
+
+typedef struct s_hsv
+{
+	float	hue;
+	float	saturation;
+	float	value;
+}	t_hsv;
+
 void	render_frame(t_gamedata *gamedata, t_player *player);
+void	render_background(t_image *img_buff, t_texture_pack *texture_pack);
 void	init_ray(t_ray *ray, t_player *player, int col);
 void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player);
 void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col);
 void	image_put_pixel(t_image *image, int x, int y, int colour);
 int		image_get_pixel(t_image *image, int x, int y);
+int		darken_pixel(int pixel, double scale);
 
 void	limit_framerate(void);
 
