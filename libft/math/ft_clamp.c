@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_focus_event.c                               :+:      :+:    :+:   */
+/*   ft_clamp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 10:55:15 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 22:01:43 by jchuah           ###   ########.fr       */
+/*   Created: 2025/12/30 22:29:51 by jchuah            #+#    #+#             */
+/*   Updated: 2025/12/30 22:30:49 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "inputs.h"
+#include "libft.h"
 
-int	handle_focus_in(t_gamedata *gamedata)
+double	ft_clamp(double value, double min, double max)
 {
-	gamedata->inputs->focused = 1;
-	return (0);
-}
-
-int	handle_focus_out(t_gamedata *gamedata)
-{
-	t_inputs	*inputs;
-
-	inputs = gamedata->inputs;
-	inputs->focused = 0;
-	inputs->move_flags = 0;
-	inputs->rot_flags = 0;
-	inputs->x_move = 0;
-	inputs->y_move = 0;
-	return (0);
+	if (value < min)
+		return (min);
+	if (value > max)
+		return (max);
+	return (value);
 }

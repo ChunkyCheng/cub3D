@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:20:07 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/23 23:38:25 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/30 21:42:49 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ t_render_vals *render_vals)
 
 //Formula for view_plane_len = tan(fov / 2) where fov is in radians
 //Thus final formula is tan(fov * pi / 360)
-void	render_frame(t_gamedata *gamedata, t_player *player)
+void	render_frame(t_gamedata *gamedata, t_render_vals *render_vals,
+t_player *player)
 {
 	t_ray	ray;
 	int		col;
 
-	render_background(&gamedata->img_buff, &gamedata->texture_pack);
-	player->view_plane_len = tan(120 * M_PI / 360);
-	player->projection_dist = IMG_WIDTH / 2 / player->view_plane_len;
-	player->view_plane.x = -player->dir.y * player->view_plane_len;
-	player->view_plane.y = player->dir.x * player->view_plane_len;
+	render_background(&gamedata->img_buff, &gamedata->texture_pack,
+		gamedata->render_vals, &gamedata->player);
+	player->view_plane.x = -player->dir.y * render_vals->view_plane_len;
+	player->view_plane.y = player->dir.x * render_vals->view_plane_len;
 	col = 0;
 	while (col < IMG_WIDTH)
 	{
@@ -63,6 +63,6 @@ void	render_frame(t_gamedata *gamedata, t_player *player)
 		gamedata->render_vals);
 	mlx_put_image_to_window(gamedata->display, gamedata->window,
 		gamedata->img_main.mlx_img,
-		gamedata->render_vals->x_offset, gamedata->render_vals->y_offset);
+		render_vals->x_offset, render_vals->y_offset);
 	limit_framerate();
 }

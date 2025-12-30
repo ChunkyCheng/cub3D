@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 17:28:46 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/30 20:01:43 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 # define DEBUG			1
 
-# define WIN_WIDTH		1920
-# define WIN_HEIGHT		1080
+# define WIN_WIDTH		3840
+# define WIN_HEIGHT		2160
 # define IMG_WIDTH		768
 # define IMG_HEIGHT		480
 # define MAP_SIZE_MAX	128
@@ -91,9 +91,8 @@ typedef struct s_player
 	float		angle;
 	t_vect		dir;
 	t_vect		view_plane;
-	double		view_plane_len;
-	double		projection_dist;
 	double		fov;
+	double		view_dist;
 }	t_player;
 
 typedef struct s_inputs			t_inputs;

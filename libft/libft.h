@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 10:17:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/23 17:36:34 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/30 22:31:12 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	ft_qsort(void *base, size_t nmemb, size_t size,
 double	ft_decimal_round(double nbr, int decimals);
 double	ft_deg_to_rad(double angle);
 int		ft_get_sign(double nbr);
+double	ft_clamp(double value, double min, double max);
 
 //more complex functions
 char	*get_next_line(int fd);

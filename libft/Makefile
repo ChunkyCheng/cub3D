@@ -43,7 +43,8 @@ ALGO_DIR		=	algo
 ALGO_FILES		=	ft_qsort.c
 
 MATH_DIR		=	math
-MATH_FILES		=	ft_decimal_round.c	ft_get_sign.c			ft_deg_to_rad.c
+MATH_FILES		=	ft_decimal_round.c	ft_get_sign.c			ft_deg_to_rad.c			\
+					ft_clamp.c
 
 GNL_DIR			=	get_next_line
 GNL_FILES		=	get_next_line.c		get_next_line_utils.c

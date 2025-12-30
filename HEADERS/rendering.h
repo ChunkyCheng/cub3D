@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/23 23:47:59 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/30 22:37:40 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 # define RED	0x00FF0000
 # define GREEN	0x0000FF00
 # define BLUE	0x000000FF
+# define BLACK	0x00000000
 
-# define DARKNESS	1
+# define DFL_VIEW_DIST	2.0
+# define DFL_FOV		100
 
 typedef struct s_ray
 {
@@ -64,6 +66,9 @@ typedef struct s_render_vals
 	int		y_offset;
 	int		scale_map_x[WIN_WIDTH];
 	int		scale_map_y[WIN_HEIGHT];
+	double	view_plane_len;
+	double	projection_dist;
+	int		min_wall_height;
 }	t_render_vals;
 
 typedef struct s_rgb
@@ -80,8 +85,10 @@ typedef struct s_hsv
 	float	value;
 }	t_hsv;
 
-void	render_frame(t_gamedata *gamedata, t_player *player);
-void	render_background(t_image *img_buff, t_texture_pack *texture_pack);
+void	render_frame(t_gamedata *gamedata, t_render_vals *render_vals,
+			t_player *player);
+void	render_background(t_image *img_buff, t_texture_pack *texture_pack,
+			t_render_vals *render_vals, t_player *player);
 void	init_ray(t_ray *ray, t_player *player, int col);
 void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player);
 void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col);

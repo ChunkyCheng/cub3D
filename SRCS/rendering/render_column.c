@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:33:35 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 17:35:06 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/30 22:40:26 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_pixel_col *pixel_col)
 	set_pixel_col_texture(&gamedata->map[ray->norm_y][ray->norm_x],
 		ray, pixel_col);
 	ray_hit_pos = get_ray_hit_pos(ray, &gamedata->player);
-	pixel_col->len = gamedata->player.projection_dist / ray->len;
+	pixel_col->len = gamedata->render_vals->projection_dist / ray->len;
 	if ((ray->e_side == Y_SIDE && ray->dir.y < 0)
 		|| (ray->e_side == X_SIDE && ray->dir.x > 0))
 		pixel_col->col = (int)(pixel_col->texture->width * ray_hit_pos);
@@ -70,19 +70,22 @@ void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col)
 	int			screen_row;
 	int			pixel;
 	int			i;
+	float		darkness;
 
 	init_pixel_col(gamedata, ray, &pixel_col);
 	if (pixel_col.len > IMG_HEIGHT)
 		screen_row = 0;
 	else
 		screen_row = round((IMG_HEIGHT - pixel_col.len) / 2);
+	darkness = (2.0 / (gamedata->render_vals->min_wall_height - IMG_HEIGHT))
+		* screen_row + 1.0;
 	i = 0;
 	while (screen_row < (IMG_HEIGHT + pixel_col.len) / 2
 		&& screen_row < IMG_HEIGHT)
 	{
 		pixel = image_get_pixel(pixel_col.texture,
 				pixel_col.col, (int)(pixel_col.row + i * pixel_col.row_step));
-		pixel = darken_pixel(pixel, 0.3 / (0.3 + ray->len));
+		pixel = darken_pixel(pixel, darkness);
 		image_put_pixel(&gamedata->img_buff, screen_col, screen_row, pixel);
 		i++;
 		screen_row++;
