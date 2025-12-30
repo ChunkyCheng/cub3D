@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/24 00:41:33 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/30 17:30:31 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ static void	parse_map(t_gamedata *gamedata, int fd)
 			else if (line[x] == '1')
 			{
 				gamedata->map[y][x].e_type = WALL;
-				gamedata->map[y][x].texture = gamedata->texture_pack.wall1;
+				gamedata->map[y][x].north = &gamedata->texture_pack.wall1.north;
+				gamedata->map[y][x].south = &gamedata->texture_pack.wall1.south;
+				gamedata->map[y][x].west = &gamedata->texture_pack.wall1.west;
+				gamedata->map[y][x].east = &gamedata->texture_pack.wall1.east;
 			}
 			else if (ft_strchr("NSWE", line[x]))
 				init_player(gamedata, x, y, line[x]);

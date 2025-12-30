@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/24 00:43:13 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/30 17:28:46 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,12 @@ typedef struct s_texture_pack
 	t_texture	wall1;
 	t_texture	wall2;
 	t_texture	wall3;
-	t_texture 	wall9;
+	t_texture	wall4;
+	t_texture	wall5;
+	t_texture	wall6;
+	t_texture	wall7;
+	t_texture	wall8;
+	t_texture	wall9;
 }	t_texture_pack;
 
 typedef struct s_map_cell
@@ -73,8 +78,11 @@ typedef struct s_map_cell
 		EMPTY,
 		WALL,
 		DOOR
-	}			e_type;
-	t_texture	texture;
+	}		e_type;
+	t_image	*north;
+	t_image	*south;
+	t_image	*west;
+	t_image	*east;
 }	t_map_cell;
 
 typedef struct s_player

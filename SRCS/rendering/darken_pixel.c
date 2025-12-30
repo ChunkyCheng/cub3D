@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 19:34:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/23 22:27:15 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/30 17:35:25 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	rgb_prime_to_pixel(t_rgb rgb_prime)
 	red = ((int)(rgb_prime.red * 255)) << 16;
 	green = ((int)(rgb_prime.green * 255)) << 8;
 	blue = (int)(rgb_prime.blue * 255);
-	return ( red | green | blue);
+	return (red | green | blue);
 }
 
 static int	hsv_to_pixel(t_hsv hsv)
