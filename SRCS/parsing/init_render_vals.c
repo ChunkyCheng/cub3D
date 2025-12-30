@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:53:30 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/24 00:43:10 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/30 19:33:09 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,6 @@ void	init_render_vals(t_render_vals *render_vals)
 		render_vals->y_offset = render_vals->y_bound / 2;
 	}
 	calculate_upscale_map(render_vals);
+	render_vals->view_plane_len = tan(120 * M_PI / 360);
+	render_vals->projection_dist = IMG_WIDTH / 2 / render_vals->view_plane_len;
 }

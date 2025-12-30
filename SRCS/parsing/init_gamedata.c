@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 17:30:31 by jchuah           ###   ########.fr       */
+/*   Updated: 2025/12/30 20:03:07 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include "cub3d.h"
 #include "parsing.h"
+#include "rendering.h"
 
 static int	is_valid_path(char *map_path)
 {
@@ -50,6 +51,7 @@ static void	init_player(t_gamedata *gamedata, int x, int y, char direction)
 		gamedata->player.angle = 180;
 	}
 	gamedata->player.fov = DFL_FOV;
+	gamedata->player.view_dist = DFL_VIEW_DIST;
 }
 
 static void	parse_map(t_gamedata *gamedata, int fd)
