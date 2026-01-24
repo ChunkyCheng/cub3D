@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_gamedata.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
+/*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 20:03:07 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/21 16:47:49 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,6 @@
 #include "cub3d.h"
 #include "parsing.h"
 #include "rendering.h"
-
-static int	is_valid_path(char *map_path)
-{
-	int	len;
-
-	len = ft_strlen(map_path);
-	if (len < 5 || ft_strcmp(&map_path[len] - 4, ".cub"))
-		return (0);
-	return (1);
-}
 
 static void	init_player(t_gamedata *gamedata, int x, int y, char direction)
 {
@@ -119,11 +109,6 @@ void	init_gamedata(t_gamedata *gamedata, char *map_path)
 {
 	int	fd;
 
-	if (!is_valid_path(map_path))
-	{
-		ft_putstr_fd("Error\ninvalid file extension\n", 2);
-		exit(2);
-	}
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
 	{

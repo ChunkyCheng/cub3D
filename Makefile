@@ -13,7 +13,8 @@ LIBS	=	$(LIBDIR)/libft.a $(MLXDIR)/libmlx.a
 ####################################===SOURCE FILES===####################################
 
 PARSE_DIR	=	parsing
-PARSE_FILES	=	init_gamedata.c		init_image_data.c		init_render_vals.c
+PARSE_FILES	=	parse_args.c		init_gamedata.c			init_image_data.c			\
+				init_render_vals.c	parse_utils.c
 
 INPUT_DIR	=	inputs
 INPUT_FILES	=	handle_key_event.c	handle_mouse_event.c	handle_focus_event.c		\

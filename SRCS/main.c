@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
+/*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:26:47 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 17:46:40 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/24 20:22:47 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,10 @@ int	main(int argc, char *argv[])
 	t_render_vals	render_vals;
 
 	if (argc != 2)
-	{
-		ft_putstr_fd("Error\nUsage: ", 2);
-		ft_putstr_fd(argv[0], 2);
-		ft_putstr_fd(" <filename.cub>\n", 2);
-		return (1);
-	}
+		return (print_error("Usage: ./cub3D <filename.cub>", 0));
 	gamedata = (t_gamedata){0};
+	if (!(parse_args(&gamedata, argv[1])))
+		return (2);
 	inputs = (t_inputs){0};
 	render_vals = (t_render_vals){0};
 	gamedata.inputs = &inputs;

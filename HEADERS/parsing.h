@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
+/*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 21:25:19 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/24 23:05:14 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@
 
 typedef struct s_render_vals	t_render_vals;
 
+typedef enum state
+{
+	ELEMENTS,
+	MAP,
+	INVALID
+}	t_state;
+
+int		print_error(char *message, int exit_code);
+char	**file_to_strarr(int fd);
 void	init_render_vals(t_render_vals *render_vals);
 void	init_image_data(t_image *image);
 

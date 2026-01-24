@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
+/*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 20:01:43 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/24 23:04:46 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <math.h>
+# include <fcntl.h>
 
 # define DEBUG			1
 
@@ -46,6 +47,7 @@ typedef struct s_image
 	int		endian;
 	int		width;
 	int		height;
+	char	*file_path;
 }	t_image;
 
 typedef struct s_texture
@@ -112,6 +114,7 @@ typedef struct s_gamedata
 	int				exit_code;
 }	t_gamedata;
 
+int			parse_args(int argc, char *map_path, t_gamedata *gamedata);
 void		init_render_vals(t_render_vals *render_vals);
 void		init_gamedata(t_gamedata *gamedata, char *map_path);
 int			game_loop(t_gamedata *gamedata);
