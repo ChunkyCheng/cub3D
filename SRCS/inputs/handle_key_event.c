@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 02:34:23 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 10:01:14 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/26 17:33:19 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	handle_key_press(int key, t_gamedata *gamedata)
 		inputs->move_flags |= S_HOLD;
 	else if (key == XK_d)
 		inputs->move_flags |= D_HOLD;
+	else if (key == XK_e)
+		inputs->move_flags |= E_HOLD;
 	else if (key == XK_Left)
 		inputs->rot_flags |= LEFT_HOLD;
 	else if (key == XK_Right)
@@ -48,6 +50,8 @@ int	handle_key_release(int key, t_gamedata *gamedata)
 		inputs->move_flags &= ~S_HOLD;
 	else if (key == XK_d)
 		inputs->move_flags &= ~D_HOLD;
+	else if (key == XK_e)
+		inputs->move_flags &= ~E_HOLD;
 	else if (key == XK_Left)
 		inputs->rot_flags &= ~LEFT_HOLD;
 	else if (key == XK_Right)

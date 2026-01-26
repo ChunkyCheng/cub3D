@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 02:35:05 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/19 17:58:23 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/26 17:17:51 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include "cub3d.h"
 
-# define W_HOLD			0b0001
-# define A_HOLD			0b0010
-# define S_HOLD			0b0100
-# define D_HOLD			0b1000
+# define W_HOLD			0b00001
+# define A_HOLD			0b00010
+# define S_HOLD			0b00100
+# define D_HOLD			0b01000
+# define E_HOLD			0b10000
 
 # define LEFT_HOLD		0b01
 # define RIGHT_HOLD		0b10
@@ -26,6 +27,7 @@
 # define LCLICK_HOLD	0b01
 
 # define MOVE_SPEED			0.04
+# define REACH_DIST			0.5
 # define ROT_SPEED_KEY		1.0
 # define ROT_SPEED_MOUSE	0.07
 
@@ -64,6 +66,8 @@ void		check_inputs(t_gamedata *gamedata,
 void		handle_movement(t_gamedata *gamedata,
 				t_inputs *inputs, t_player *player);
 void		handle_rotation(t_inputs *inputs, t_player *player);
+void		handle_use_key(t_gamedata *gamedata,
+				t_inputs *inputs, t_player *player);
 
 t_hitbox	player_hitbox(t_vect pos);
 t_hitbox	cell_hitbox(int x, int y);

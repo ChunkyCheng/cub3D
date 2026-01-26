@@ -6,13 +6,14 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:09:35 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 11:21:07 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/26 16:53:28 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "rendering.h"
 #include <sys/time.h>
+
 
 static t_llong	get_usec(void)
 {
@@ -22,6 +23,7 @@ static t_llong	get_usec(void)
 	return (tv.tv_sec * 1000000 + tv.tv_usec);
 }
 
+/*
 static void	busy_sleep(t_llong elapsed)
 {
 	t_llong	frame_time;
@@ -39,6 +41,7 @@ static void	busy_sleep(t_llong elapsed)
 			break ;
 	}
 }
+*/
 
 static void	print_fps(void)
 {
@@ -66,7 +69,7 @@ static void	print_fps(void)
 
 void	limit_framerate(void)
 {
-	static t_llong	prev = 0;
+	/*static t_llong	prev = 0;
 	t_llong			elapsed;
 
 	if (prev == 0)
@@ -76,7 +79,7 @@ void	limit_framerate(void)
 	}
 	elapsed = get_usec() - prev;
 	busy_sleep(elapsed);
-	prev = get_usec();
+	prev = get_usec();*/
 	if (DEBUG)
 		print_fps();
 }

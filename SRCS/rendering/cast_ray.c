@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:52:21 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 20:26:36 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/26 16:57:44 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player)
 		}
 		if (is_out_of_bounds(ray, player))
 			return ;
-		if (gamedata->map[ray->norm_y][ray->norm_x].e_type == WALL)
+		if (gamedata->map[ray->norm_y][ray->norm_x].visible)
 			break ;
 	}
 	set_perpendicular_distance(ray, player);

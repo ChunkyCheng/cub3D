@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:55:17 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/21 18:18:58 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/26 16:58:29 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int map_x, int map_y)
 	if (map_x < 0 || map_x >= MAP_SIZE_MAX
 		|| map_y < 0 || map_y >= MAP_SIZE_MAX)
 		return (0);
-	if (gamedata->map[map_y][map_x].e_type == WALL
+	if (gamedata->map[map_y][map_x].solid
 		&& is_collision(player_hitbox(player_pos), cell_hitbox(map_x, map_y)))
 		return (1);
 	return (0);

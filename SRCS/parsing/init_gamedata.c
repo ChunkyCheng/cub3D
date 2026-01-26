@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 20:03:07 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/26 17:30:40 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,23 @@ static void	parse_map(t_gamedata *gamedata, int fd)
 		while (line[x])
 		{
 			if (line[x] == '0' || line[x] == ' ')
-				gamedata->map[y][x].e_type = EMPTY;
-			else if (line[x] == '1')
 			{
-				gamedata->map[y][x].e_type = WALL;
+				gamedata->map[y][x].e_type = EMPTY;
+				gamedata->map[y][x].solid = 0;
+				gamedata->map[y][x].visible = 0;
+			}
+			else if (line[x] == '1' || line[x] == 'D')
+			{
+				if (line[x] == 'D')
+					gamedata->map[y][x].e_type = DOOR;
+				else
+					gamedata->map[y][x].e_type = WALL;
 				gamedata->map[y][x].north = &gamedata->texture_pack.wall1.north;
 				gamedata->map[y][x].south = &gamedata->texture_pack.wall1.south;
 				gamedata->map[y][x].west = &gamedata->texture_pack.wall1.west;
 				gamedata->map[y][x].east = &gamedata->texture_pack.wall1.east;
+				gamedata->map[y][x].solid = 1;
+				gamedata->map[y][x].visible = 1;
 			}
 			else if (ft_strchr("NSWE", line[x]))
 				init_player(gamedata, x, y, line[x]);

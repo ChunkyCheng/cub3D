@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 19:34:14 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 20:59:12 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/26 12:05:56 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	hsv_to_pixel(t_hsv hsv)
 		rgb_prime = (t_rgb){.red = 0, .green = mid, .blue = chroma};
 	else if (hsv.hue < 300)
 		rgb_prime = (t_rgb){.red = mid, .green = 0, .blue = chroma};
-	else if (hsv.hue < 360)
+	else
 		rgb_prime = (t_rgb){.red = chroma, .green = 0, .blue = mid};
 	rgb_prime.red += match;
 	rgb_prime.green += match;

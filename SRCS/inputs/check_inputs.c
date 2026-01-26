@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 16:54:11 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/17 17:42:53 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/26 17:18:11 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ t_player *player)
 	(void)gamedata;
 	handle_movement(gamedata, inputs, player);
 	handle_rotation(inputs, player);
+	handle_use_key(gamedata, inputs, player);
 }

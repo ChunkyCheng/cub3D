@@ -17,8 +17,8 @@ PARSE_FILES	=	init_gamedata.c		init_image_data.c		init_render_vals.c
 
 INPUT_DIR	=	inputs
 INPUT_FILES	=	handle_key_event.c	handle_mouse_event.c	handle_focus_event.c		\
-				handle_movement.c	handle_rotation.c		check_inputs.c				\
-				hitbox_utils.c		check_collisions.c
+				handle_movement.c	handle_rotation.c		handle_use_key.c			\
+				check_inputs.c		hitbox_utils.c			check_collisions.c
 
 RENDER_DIR	=	rendering
 RENDER_FILES=	render_frame.c		render_background.c		init_ray.c					\
@@ -106,11 +106,6 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 clean:
 	@printf "$(RED)"
-	@if [ -d $(MLXDIR) ]; then						\
-		rm -rf $(MLXDIR);							\
-		printf "Removed $(MLXDIR)\n";				\
-	else											\
-		printf "$(MLXDIR) not found\n"; fi;
 	@make fclean -s -C $(LIBDIR)
 	@printf "$(RED)"
 	@if [ -d $(OBJDIR) ]; then						\
