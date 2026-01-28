@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 12:02:23 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 19:42:20 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 # define DFL_VIEW_DIST	7.0
 # define DFL_FOV		100
+
+# define COIN_SIZE		0.5
 
 typedef struct s_ray
 {
@@ -92,6 +94,10 @@ void	render_background(t_image *img_buff, t_texture_pack *texture_pack,
 void	init_ray(t_ray *ray, t_player *player, int col);
 void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player);
 void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col);
+void	render_coins(t_gamedata *gamedata, t_player *player, t_coins *coins);
+
+void	update_animations(t_gamedata *gamedata);
+
 void	image_put_pixel(t_image *image, int x, int y, int colour);
 int		image_get_pixel(t_image *image, int x, int y);
 int		darken_pixel(int pixel, float scale);

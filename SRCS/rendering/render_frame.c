@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:20:07 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/26 17:32:30 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 17:26:46 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ t_player *player)
 			render_column(gamedata, &ray, col);
 		col++;
 	}
+	render_coins(gamedata, &gamedata->player, &gamedata->coins);
 	scale_image(&gamedata->img_main, &gamedata->img_buff,
 		gamedata->render_vals);
 	mlx_put_image_to_window(gamedata->display, gamedata->window,

@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/26 17:30:40 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 19:49:06 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ static void	init_player(t_gamedata *gamedata, int x, int y, char direction)
 	gamedata->player.view_dist = DFL_VIEW_DIST;
 }
 
+static void	add_coin(t_coins *coins, int x, int y)
+{
+	coins->pos[coins->coin_total] = (t_vect){.x = x + 0.5, .y = y + 0.5};
+	coins->coin_total++;
+}
+
 static void	parse_map(t_gamedata *gamedata, int fd)
 {
 	char	*line;
@@ -88,6 +94,8 @@ static void	parse_map(t_gamedata *gamedata, int fd)
 			}
 			else if (ft_strchr("NSWE", line[x]))
 				init_player(gamedata, x, y, line[x]);
+			else if (line[x] == 'C')
+				add_coin(&gamedata->coins, x, y);
 			x++;
 		}
 		y++;
@@ -124,6 +132,29 @@ t_texture_pack *texture_pack, int fd)
 	init_image_data(&texture_pack->wall1.east);
 }
 
+static void	parse_coin_animation(t_gamedata *gamedata, t_coins *coins)
+{
+	coins->frames[0].mlx_img = mlx_xpm_file_to_image(gamedata->display, COIN0,
+		&coins->frames[0].width, &coins->frames[0].height);
+	init_image_data(&coins->frames[0]);
+	coins->frames[1].mlx_img = mlx_xpm_file_to_image(gamedata->display, COIN1,
+		&coins->frames[1].width, &coins->frames[1].height);
+	init_image_data(&coins->frames[1]);
+	coins->frames[2].mlx_img = mlx_xpm_file_to_image(gamedata->display, COIN2,
+		&coins->frames[2].width, &coins->frames[2].height);
+	init_image_data(&coins->frames[2]);
+	coins->frames[3].mlx_img = mlx_xpm_file_to_image(gamedata->display, COIN3,
+		&coins->frames[3].width, &coins->frames[3].height);
+	init_image_data(&coins->frames[3]);
+	coins->frames[4] = coins->frames[0];
+	coins->frames[5] = coins->frames[0];
+	coins->frames[6] = coins->frames[0];
+	coins->frames[7] = coins->frames[0];
+	coins->frame_total = 8;
+	coins->frame_current = 0;
+	coins->frame_delay = 10;
+}
+
 void	init_gamedata(t_gamedata *gamedata, char *map_path)
 {
 	int	fd;
@@ -140,6 +171,7 @@ void	init_gamedata(t_gamedata *gamedata, char *map_path)
 		exit(3);
 	}
 	parse_texture_pack(gamedata, &gamedata->texture_pack, fd);
+	parse_coin_animation(gamedata, &gamedata->coins);
 	parse_map(gamedata, fd);
 	close(fd);
 	init_render_vals(gamedata->render_vals);

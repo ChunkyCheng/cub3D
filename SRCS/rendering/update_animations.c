@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   update_animations.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 15:12:36 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 19:45:48 by jchuah           ###   ########.fr       */
+/*   Created: 2026/01/28 19:42:29 by jchuah            #+#    #+#             */
+/*   Updated: 2026/01/28 19:45:36 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "inputs.h"
 #include "rendering.h"
 
-int	game_loop(t_gamedata *gamedata)
+void	update_animations(t_gamedata *gamedata)
 {
-	check_inputs(gamedata, gamedata->inputs, &gamedata->player);
-	render_frame(gamedata, gamedata->render_vals, &gamedata->player);
-	update_animations(gamedata);
-	return (0);
+	t_coins		*coins;
+	static int	coin_frame;
+
+	coins = &gamedata->coins;
+	coin_frame++;
+	if (coin_frame == coins->frame_delay)
+	{
+		coin_frame = 0;
+		coins->frame_current = (coins->frame_current + 1) % coins->frame_total;
+	}
 }

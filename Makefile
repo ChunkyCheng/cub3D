@@ -1,5 +1,5 @@
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -O3 -g3 #-fsanitize=address,leak
+CFLAGS	=	-Wall -Wextra -Werror -O2 -g3 #-fsanitize=address,leak
 
 LIBDIR	=	libft
 MLXDIR	=	minilibx-linux
@@ -22,7 +22,8 @@ INPUT_FILES	=	handle_key_event.c	handle_mouse_event.c	handle_focus_event.c		\
 
 RENDER_DIR	=	rendering
 RENDER_FILES=	render_frame.c		render_background.c		init_ray.c					\
-				cast_ray.c			render_column.c			image_put_pixel.c			\
+				cast_ray.c			render_column.c			render_coins.c				\
+				update_animations.c	image_put_pixel.c			\
 				image_get_pixel.c	limit_framerate.c		darken_pixel.c
 
 MODULES		=	PARSE	INPUT	RENDER

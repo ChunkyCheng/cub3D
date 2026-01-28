@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 21:25:19 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 12:54:37 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # define DFL_SOUTH		"textures/wall-default-south.xpm"
 # define DFL_WEST		"textures/wall-default-west.xpm"
 # define DFL_EAST		"textures/wall-default-east.xpm"
+
+# define COIN0	"textures/coin_animation/coin0.xpm"
+# define COIN1	"textures/coin_animation/coin1.xpm"
+# define COIN2	"textures/coin_animation/coin2.xpm"
+# define COIN3	"textures/coin_animation/coin3.xpm"
 
 typedef struct s_render_vals	t_render_vals;
 

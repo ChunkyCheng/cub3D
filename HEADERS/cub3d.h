@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 11:42:25 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 19:41:21 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@
 # define WIN_HEIGHT		1080
 # define IMG_WIDTH		768
 # define IMG_HEIGHT		480
-# define MAP_SIZE_MAX	128
+
+# define MAP_SIZE_MAX			128
+# define ANIMATION_FRAME_MAX	30
+# define COIN_MAX				128
 
 # define PLAYER_RADIUS	0.2
-# define QUANTIZE_RES	3
 
 typedef struct s_vect
 {
@@ -100,6 +102,16 @@ typedef struct s_player
 	double		view_dist;
 }	t_player;
 
+typedef struct s_coins
+{
+	t_vect	pos[COIN_MAX];
+	int		coin_total;
+	t_image	frames[ANIMATION_FRAME_MAX];
+	int		frame_total;
+	int		frame_current;
+	int		frame_delay;
+}	t_coins;
+
 typedef struct s_inputs			t_inputs;
 typedef struct s_render_vals	t_render_vals;
 
@@ -112,6 +124,7 @@ typedef struct s_gamedata
 	t_texture_pack	texture_pack;
 	t_map_cell		map[MAP_SIZE_MAX][MAP_SIZE_MAX];
 	t_player		player;
+	t_coins			coins;
 	t_inputs		*inputs;
 	t_render_vals	*render_vals;
 	int				exit_code;
