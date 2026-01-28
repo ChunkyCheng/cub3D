@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 15:12:36 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 19:45:48 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 22:56:40 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	game_loop(t_gamedata *gamedata)
 {
 	check_inputs(gamedata, gamedata->inputs, &gamedata->player);
-	render_frame(gamedata, gamedata->render_vals, &gamedata->player);
+	render_frame(gamedata, gamedata->cache, &gamedata->player);
 	update_animations(gamedata);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 19:42:20 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 22:56:27 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_pixel_col
 	double	row_step;
 }	t_pixel_col;
 
-typedef struct s_render_vals
+typedef struct s_cache
 {
 	float	scale;
 	int		x_bound;
@@ -71,7 +71,7 @@ typedef struct s_render_vals
 	double	view_plane_len;
 	double	projection_dist;
 	int		min_wall_height;
-}	t_render_vals;
+}	t_cache;
 
 typedef struct s_rgb
 {
@@ -87,10 +87,10 @@ typedef struct s_hsv
 	float	value;
 }	t_hsv;
 
-void	render_frame(t_gamedata *gamedata, t_render_vals *render_vals,
+void	render_frame(t_gamedata *gamedata, t_cache *cache,
 			t_player *player);
 void	render_background(t_image *img_buff, t_texture_pack *texture_pack,
-			t_render_vals *render_vals, t_player *player);
+			t_cache *cache, t_player *player);
 void	init_ray(t_ray *ray, t_player *player, int col);
 void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player);
 void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col);

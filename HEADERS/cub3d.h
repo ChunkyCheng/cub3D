@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 19:41:21 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 22:56:02 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ typedef struct s_coins
 	int		frame_delay;
 }	t_coins;
 
-typedef struct s_inputs			t_inputs;
-typedef struct s_render_vals	t_render_vals;
+typedef struct s_inputs	t_inputs;
+typedef struct s_cache	t_cache;
 
 typedef struct s_gamedata
 {
@@ -126,11 +126,11 @@ typedef struct s_gamedata
 	t_player		player;
 	t_coins			coins;
 	t_inputs		*inputs;
-	t_render_vals	*render_vals;
+	t_cache			*cache;
 	int				exit_code;
 }	t_gamedata;
 
-void		init_render_vals(t_render_vals *render_vals);
+void		init_cache(t_cache *cache);
 void		init_gamedata(t_gamedata *gamedata, char *map_path);
 int			game_loop(t_gamedata *gamedata);
 int			close_and_exit(t_gamedata *gamedata);

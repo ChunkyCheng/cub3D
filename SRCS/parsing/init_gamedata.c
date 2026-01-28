@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 19:49:06 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 22:56:53 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void	init_gamedata(t_gamedata *gamedata, char *map_path)
 	parse_coin_animation(gamedata, &gamedata->coins);
 	parse_map(gamedata, fd);
 	close(fd);
-	init_render_vals(gamedata->render_vals);
+	init_cache(gamedata->cache);
 	mlx_mouse_move(gamedata->display, gamedata->window,
 		WIN_WIDTH / 2, WIN_HEIGHT / 2);
 }

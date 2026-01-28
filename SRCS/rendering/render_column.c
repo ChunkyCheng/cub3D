@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:33:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 22:27:56 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 22:59:12 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_pixel_col *pixel_col)
 	set_pixel_col_texture(&gamedata->map[ray->norm_y][ray->norm_x],
 		ray, pixel_col);
 	ray_hit_pos = get_ray_hit_pos(ray, &gamedata->player);
-	pixel_col->len = gamedata->render_vals->projection_dist / ray->len;
+	pixel_col->len = gamedata->cache->projection_dist / ray->len;
 	if ((ray->e_side == Y_SIDE && ray->dir.y < 0)
 		|| (ray->e_side == X_SIDE && ray->dir.x > 0))
 		pixel_col->col = (int)(pixel_col->texture->width * ray_hit_pos);
@@ -77,7 +77,7 @@ void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col)
 		screen_row = 0;
 	else
 		screen_row = round((IMG_HEIGHT - pixel_col.len) / 2);
-	darkness = (2.0 / (gamedata->render_vals->min_wall_height - IMG_HEIGHT))
+	darkness = (2.0 / (gamedata->cache->min_wall_height - IMG_HEIGHT))
 		* screen_row + 1.0;
 	i = 0;
 	while (screen_row < (IMG_HEIGHT + pixel_col.len) / 2

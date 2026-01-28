@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 23:38:32 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 22:39:29 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 22:58:58 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	fill_remaining(t_image *img_buff, int y)
 }
 
 void	render_background(t_image *img_buff, t_texture_pack *texture_pack,
-t_render_vals *render_vals, t_player *player)
+t_cache *cache, t_player *player)
 {
 	int		x;
 	int		y;
@@ -40,10 +40,10 @@ t_render_vals *render_vals, t_player *player)
 
 	(void)player;
 	y = 0;
-	y_limit = (IMG_HEIGHT - render_vals->min_wall_height) / 2;
+	y_limit = (IMG_HEIGHT - cache->min_wall_height) / 2;
 	while (y < y_limit)
 	{
-		darkness = (2.0 / (render_vals->min_wall_height - IMG_HEIGHT))
+		darkness = (2.0 / (cache->min_wall_height - IMG_HEIGHT))
 			* y + 1.0;
 		x = 0;
 		while (x < IMG_WIDTH)

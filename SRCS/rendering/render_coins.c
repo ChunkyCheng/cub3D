@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 13:49:29 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 22:44:10 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 22:59:21 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ float depth, int screen_x)
 	int	pixel;
 
 
-	pix_width = COIN_SIZE * gamedata->render_vals->projection_dist / depth;
+	pix_width = COIN_SIZE * gamedata->cache->projection_dist / depth;
 	pix_height = coin_img->height * pix_width / coin_img->width;
 	
-	float darkness = (2.0 / (gamedata->render_vals->min_wall_height - IMG_HEIGHT))
+	float darkness = (2.0 / (gamedata->cache->min_wall_height - IMG_HEIGHT))
 		* (IMG_HEIGHT - (pix_height * 2)) / 2 + 1.0;
 	y = 0;
 	while (y < pix_height)
