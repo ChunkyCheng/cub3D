@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/26 12:40:21 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 11:42:25 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 
 # define DEBUG			1
 
+//3840x2160
+//1920x1080
+//768x480
 # define WIN_WIDTH		1920
 # define WIN_HEIGHT		1080
 # define IMG_WIDTH		768
