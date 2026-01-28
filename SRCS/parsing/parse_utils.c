@@ -5,62 +5,62 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/24 17:49:55 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/24 18:32:28 by lming-ha         ###   ########.fr       */
+/*   Created: 2026/01/28 17:10:27 by lming-ha          #+#    #+#             */
+/*   Updated: 2026/01/28 17:50:44 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "parsing.h"
 
-int	print_error(char *message, int	exit_code)
+void	parsing_cleanup(t_parsing *p_data)
 {
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(message, 2);
-	return (exit_code);
+	if (p_data->identifier)
+		free(p_data->identifier);
+	if (p_data->info)
+		free(p_data->info);
+	p_data->identifier = NULL;
+	p_data->info = NULL;
+	p_data->wall_idx = 0;
 }
 
-static char	**strarr_add_line(char **strarr, char *line)
+void	clean_error(t_parsing *p_data, t_gamedata *gamedata, char *message)
 {
-	char	**new_arr;
-	size_t	len;
-	size_t	i;
-
-	if (!strarr)
-		len = 0;
-	else
-		len = ft_strarr_len(strarr);
-	new_arr = (char **)malloc(sizeof(char *) * (len + 2));
-	if (!new_arr)
-		return (ft_strarr_free(strarr), NULL);
-	i = 0;
-	while (i < len)
+	if (message)
 	{
-		new_arr[i] = strarr[i];
-		i++;
+		ft_putendl_fd("Error", 2);
+		ft_putendl_fd(message, 2);
 	}
-	new_arr[i] = ft_strdup(line);
-	if (!new_arr[i])
-		return (ft_strarr_free(strarr), free(new_arr), NULL);
-	new_arr[i + 1] = NULL;
-	free(strarr);
-	return (new_arr);
+	parsing_cleanup(p_data);
+	if (p_data->file)
+		ft_strarr_free(p_data->file);
+	p_data->file = NULL;
+	close_with_exit_code(gamedata, 1);
 }
 
-char	**file_to_strarr(int fd)
+int	read_valid_ext(char *path, char *extension, char ***file)
 {
-	char	**strarr;
-	char	*line;
+	int		len;
+	int		extlen;
+	int		fd;
 
-	strarr = NULL;
-	line = get_next_line(fd);
-	while (line)
+	len = ft_strlen(path);
+	extlen = ft_strlen(extension);
+	if (len < extlen || ft_strncmp(&path[len - extlen], extension, extlen) != 0)
 	{
-		strarr = strarr_add_line(strarr, line);
-		free(line);
-		if (!strarr)
-			return (NULL);
-		line = get_next_line(fd);
+		ft_putendl_fd("Error\nInvalid file extension. Expected [", 2);
+		ft_putendl_fd(extension, 2);
+		ft_putendl_fd("]", 2);
+		return (0);
 	}
-	return (strarr);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error\ncub3D"), 0);
+	if (file)
+	{
+		*file = file_to_strarr(fd);
+		if (!*file)
+			return (close(fd), 0);
+	}
+	close(fd);
+	return (1);
 }

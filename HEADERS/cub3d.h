@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/24 23:04:46 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/01/28 18:10:46 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,7 @@ typedef struct s_texture_pack
 {
 	int			floor;
 	int			ceiling;
-	t_texture	wall1;
-	t_texture	wall2;
-	t_texture	wall3;
-	t_texture	wall4;
-	t_texture	wall5;
-	t_texture	wall6;
-	t_texture	wall7;
-	t_texture	wall8;
-	t_texture	wall9;
+	t_image		wall[8][4];
 }	t_texture_pack;
 
 typedef struct s_map_cell
@@ -114,7 +106,7 @@ typedef struct s_gamedata
 	int				exit_code;
 }	t_gamedata;
 
-int			parse_args(int argc, char *map_path, t_gamedata *gamedata);
+void		parsing(t_gamedata *gamedata, char *map_path);
 void		init_render_vals(t_render_vals *render_vals);
 void		init_gamedata(t_gamedata *gamedata, char *map_path);
 int			game_loop(t_gamedata *gamedata);

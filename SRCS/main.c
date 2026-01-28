@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:26:47 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/24 20:22:47 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/01/28 17:58:08 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,10 @@ int	main(int argc, char *argv[])
 	t_inputs		inputs;
 	t_render_vals	render_vals;
 
-	if (argc != 2)
-		return (print_error("Usage: ./cub3D <filename.cub>", 0));
+	if (argc != 2 || !argv[1] || !*argv[1])
+		return (ft_putendl_fd("Error\nUsage: ./cub3D <filename.cub>", 2), 1);
 	gamedata = (t_gamedata){0};
-	if (!(parse_args(&gamedata, argv[1])))
-		return (2);
+	parsing(&gamedata, argv[1]);
 	inputs = (t_inputs){0};
 	render_vals = (t_render_vals){0};
 	gamedata.inputs = &inputs;

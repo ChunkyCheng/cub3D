@@ -6,29 +6,40 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:58:36 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/24 23:04:23 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/01/28 17:31:15 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "inputs.h"
 
-static void	free_texture(t_gamedata *gamedata, t_texture *texture)
+static void	free_image(t_gamedata *gamedata, t_image *image)
 {
-	if (texture->north.mlx_img)
-		mlx_destroy_image(gamedata->display, texture->north.mlx_img);
-	if (texture->south.mlx_img)
-		mlx_destroy_image(gamedata->display, texture->south.mlx_img);
-	if (texture->west.mlx_img)
-		mlx_destroy_image(gamedata->display, texture->west.mlx_img);
-	if (texture->east.mlx_img)
-		mlx_destroy_image(gamedata->display, texture->east.mlx_img);
+	if (image->file_path)
+		free(image->file_path);
+	if (image->mlx_img && gamedata && gamedata->display)
+		mlx_destroy_image(gamedata->display, image->mlx_img);
+	image->file_path = NULL;
+	image->mlx_img = NULL;
 }
 
 static void	free_texture_pack(t_gamedata *gamedata,
 t_texture_pack *texture_pack)
 {
-	free_texture(gamedata, &texture_pack->wall1);
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 8)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			free_image(gamedata, &texture_pack->wall[i][j]);
+			j++;
+		}
+		i++;
+	}
 }
 
 int	close_and_exit(t_gamedata *gamedata)
