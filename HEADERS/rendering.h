@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 22:56:27 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 23:21:52 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,24 @@ typedef struct s_pixel_col
 	double	row_step;
 }	t_pixel_col;
 
-typedef struct s_cache
+typedef struct s_upscaling
 {
 	float	scale;
 	int		x_bound;
 	int		y_bound;
 	int		x_offset;
 	int		y_offset;
+	int		needs_scaling;
 	int		scale_map_x[WIN_WIDTH];
 	int		scale_map_y[WIN_HEIGHT];
-	double	view_plane_len;
-	double	projection_dist;
-	int		min_wall_height;
+}	t_upscaling;
+
+typedef struct s_cache
+{
+	double		view_plane_len;
+	double		projection_dist;
+	int			min_wall_height;
+	t_upscaling	upscaling;
 }	t_cache;
 
 typedef struct s_rgb
@@ -95,6 +101,7 @@ void	init_ray(t_ray *ray, t_player *player, int col);
 void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player);
 void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col);
 void	render_coins(t_gamedata *gamedata, t_player *player, t_coins *coins);
+void	push_image(t_gamedata *gamedata);
 
 void	update_animations(t_gamedata *gamedata);
 

@@ -21,10 +21,11 @@ INPUT_FILES	=	handle_key_event.c	handle_mouse_event.c	handle_focus_event.c		\
 				check_inputs.c		hitbox_utils.c			check_collisions.c
 
 RENDER_DIR	=	rendering
-RENDER_FILES=	render_frame.c		render_background.c		init_ray.c					\
-				cast_ray.c			render_column.c			render_coins.c				\
-				update_animations.c	image_put_pixel.c			\
-				image_get_pixel.c	limit_framerate.c		darken_pixel.c
+RENDER_FILES=	render_frame.c			render_background.c		init_ray.c				\
+				cast_ray.c				render_column.c			render_coins.c			\
+				push_image.c			update_animations.c								\
+				image_put_pixel.c		image_get_pixel.c		limit_framerate.c		\
+				darken_pixel.c
 
 MODULES		=	PARSE	INPUT	RENDER
 

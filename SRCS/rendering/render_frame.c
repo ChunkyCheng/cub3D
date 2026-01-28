@@ -6,37 +6,12 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:20:07 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 22:58:46 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 23:21:39 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "rendering.h"
-
-static void	scale_image(t_image *main, t_image *buff,
-t_cache *cache)
-{
-	int		main_x;
-	int		main_y;
-	int		buff_x;
-	int		buff_y;
-	int		pixel;
-
-	main_y = 0;
-	while (main_y < WIN_HEIGHT - cache->y_bound)
-	{
-		main_x = 0;
-		buff_y = cache->scale_map_y[main_y];
-		while (main_x < WIN_WIDTH - cache->x_bound)
-		{
-			buff_x = cache->scale_map_x[main_x];
-			pixel = image_get_pixel(buff, buff_x, buff_y);
-			image_put_pixel(main, main_x, main_y, pixel);
-			main_x++;
-		}
-		main_y++;
-	}
-}
 
 //Formula for view_plane_len = tan(fov / 2) where fov is in radians
 //Thus final formula is tan(fov * pi / 360)
@@ -60,10 +35,6 @@ t_player *player)
 		col++;
 	}
 	render_coins(gamedata, &gamedata->player, &gamedata->coins);
-	scale_image(&gamedata->img_main, &gamedata->img_buff,
-		gamedata->cache);
-	mlx_put_image_to_window(gamedata->display, gamedata->window,
-		gamedata->img_main.mlx_img,
-		cache->x_offset, cache->y_offset);
+	push_image(gamedata);
 	limit_framerate();
 }
