@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/30 22:37:40 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/28 12:02:23 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define BLUE	0x000000FF
 # define BLACK	0x00000000
 
-# define DFL_VIEW_DIST	2.0
+# define DFL_VIEW_DIST	7.0
 # define DFL_FOV		100
 
 typedef struct s_ray
@@ -94,7 +94,7 @@ void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player);
 void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col);
 void	image_put_pixel(t_image *image, int x, int y, int colour);
 int		image_get_pixel(t_image *image, int x, int y);
-int		darken_pixel(int pixel, double scale);
+int		darken_pixel(int pixel, float scale);
 
 void	limit_framerate(void);
 
