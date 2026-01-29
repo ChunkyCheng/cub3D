@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:53:30 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 23:23:17 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/29 15:11:24 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@ static void	calculate_upscale_map(t_upscaling *upscaling)
 {
 	int	i;
 
-	init_upscaling(upscaling);
 	if ((IMG_WIDTH == WIN_WIDTH && IMG_HEIGHT <= WIN_HEIGHT)
 		|| (IMG_HEIGHT == WIN_HEIGHT && IMG_WIDTH <= WIN_WIDTH))
 	{
 		upscaling->needs_scaling = 0;
+		upscaling->x_offset = (WIN_WIDTH - IMG_WIDTH) / 2;
+		upscaling->y_offset = (WIN_HEIGHT - IMG_HEIGHT) / 2;
 		return ;
 	}
+	init_upscaling(upscaling);
 	upscaling->needs_scaling = 1;
 	i = 0;
 	while (i < WIN_WIDTH)
@@ -65,7 +67,6 @@ static void	calculate_upscale_map(t_upscaling *upscaling)
 
 void	init_cache(t_cache *cache)
 {
-
 	calculate_upscale_map(&cache->upscaling);
 	cache->view_plane_len = tan(DFL_FOV * M_PI / 360);
 	cache->projection_dist = IMG_WIDTH / 2 / cache->view_plane_len;
