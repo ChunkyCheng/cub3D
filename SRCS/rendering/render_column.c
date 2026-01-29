@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:33:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 22:59:12 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/29 15:23:03 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,5 @@ void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col)
 		i++;
 		screen_row++;
 	}
+	gamedata->cache->z_buffer[screen_col] = ray->len;
 }

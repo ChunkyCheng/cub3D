@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 23:21:52 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/29 15:21:12 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_cache
 	double		view_plane_len;
 	double		projection_dist;
 	int			min_wall_height;
+	float		z_buffer[IMG_WIDTH];
 	t_upscaling	upscaling;
 }	t_cache;
 

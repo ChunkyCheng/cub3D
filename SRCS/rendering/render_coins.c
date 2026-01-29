@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 13:49:29 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 22:59:21 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/29 15:25:54 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,26 @@ float depth, int screen_x)
 	
 	float darkness = (2.0 / (gamedata->cache->min_wall_height - IMG_HEIGHT))
 		* (IMG_HEIGHT - (pix_height * 2)) / 2 + 1.0;
-	y = 0;
-	while (y < pix_height)
+	x = 0;
+	while (x < pix_width)
 	{
-		x = 0;
-		while (x < pix_width)
+		if (depth < gamedata->cache->z_buffer[(x - pix_width / 2) + screen_x])
 		{
-			pixel = image_get_pixel(coin_img, coin_img->width * x / pix_width,
-				coin_img->height * y / pix_height);
-			if ((pixel & ALPHA) != ALPHA)
+			y = 0;
+			while (y < pix_height)
 			{
-				pixel = darken_pixel(pixel, darkness);
-				image_put_pixel(&gamedata->img_buff, (x - pix_width / 2) + screen_x,
-					(y + (IMG_HEIGHT - pix_height) / 2), pixel);
+				pixel = image_get_pixel(coin_img, coin_img->width * x / pix_width,
+					coin_img->height * y / pix_height);
+				if ((pixel & ALPHA) != ALPHA)
+				{
+					pixel = darken_pixel(pixel, darkness);
+					image_put_pixel(&gamedata->img_buff, (x - pix_width / 2) + screen_x,
+						(y + (IMG_HEIGHT - pix_height) / 2), pixel);
+				}
+				y++;
 			}
-			x++;
 		}
-		y++;
+		x++;
 	}
 }
 
