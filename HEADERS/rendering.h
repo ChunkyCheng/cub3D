@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 15:21:12 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/29 16:38:29 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ typedef struct s_pixel_col
 	double	row_step;
 }	t_pixel_col;
 
+typedef struct s_sprite_pos
+{
+	float	depth;
+	int		screen_x;
+}	t_sprite_pos;
+
 typedef struct s_upscaling
 {
 	float	scale;
@@ -79,20 +85,6 @@ typedef struct s_cache
 	float		z_buffer[IMG_WIDTH];
 	t_upscaling	upscaling;
 }	t_cache;
-
-typedef struct s_rgb
-{
-	float	red;
-	float	green;
-	float	blue;
-}	t_rgb;
-
-typedef struct s_hsv
-{
-	float	hue;
-	float	saturation;
-	float	value;
-}	t_hsv;
 
 void	render_frame(t_gamedata *gamedata, t_cache *cache,
 			t_player *player);
