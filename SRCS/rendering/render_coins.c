@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 13:49:29 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 23:35:13 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/30 01:46:08 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static int	compare_sprite_depth(const void *ptr1, const void *ptr2)
 	return (0);
 }
 
-static void	set_coin_pos_from_screen(t_player *player, t_vect coin_pos,
-t_screen_pos *screen_pos)
+static void	set_coin_pos_from_screen(t_gamedata *gamedata, t_player *player,
+t_vect coin_pos, t_screen_pos *screen_pos)
 {
 	t_vect	coin_relpos;
 	float	sideways;
@@ -37,8 +37,9 @@ t_screen_pos *screen_pos)
 		= coin_relpos.x * player->dir.x + coin_relpos.y * player->dir.y;
 	if (screen_pos->depth <= 0 || screen_pos->depth > player->view_dist)
 		return ;
-	sideways = (coin_relpos.x * player->view_plane.x
-			+ coin_relpos.y * player->view_plane.y) / screen_pos->depth;
+	sideways
+		= (coin_relpos.x * -player->dir.y + coin_relpos.y * player->dir.x)
+		/ (screen_pos->depth * gamedata->cache->view_plane_len);
 	screen_pos->screen_x = (sideways + 1) * (IMG_WIDTH - 1) / 2;
 }
 
@@ -80,7 +81,8 @@ void	render_coins(t_gamedata *gamedata, t_player *player, t_coins *coins)
 	visible = 0;
 	while (i < coins->coin_total)
 	{
-		set_coin_pos_from_screen(player, coins->pos[i], &screen_pos[visible]);
+		set_coin_pos_from_screen(gamedata, player,
+			coins->pos[i], &screen_pos[visible]);
 		if (screen_pos[visible].depth > 0
 			&& screen_pos[visible].depth <= player->view_dist
 			&& screen_pos[visible].screen_x >= 0

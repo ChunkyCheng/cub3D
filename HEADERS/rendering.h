@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 23:16:14 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/30 01:44:42 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define BLACK	0x00000000
 
 # define DFL_VIEW_DIST	7.0
-# define DFL_FOV		100
+# define DFL_FOV		60
 
 # define COIN_SIZE		0.5
 

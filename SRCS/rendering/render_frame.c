@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:20:07 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 22:02:04 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/29 23:52:09 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_player *player)
 		cast_ray(gamedata, &ray, player);
 		if (!ray.out_of_bounds)
 			render_wall_column(gamedata, &ray, col);
+		else
+			gamedata->cache->z_buffer[col] = player->view_dist;
 		col++;
 	}
 	render_coins(gamedata, &gamedata->player, &gamedata->coins);

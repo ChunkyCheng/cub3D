@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 15:11:07 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/29 23:39:47 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 //768x480
 # define WIN_WIDTH		1920
 # define WIN_HEIGHT		1080
-# define IMG_WIDTH		768
-# define IMG_HEIGHT		480
+# define IMG_WIDTH		1920
+# define IMG_HEIGHT		1080
 
 # define MAP_SIZE_MAX			128
 # define ANIMATION_FRAME_MAX	30
