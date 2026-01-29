@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 17:30:55 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/01/29 17:52:37 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,6 @@
 #include "cub3d.h"
 #include "parsing.h"
 #include "rendering.h"
-
-static void	init_player(t_gamedata *gamedata, int x, int y, char direction)
-{
-	gamedata->player.pos.x = x + 0.5;
-	gamedata->player.pos.y = y + 0.5;
-	if (direction == 'N')
-	{
-		gamedata->player.dir.y = -1;
-		gamedata->player.angle = 270;
-	}
-	else if (direction == 'S')
-	{
-		gamedata->player.dir.y = 1;
-		gamedata->player.angle = 90;
-	}
-	else if (direction == 'E')
-	{
-		gamedata->player.dir.x = 1;
-		gamedata->player.angle = 0;
-	}
-	else
-	{
-		gamedata->player.dir.x = -1;
-		gamedata->player.angle = 180;
-	}
-	gamedata->player.fov = DFL_FOV;
-	gamedata->player.view_dist = DFL_VIEW_DIST;
-}
 
 static void	parse_map(t_gamedata *gamedata, int fd)
 {
@@ -99,7 +71,7 @@ static void	parse_map(t_gamedata *gamedata, int fd)
 // 			&texture_pack->wall.east.width,
 // 			&texture_pack->wall.east.height);
 // 	init_image_data(&texture_pack->wall.east);
-}
+// }
 
 void	init_gamedata(t_gamedata *gamedata, char *map_path)
 {
@@ -111,7 +83,6 @@ void	init_gamedata(t_gamedata *gamedata, char *map_path)
 		perror("Error\ninit_gamedata");
 		exit(3);
 	}
-	// parse_texture_pack(gamedata, &gamedata->texture_pack);
 	parse_map(gamedata, fd);
 	close(fd);
 	init_render_vals(gamedata->render_vals);

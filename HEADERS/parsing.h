@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 17:50:44 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/01/29 18:35:04 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@
 
 typedef struct s_render_vals	t_render_vals;
 
+typedef struct s_map
+{
+	char	**content;
+	int		height;
+	int		width;
+	int		top;
+	int		bottom;
+	int		left;
+	int		right;
+}	t_map;
 
 typedef struct s_parsing
 {
@@ -33,18 +43,18 @@ typedef struct s_parsing
 		ELEMENTS,
 		MAP
 	}		e_state;
-	char	**file;
+	int		fd;
 	char	*identifier;
 	int		wall_idx;
 	int		wall[8];
 	char	*info;
-	char	**map;
+	t_map	map;
 }	t_parsing;
 
-int		read_valid_ext(char *path, char *extension, char ***file);
-char	**file_to_strarr(int fd);
+int		open_valid_ext(char *path, char *extension, int *out_fd);
+int		add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata);
 void	parsing_cleanup(t_parsing *p_data);
-void	clean_error(t_parsing *p_data, t_gamedata *gd, char *message);
+void	clean_error(t_parsing *p_data, t_gamedata *gamedata, char *message);
 
 void	parse_element(char *line, t_gamedata *gamedata, t_parsing *p_data);
 void	parse_colour(t_gamedata *gamedata, t_parsing *p_data);

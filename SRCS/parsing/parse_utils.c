@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:27 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/28 17:50:44 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/01/29 17:35:45 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,19 @@ void	clean_error(t_parsing *p_data, t_gamedata *gamedata, char *message)
 		ft_putendl_fd(message, 2);
 	}
 	parsing_cleanup(p_data);
-	if (p_data->file)
-		ft_strarr_free(p_data->file);
-	p_data->file = NULL;
+	if (p_data->fd > 0)
+		close(p_data->fd);
+	p_data->fd = -1;
+	if (p_data->map.content)
+		ft_strarr_free(p_data->map.content);
+	p_data->map.content = NULL;
 	close_with_exit_code(gamedata, 1);
 }
 
-int	read_valid_ext(char *path, char *extension, char ***file)
+int	open_valid_ext(char *path, char *extension, int *out_fd)
 {
 	int		len;
 	int		extlen;
-	int		fd;
 
 	len = ft_strlen(path);
 	extlen = ft_strlen(extension);
@@ -52,15 +54,11 @@ int	read_valid_ext(char *path, char *extension, char ***file)
 		ft_putendl_fd("]", 2);
 		return (0);
 	}
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (perror("Error\ncub3D"), 0);
-	if (file)
+	*out_fd = open(path, O_RDONLY);
+	if (*out_fd < 0)
 	{
-		*file = file_to_strarr(fd);
-		if (!*file)
-			return (close(fd), 0);
+		perror("Error\nopen_valid_ext");
+		return (0);
 	}
-	close(fd);
 	return (1);
 }

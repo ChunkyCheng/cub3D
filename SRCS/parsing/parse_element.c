@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:09:55 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/28 17:52:57 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/01/29 18:17:06 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,55 +15,56 @@
 static void	parse_info(t_gamedata *gamedata, t_parsing *p_data)
 {
 	int			i;
+	int			fd;
 	const char	*wall[4] = {"NO", "EA", "SO", "WE"};
 
-	i = 0;
+	i = -1;
+	fd = -1;
 	if (*p_data->identifier == 'F' || *p_data->identifier == 'C')
 		return (parse_colour(gamedata, p_data));
 	if (!ft_strchr(p_data->info, '/'))
 		clean_error(p_data, gamedata, "Texture information is not a path");
-	while (i < 4)
+	while (i++ < 3)
 	{
 		if (ft_strncmp(p_data->identifier, wall[i], 2) == 0)
 		{
-			if (gamedata->texture_pack.wall[p_data->wall_idx][i].mlx_img)
+			if (gamedata->texture_pack.wall[p_data->wall_idx][i].file_path)
 				clean_error(p_data, gamedata, "Duplicate wall definition");
-			if (read_valid_ext(p_data->info, ".xpm", NULL) == 0)
-				clean_error(p_data, gamedata, NULL);
+			if (open_valid_ext(p_data->info, ".xpm", &fd) == 0)
+				clean_error(p_data, gamedata, "Invalid texture extension");
+			close(fd);
 			gamedata->texture_pack.wall[p_data->wall_idx][i].file_path
 				= ft_strdup(p_data->info);
 			if (!gamedata->texture_pack.wall[p_data->wall_idx][i].file_path)
 				clean_error(p_data, gamedata, "ft_strdup failure");
-			return ;
 		}
-		i++;
 	}
 }
 
-static void	parse_identifier(t_parsing *p_data, t_gamedata *gd, char **line)
+static void	parse_found(t_parsing *p_data, t_gamedata *gamedata, char **line)
 {
 	if (*p_data->identifier != 'F' && *p_data->identifier != 'C')
 	{
 		if (**line >= '1' && **line <= '9')
 		{
-			p_data->wall_idx = ft_atoi(**line);
+			p_data->wall_idx = **line - '0';
 			(*line)++;
 		}
 		else if (**line == ' ')
 			p_data->wall_idx = 1;
 		else
-			clean_error(p_data, gd, "Invalid wall texture suffix");
+			clean_error(p_data, gamedata, "Invalid wall texture suffix");
 		p_data->wall_idx -= 1;
 		p_data->wall[p_data->wall_idx] = 1;
 		p_data->identifier = ft_substr(p_data->identifier, 0, 2);
 		if (!p_data->identifier)
-			clean_error(p_data, gd, "ft_substr failure");
+			clean_error(p_data, gamedata, "ft_substr failure");
 	}
 	if (**line != ' ')
-		clean_error(p_data, gd, "No separator after type identifier");
+		clean_error(p_data, gamedata, "No separator after type identifier");
 }
 
-static int	identify_element(char **line, t_parsing *p_data, t_gamedata *gd)
+static void	identification(char **line, t_parsing *p_data, t_gamedata *gamedata)
 {
 	int			i;
 	int			found;
@@ -82,24 +83,23 @@ static int	identify_element(char **line, t_parsing *p_data, t_gamedata *gd)
 		i++;
 	}
 	if (found)
-		parse_identifier(p_data, gd, line);
+		parse_found(p_data, gamedata, line);
 	while (line && **line == ' ')
 		(*line)++;
-	if (!found && (**line == '1' || **line == '0'
-			|| **line == '\n' || **line == '\0'))
-		return (p_data->e_state = MAP, 1);
-	return (found);
+	if (!found && (ft_strchr("123456789\n", **line) || **line == '\0'))
+		p_data->e_state = MAP;
+	if (!found && p_data->e_state != MAP)
+		clean_error(p_data, gamedata, "Invalid element line");
 }
 
 void	parse_element(char *line, t_gamedata *gamedata, t_parsing *p_data)
 {
-	if (*line == ' ' || *line == '1' || *line == '0')
+	if (*line == ' ' || *line == '1')
 	{
 		p_data->e_state = MAP;
 		return ;
 	}
-	if (!identify_element(&line, p_data, gamedata))
-		clean_error(p_data, gamedata, "Invalid element line");
+	identification(&line, p_data, gamedata);
 	if (p_data->e_state == MAP)
 		return ;
 	p_data->info = ft_strtrim(line, "\n");

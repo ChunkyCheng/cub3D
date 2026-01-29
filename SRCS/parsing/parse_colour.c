@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:09 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/28 17:37:27 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/01/29 18:14:03 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	rgbtoi(const char *str)
 	return (value);
 }
 
-static int	parse_rgb_color(char *info, t_parsing *p_data, t_gamedata *gd)
+static int	parse_rgb_color(char *info, t_parsing *p_data, t_gamedata *gamedata)
 {
 	int		r;
 	int		g;
@@ -48,11 +48,11 @@ static int	parse_rgb_color(char *info, t_parsing *p_data, t_gamedata *gd)
 
 	rgb_values = ft_split(info, ',');
 	if (!rgb_values)
-		clean_error(p_data, gd, "ft_split failure");
+		clean_error(p_data, gamedata, "ft_split failure");
 	if (!rgb_values[0] || !rgb_values[1] || !rgb_values[2] || rgb_values[3])
 	{
 		ft_strarr_free(rgb_values);
-		clean_error(p_data, gd, "Invalid R,G,B color format");
+		clean_error(p_data, gamedata, "Invalid R,G,B color format");
 	}
 	r = rgbtoi(rgb_values[0]);
 	g = rgbtoi(rgb_values[1]);
