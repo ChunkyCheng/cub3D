@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_column.c                                    :+:      :+:    :+:   */
+/*   render_wall_column.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:33:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 15:23:03 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/29 21:50:30 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_pixel_col *pixel_col)
 		pixel_col->row = 0;
 }
 
-void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col)
+void	render_wall_column(t_gamedata *gamedata, t_ray *ray, int screen_col)
 {
 	t_pixel_col	pixel_col;
 	int			screen_row;

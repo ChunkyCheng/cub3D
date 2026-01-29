@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:52:21 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/26 16:57:44 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/29 22:15:42 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ static int	is_out_of_bounds(t_ray *ray, t_player *player)
 static void	set_perpendicular_distance(t_ray *ray, t_player *player)
 {
 	if (ray->e_side == X_SIDE)
-		ray->len = (ray->norm_x - player->pos.x + (1 - ray->step.x) / 2)
+		ray->len = (ray->norm_x - player->pos.x + (1.0 - ray->step.x) / 2)
 			/ ray->dir.x;
 	else
-		ray->len = (ray->norm_y - player->pos.y + (1 - ray->step.y) / 2)
+		ray->len = (ray->norm_y - player->pos.y + (1.0 - ray->step.y) / 2)
 			/ ray->dir.y;
 }
 

@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 16:38:29 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/29 23:16:14 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,23 @@ typedef struct s_ray
 	int		out_of_bounds;
 }	t_ray;
 
-typedef struct s_pixel_col
+typedef struct s_pix_col
 {
 	t_image	*texture;
-	double	len;
-	int		col;
-	double	row;
-	double	row_step;
-}	t_pixel_col;
+	int		full_height;
+	int		tex_x;
+	int		screen_x;
+	double	tex_y_top;
+	double	tex_step;
+	int		screen_y_top;
+	int		draw_height;
+}	t_pix_col;
 
-typedef struct s_sprite_pos
+typedef struct s_screen_pos
 {
 	float	depth;
 	int		screen_x;
-}	t_sprite_pos;
+}	t_screen_pos;
 
 typedef struct s_upscaling
 {
@@ -92,7 +95,7 @@ void	render_background(t_image *img_buff, t_texture_pack *texture_pack,
 			t_cache *cache, t_player *player);
 void	init_ray(t_ray *ray, t_player *player, int col);
 void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player);
-void	render_column(t_gamedata *gamedata, t_ray *ray, int screen_col);
+void	render_wall_column(t_gamedata *gamedata, t_ray *ray, int screen_col);
 void	render_coins(t_gamedata *gamedata, t_player *player, t_coins *coins);
 void	push_image(t_gamedata *gamedata);
 
@@ -101,6 +104,8 @@ void	update_animations(t_gamedata *gamedata);
 void	image_put_pixel(t_image *image, int x, int y, int colour);
 int		image_get_pixel(t_image *image, int x, int y);
 int		darken_pixel(int pixel, float scale);
+void	init_pix_col(t_pix_col *pix_col);
+void	draw_pix_col(t_image *dst, t_pix_col *pix_col, float darkness);
 
 void	limit_framerate(void);
 
