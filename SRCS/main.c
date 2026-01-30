@@ -6,13 +6,14 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:26:47 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 22:54:51 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/30 23:16:19 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "inputs.h"
 #include "rendering.h"
+#include "minimap.h"
 
 static char	*create_title(char *title)
 {
@@ -85,9 +86,10 @@ static void	hook_events(t_gamedata *gamedata)
 
 int	main(int argc, char *argv[])
 {
-	t_gamedata		gamedata;
-	t_inputs		inputs;
-	t_cache	cache;
+	t_gamedata	gamedata;
+	t_minimap	minimap;
+	t_inputs	inputs;
+	t_cache		cache;
 
 	if (argc != 2)
 	{
@@ -99,11 +101,13 @@ int	main(int argc, char *argv[])
 	gamedata = (t_gamedata){0};
 	inputs = (t_inputs){0};
 	cache = (t_cache){0};
+	gamedata.minimap = &minimap;
 	gamedata.inputs = &inputs;
 	gamedata.cache = &cache;
 	init_mlx_displays(&gamedata, argv[1]);
 	init_mlx_imgs(&gamedata, &gamedata.img_main, &gamedata.img_buff);
 	init_gamedata(&gamedata, argv[1]);
+	init_minimap(&gamedata, gamedata.minimap);
 	hook_events(&gamedata);
 	mlx_loop(gamedata.display);
 	close_and_exit(&gamedata);

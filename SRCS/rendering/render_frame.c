@@ -6,12 +6,13 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:20:07 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 23:52:09 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/31 00:41:58 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "rendering.h"
+#include "minimap.h"
 
 //Formula for view_plane_len = tan(fov / 2) where fov is in radians
 //Thus final formula is tan(fov * pi / 360)
@@ -37,6 +38,7 @@ t_player *player)
 		col++;
 	}
 	render_coins(gamedata, &gamedata->player, &gamedata->coins);
+	render_minimap(gamedata, &gamedata->player, gamedata->minimap);
 	push_image(gamedata);
 	limit_framerate();
 }

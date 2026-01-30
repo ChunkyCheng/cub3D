@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 02:35:05 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 23:41:24 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/30 23:39:45 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define LCLICK_HOLD	0b01
 
 # define MOVE_SPEED			0.06
-# define REACH_DIST			0.5
+# define REACH_DIST			0.9
 # define ROT_SPEED_KEY		1.0
 # define ROT_SPEED_MOUSE	0.07
 

@@ -1,5 +1,5 @@
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -O2 -g3 #-fsanitize=address,leak
+CFLAGS	=	-Wall -Wextra -Werror -O3 -g3 #-fsanitize=address,leak
 
 LIBDIR	=	libft
 MLXDIR	=	minilibx-linux
@@ -28,7 +28,11 @@ RENDER_FILES=	render_frame.c			render_background.c		init_ray.c				\
 				image_put_pixel.c		image_get_pixel.c		limit_framerate.c		\
 				darken_pixel.c
 
-MODULES		=	PARSE	INPUT	RENDER
+MINIMAP_DIR		=	minimap
+MINIMAP_FILES	=	init_minimap.c		draw_circle.c	draw_rectangle.c				\
+					render_minimap.c
+
+MODULES		=	PARSE	INPUT	RENDER	MINIMAP
 
 $(foreach M,$(MODULES), $(eval $(M)_SRCS = $(addprefix $($(M)_DIR)/, $($(M)_FILES))))
 
