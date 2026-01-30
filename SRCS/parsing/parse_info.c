@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_texture.c                                       :+:      :+:    :+:   */
+/*   parse_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -94,14 +94,14 @@ void	parse_texture(t_gamedata *gamedata, t_parsing *p_data)
 	{
 		if (ft_strncmp(p_data->identifier, wall[i], 2) == 0)
 		{
-			if (gamedata->texture_pack.wall[p_data->wall_idx][i].file_path)
+			if (gamedata->texture_pack.texture[p_data->wall_idx][i].file_path)
 				clean_error(p_data, gamedata, "Duplicate wall definition");
 			if (open_valid_ext(p_data->info, ".xpm", &fd) == 0)
-				clean_error(p_data, gamedata, "Invalid texture extension");
+				clean_error(p_data, gamedata, NULL);
 			close(fd);
-			gamedata->texture_pack.wall[p_data->wall_idx][i].file_path
+			gamedata->texture_pack.texture[p_data->wall_idx][i].file_path
 				= ft_strdup(p_data->info);
-			if (!gamedata->texture_pack.wall[p_data->wall_idx][i].file_path)
+			if (!gamedata->texture_pack.texture[p_data->wall_idx][i].file_path)
 				clean_error(p_data, gamedata, "ft_strdup failure");
 		}
 	}

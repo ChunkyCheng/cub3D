@@ -12,21 +12,6 @@
 
 #include "parsing.h"
 
-static void	free_intarr(int **arr, int height)
-{
-	int	i;
-
-	if (!arr)
-		return ;
-	i = 0;
-	while (i < height)
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
 static int	check_disconnected(t_map *map, int **mask)
 {
 	int	x;
@@ -79,20 +64,15 @@ static int	**create_map_mask(int height, int width)
 
 void	validate_map(t_gamedata *gamedata, t_parsing *p_data)
 {
-	int	**mask;
 	int	x;
 	int	y;
 
-	mask = create_map_mask(p_data->map.height, p_data->map.width);
-	if (!mask)
+	p_data->map.mask = create_map_mask(p_data->map.height, p_data->map.width);
+	if (!p_data->map.mask)
 		clean_error(p_data, gamedata, "Allocation failure");
 	x = (int)gamedata->player.pos.x;
 	y = (int)gamedata->player.pos.y;
-	flood_fill(&p_data->map, mask, x, y);
-	if (check_disconnected(&p_data->map, mask))
-	{
-		free_intarr(mask, p_data->map.height);
+	flood_fill(&p_data->map, p_data->map.mask, x, y);
+	if (check_disconnected(&p_data->map, p_data->map.mask))
 		clean_error(p_data, gamedata, "Map is not closed/surrounded by walls");
-	}
-	free_intarr(mask, p_data->map.height);
 }

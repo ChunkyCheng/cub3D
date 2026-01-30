@@ -12,6 +12,26 @@
 
 #include "parsing.h"
 
+static int	**dup_mask(t_map *map, t_parsing *p_data, t_gamedata *gamedata)
+{
+	int	**new_mask;
+	int	y;
+
+	new_mask = ft_calloc(map->height, sizeof(int *));
+	if (!new_mask)
+		clean_error(p_data, gamedata, "ft_calloc failure");
+	y = 0;
+	while (y < map->height)
+	{
+		new_mask[y] = ft_calloc(map->width, sizeof(int));
+		if (!new_mask[y])
+			clean_error(p_data, gamedata, "ft_calloc failure");
+		ft_memcpy(new_mask[y], map->mask[y], sizeof(int) * map->width);
+		y++;
+	}
+	return (new_mask);
+}
+
 static void	parse_map(t_gamedata *gamedata, t_parsing *p_data)
 {
 	pad_map(&p_data->map, p_data, gamedata);
@@ -21,8 +41,18 @@ static void	parse_map(t_gamedata *gamedata, t_parsing *p_data)
 	parsing_cleanup(p_data);
 	close(p_data->fd);
 	p_data->fd = -1;
+	gamedata->pmap.content = ft_strarr_dup(p_data->map.content);
+	if (!gamedata->pmap.content)
+		clean_error(p_data, gamedata, "ft_strarr_dup failure");
+	gamedata->pmap.height = p_data->map.height;
+	gamedata->pmap.width = p_data->map.width;
+	gamedata->pmap.mask = dup_mask(&p_data->map, p_data, gamedata);
+	if (!gamedata->pmap.mask)
+		clean_error(p_data, gamedata, "dup_mask failure");
 	ft_strarr_free(p_data->map.content);
 	p_data->map.content = NULL;
+	free_mask(p_data->map.mask, p_data->map.height);
+	p_data->map.mask = NULL;
 }
 
 static void	parse_line(char *line, t_gamedata *gamedata, t_parsing *p_data)

@@ -22,14 +22,14 @@ void	element_checklist(t_gamedata *gamedata, t_parsing *p_data)
 	if (gamedata->texture_pack.ceiling == -1)
 		clean_error(p_data, gamedata, "Ceiling color not defined");
 	i = 0;
-	while (i < 8)
+	while (i + 1 < 9)
 	{
 		j = 0;
 		if (p_data->wall[i])
 		{
 			while (j < 4)
 			{
-				if (!gamedata->texture_pack.wall[i][j].file_path)
+				if (!gamedata->texture_pack.texture[i][j].file_path)
 					clean_error(p_data, gamedata, "Incomplete wall set");
 				j++;
 			}
@@ -76,6 +76,8 @@ int	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata)
 	{
 		if (!ft_isdigit(line[i]) && ft_strchr(" NSEWCD", line[i]) == NULL)
 			clean_error(p_data, gamedata, "Invalid character in map");
+		if (get_wall(line[i]) != 0 && !p_data->wall[get_wall(line[i])])
+			clean_error(p_data, gamedata, "Undefined wall texture used in map");
 		i++;
 	}
 	p_data->map.height++;

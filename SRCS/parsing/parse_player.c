@@ -51,23 +51,23 @@ void	parse_player(t_gamedata *gamedata, t_parsing *p_data)
 	int	found;
 
 	found = 0;
-	y = 0;
-	while (y < p_data->map.height)
+	y = -1;
+	while (++y < p_data->map.height)
 	{
-		x = 0;
-		while (p_data->map.content[y][x])
+		x = -1;
+		while (p_data->map.content[y][++x])
 		{
 			if (ft_strchr("NSEW", p_data->map.content[y][x]))
 			{
 				if (found)
 					clean_error(p_data, gamedata, "Multiple player positions");
-				init_player(gamedata, x, y,
-					p_data->map.content[y][x]);
+				if (x == 0 || y == 0 || y == p_data->map.height - 1
+					|| !p_data->map.content[y][x + 1])
+					clean_error(p_data, gamedata, "Player on border");
+				init_player(gamedata, x, y, p_data->map.content[y][x]);
 				found = 1;
 			}
-			x++;
 		}
-		y++;
 	}
 	if (!found)
 		clean_error(p_data, gamedata, "No player position found");

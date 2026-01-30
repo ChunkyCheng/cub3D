@@ -16,16 +16,15 @@ static void	parse_found(t_parsing *p_data, t_gamedata *gamedata, char **line)
 {
 	if (*p_data->identifier != 'F' && *p_data->identifier != 'C')
 	{
-		if (ret_wall(**line))
+		if (get_wall(**line))
 		{
-			p_data->wall_idx = ret_wall(**line);
+			p_data->wall_idx = get_wall(**line);
 			(*line)++;
 		}
 		else if (**line == ' ')
 			p_data->wall_idx = 1;
 		else
 			clean_error(p_data, gamedata, "Invalid wall texture suffix");
-		p_data->wall_idx -= 1;
 		p_data->wall[p_data->wall_idx] = 1;
 	}
 	if (**line != ' ')

@@ -39,7 +39,7 @@ static void	spread_walls(t_map *map, int **mask, int x, int y)
 	int	nx;
 	int	ny;
 
-	if (ret_wall(map->content[y][x]))
+	if (get_wall(map->content[y][x]))
 		mask[y][x] = 2;
 	dy = -1;
 	while (dy <= 1)
@@ -50,7 +50,7 @@ static void	spread_walls(t_map *map, int **mask, int x, int y)
 			nx = x + dx;
 			ny = y + dy;
 			if (nx >= 0 && nx < map->width && ny >= 0 && ny < map->height
-				&& !mask[ny][nx] && ret_wall(map->content[ny][nx]))
+				&& !mask[ny][nx] && get_wall(map->content[ny][nx]))
 			{
 				mask[ny][nx] = 2;
 				spread_walls(map, mask, nx, ny);
@@ -68,7 +68,7 @@ void	flood_fill(t_map *map, int **mask, int x, int y)
 	if (mask[y][x])
 		return ;
 	mask[y][x] = 1;
-	if (ret_wall(map->content[y][x]))
+	if (get_wall(map->content[y][x]))
 		return (spread_walls(map, mask, x, y));
 	flood_fill(map, mask, x + 1, y);
 	flood_fill(map, mask, x - 1, y);

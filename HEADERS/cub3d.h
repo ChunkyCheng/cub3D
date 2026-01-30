@@ -32,6 +32,14 @@
 # define PLAYER_RADIUS	0.2
 # define QUANTIZE_RES	3
 
+typedef struct s_map
+{
+	char	**content;
+	int		**mask;
+	int		height;
+	int		width;
+}	t_map;
+
 typedef struct s_vect
 {
 	double	x;
@@ -62,7 +70,7 @@ typedef struct s_texture_pack
 {
 	int			floor;
 	int			ceiling;
-	t_image		wall[8][4];
+	t_image		texture[9][4];
 }	t_texture_pack;
 
 typedef struct s_map_cell
@@ -71,8 +79,11 @@ typedef struct s_map_cell
 	{
 		EMPTY,
 		WALL,
-		DOOR
+		DOOR,
+		UNBOUND
 	}		e_type;
+	int		visible;
+	int		solid;
 	t_image	*north;
 	t_image	*south;
 	t_image	*west;
@@ -99,6 +110,7 @@ typedef struct s_gamedata
 	t_image			img_main;
 	t_image			img_buff;
 	t_texture_pack	texture_pack;
+	t_map			pmap;
 	t_map_cell		map[MAP_SIZE_MAX][MAP_SIZE_MAX];
 	t_player		player;
 	t_inputs		*inputs;
@@ -110,6 +122,7 @@ void		parsing(t_gamedata *gamedata, char *map_path);
 void		init_render_vals(t_render_vals *render_vals);
 void		init_gamedata(t_gamedata *gamedata, char *map_path);
 int			game_loop(t_gamedata *gamedata);
+void		free_mask(int **arr, int height);
 int			close_and_exit(t_gamedata *gamedata);
 void		close_with_exit_code(t_gamedata *gamedata, int exit_code);
 

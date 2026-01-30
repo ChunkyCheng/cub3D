@@ -16,73 +16,98 @@
 #include "parsing.h"
 #include "rendering.h"
 
-static void	parse_map(t_gamedata *gamedata, int fd)
+static void	set_wall_cell(t_gamedata *gamedata, int x, int y, int t_idx)
 {
-	char	*line;
+	if (gamedata->pmap.content[y][x] == 'D')
+		gamedata->map[y][x].e_type = DOOR;
+	else
+		gamedata->map[y][x].e_type = WALL;
+	gamedata->map[y][x].north = &gamedata->texture_pack.texture[t_idx][0];
+	gamedata->map[y][x].south = &gamedata->texture_pack.texture[t_idx][1];
+	gamedata->map[y][x].west = &gamedata->texture_pack.texture[t_idx][2];
+	gamedata->map[y][x].east = &gamedata->texture_pack.texture[t_idx][3];
+	gamedata->map[y][x].solid = 1;
+	gamedata->map[y][x].visible = 1;
+}
+
+static void	arr_to_map_cell(t_gamedata *gamedata, t_map *pmap, int **mask)
+{
 	int		y;
 	int		x;
+	int		t_idx;
 
 	y = 0;
-	line = get_next_line(fd);
-	while (line)
+	while (y < pmap->height)
 	{
 		x = 0;
-		while (line[x])
+		while (x < pmap->width && pmap->content[y][x])
 		{
-			if (line[x] == '0' || line[x] == ' ')
+			t_idx = get_wall(pmap->content[y][x]);
+			if (pmap->content[y][x] == ' ' && mask[y][x] == 3)
+				gamedata->map[y][x].e_type = UNBOUND;
+			else if (ft_strchr(" 0", pmap->content[y][x]))
 				gamedata->map[y][x].e_type = EMPTY;
-			else if (line[x] == '1')
-			{
-				gamedata->map[y][x].e_type = WALL;
-				gamedata->map[y][x].north = &gamedata->texture_pack.wall.north;
-				gamedata->map[y][x].south = &gamedata->texture_pack.wall.south;
-				gamedata->map[y][x].west = &gamedata->texture_pack.wall.west;
-				gamedata->map[y][x].east = &gamedata->texture_pack.wall.east;
-			}
+			if (pmap->content[y][x] == 'D' || t_idx)
+				set_wall_cell(gamedata, x, y, t_idx);
+			// if (pmap->content[y][x] == 'C')
+			// 	add_coin(&gamedata->coins, x, y);
 			x++;
 		}
 		y++;
-		free(line);
-		line = get_next_line(fd);
 	}
 }
 
-static void	parse_texture_pack(t_gamedata *gamedata, t_texture_pack *texture_pack)
+static void	init_image_data(t_image *image, t_gamedata *gamedata)
 {
-	texture_pack->wall.north.mlx_img
-		= mlx_xpm_file_to_image(gamedata->display, DFL_NORTH,
-			&texture_pack->wall.north.width,
-			&texture_pack->wall.north.height);
-	init_image_data(&texture_pack->wall.north);
-	texture_pack->wall.south.mlx_img
-		= mlx_xpm_file_to_image(gamedata->display, DFL_SOUTH,
-			&texture_pack->wall.south.width,
-			&texture_pack->wall.south.height);
-	init_image_data(&texture_pack->wall.south);
-	texture_pack->wall.west.mlx_img
-		= mlx_xpm_file_to_image(gamedata->display, DFL_WEST,
-			&texture_pack->wall.west.width,
-			&texture_pack->wall.west.height);
-	init_image_data(&texture_pack->wall.west);
-	texture_pack->wall.east.mlx_img
-		= mlx_xpm_file_to_image(gamedata->display, DFL_EAST,
-			&texture_pack->wall.east.width,
-			&texture_pack->wall.east.height);
-	init_image_data(&texture_pack->wall.east);
+	if (!image->mlx_img)
+	{
+		ft_putstr_fd("Error\nFailed to load texture: ", 2);
+		ft_putendl_fd(image->file_path, 2);
+		close_with_exit_code(gamedata, 127);
+	}
+	image->pixels = mlx_get_data_addr(image->mlx_img, &image->bitsperpixel,
+			&image->row_len, &image->endian);
+	if (!image->pixels)
+	{
+		ft_putstr_fd("Error\nFailed to get image data address", 2);
+		close_with_exit_code(gamedata, 127);
+	}
+}
+
+static void	init_tex_pack(t_gamedata *gamedata, t_texture_pack *texture_pack)
+{
+	int	i;
+	int	j;
+
+	gamedata->texture_pack.texture[0][0].file_path = DFL_NORTH;
+	gamedata->texture_pack.texture[0][1].file_path = DFL_SOUTH;
+	gamedata->texture_pack.texture[0][2].file_path = DFL_WEST;
+	gamedata->texture_pack.texture[0][3].file_path = DFL_EAST;
+	i = 0;
+	while (i < 9)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			if (!gamedata->texture_pack.texture[i][j].file_path)
+				break ;
+			texture_pack->texture[i][j].mlx_img
+				= mlx_xpm_file_to_image(gamedata->display,
+					texture_pack->texture[i][j].file_path,
+					&texture_pack->texture[i][j].width,
+					&texture_pack->texture[i][j].height);
+			init_image_data(&texture_pack->texture[i][j], gamedata);
+			j++;
+		}
+		i++;
+	}
 }
 
 void	init_gamedata(t_gamedata *gamedata, char *map_path)
 {
-	int	fd;
-
-	fd = open(map_path, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("Error\ninit_gamedata");
-		exit(3);
-	}
-	parse_map(gamedata, fd);
-	close(fd);
+	(void)map_path;
+	init_tex_pack(gamedata, &gamedata->texture_pack);
+	arr_to_map_cell(gamedata, &gamedata->pmap, gamedata->pmap.mask);
 	init_render_vals(gamedata->render_vals);
 	mlx_mouse_move(gamedata->display, gamedata->window,
 		WIN_WIDTH / 2, WIN_HEIGHT / 2);

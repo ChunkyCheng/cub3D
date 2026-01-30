@@ -25,13 +25,6 @@
 
 typedef struct s_render_vals	t_render_vals;
 
-typedef struct s_map
-{
-	char	**content;
-	int		height;
-	int		width;
-}	t_map;
-
 typedef struct s_parsing
 {
 	enum
@@ -48,7 +41,7 @@ typedef struct s_parsing
 }	t_parsing;
 
 int		open_valid_ext(char *path, char *extension, int *out_fd);
-int		ret_wall(char c);
+int		get_wall(char c);
 void	parsing_cleanup(t_parsing *p_data);
 void	clean_error(t_parsing *p_data, t_gamedata *gamedata, char *message);
 
@@ -65,6 +58,5 @@ void	flood_fill(t_map *map, int **mask, int x, int y);
 int		check_edge_flood(t_map *map, int **mask, int x, int y);
 
 void	init_render_vals(t_render_vals *render_vals);
-void	init_image_data(t_image *image);
 
 #endif

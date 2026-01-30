@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-int	ret_wall(char c)
+int	get_wall(char c)
 {
 	if (c >= '1' && c <= '9')
 		return (c - '0');
@@ -43,6 +43,8 @@ void	clean_error(t_parsing *p_data, t_gamedata *gamedata, char *message)
 	p_data->fd = -1;
 	if (p_data->map.content)
 		ft_strarr_free(p_data->map.content);
+	if (p_data->map.mask)
+		free_mask(p_data->map.mask, p_data->map.height);
 	p_data->map.content = NULL;
 	close_with_exit_code(gamedata, 1);
 }
@@ -64,7 +66,7 @@ int	open_valid_ext(char *path, char *extension, int *out_fd)
 	*out_fd = open(path, O_RDONLY);
 	if (*out_fd < 0)
 	{
-		perror("Error\nopen_valid_ext");
+		perror("Error\ncub3D");
 		return (0);
 	}
 	return (1);
