@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_colour.c                                     :+:      :+:    :+:   */
+/*   parse_texture.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:09 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/29 18:14:03 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/01/30 09:25:32 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	parse_rgb_color(char *info, t_parsing *p_data, t_gamedata *gamedata)
 	int		b;
 	char	**rgb_values;
 
-	rgb_values = ft_split(info, ',');
+	rgb_values = ft_split(info, ",");
 	if (!rgb_values)
 		clean_error(p_data, gamedata, "ft_split failure");
 	if (!rgb_values[0] || !rgb_values[1] || !rgb_values[2] || rgb_values[3])
@@ -78,4 +78,31 @@ void	parse_colour(t_gamedata *gamedata, t_parsing *p_data)
 		gamedata->texture_pack.floor = colour;
 	else
 		gamedata->texture_pack.ceiling = colour;
+}
+
+void	parse_texture(t_gamedata *gamedata, t_parsing *p_data)
+{
+	int			i;
+	int			fd;
+	const char	*wall[4] = {"NO", "EA", "SO", "WE"};
+
+	i = -1;
+	fd = -1;
+	if (!ft_strchr(p_data->info, '/'))
+		clean_error(p_data, gamedata, "Texture information is not a path");
+	while (i++ < 3)
+	{
+		if (ft_strncmp(p_data->identifier, wall[i], 2) == 0)
+		{
+			if (gamedata->texture_pack.wall[p_data->wall_idx][i].file_path)
+				clean_error(p_data, gamedata, "Duplicate wall definition");
+			if (open_valid_ext(p_data->info, ".xpm", &fd) == 0)
+				clean_error(p_data, gamedata, "Invalid texture extension");
+			close(fd);
+			gamedata->texture_pack.wall[p_data->wall_idx][i].file_path
+				= ft_strdup(p_data->info);
+			if (!gamedata->texture_pack.wall[p_data->wall_idx][i].file_path)
+				clean_error(p_data, gamedata, "ft_strdup failure");
+		}
+	}
 }

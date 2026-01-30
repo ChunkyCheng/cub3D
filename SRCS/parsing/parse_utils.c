@@ -6,11 +6,18 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:27 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/29 17:35:45 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/01/30 16:05:06 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+int	ret_wall(char c)
+{
+	if (c >= '1' && c <= '9')
+		return (c - '0');
+	return (0);
+}
 
 void	parsing_cleanup(t_parsing *p_data)
 {
@@ -49,8 +56,8 @@ int	open_valid_ext(char *path, char *extension, int *out_fd)
 	extlen = ft_strlen(extension);
 	if (len < extlen || ft_strncmp(&path[len - extlen], extension, extlen) != 0)
 	{
-		ft_putendl_fd("Error\nInvalid file extension. Expected [", 2);
-		ft_putendl_fd(extension, 2);
+		ft_putstr_fd("Error\nInvalid file extension. Expected [", 2);
+		ft_putstr_fd(extension, 2);
 		ft_putendl_fd("]", 2);
 		return (0);
 	}

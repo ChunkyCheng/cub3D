@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 17:52:37 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/01/30 16:57:57 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static void	parse_map(t_gamedata *gamedata, int fd)
 				gamedata->map[y][x].west = &gamedata->texture_pack.wall.west;
 				gamedata->map[y][x].east = &gamedata->texture_pack.wall.east;
 			}
-			else if (ft_strchr("NSWE", line[x]))
-				init_player(gamedata, x, y, line[x]);
 			x++;
 		}
 		y++;
@@ -49,29 +47,29 @@ static void	parse_map(t_gamedata *gamedata, int fd)
 	}
 }
 
-// static void	parse_texture_pack(t_gamedata *gamedata, t_texture_pack *texture_pack)
-// {
-// 	texture_pack->wall.north.mlx_img
-// 		= mlx_xpm_file_to_image(gamedata->display, DFL_NORTH,
-// 			&texture_pack->wall.north.width,
-// 			&texture_pack->wall.north.height);
-// 	init_image_data(&texture_pack->wall.north);
-// 	texture_pack->wall.south.mlx_img
-// 		= mlx_xpm_file_to_image(gamedata->display, DFL_SOUTH,
-// 			&texture_pack->wall.south.width,
-// 			&texture_pack->wall.south.height);
-// 	init_image_data(&texture_pack->wall.south);
-// 	texture_pack->wall.west.mlx_img
-// 		= mlx_xpm_file_to_image(gamedata->display, DFL_WEST,
-// 			&texture_pack->wall.west.width,
-// 			&texture_pack->wall.west.height);
-// 	init_image_data(&texture_pack->wall.west);
-// 	texture_pack->wall.east.mlx_img
-// 		= mlx_xpm_file_to_image(gamedata->display, DFL_EAST,
-// 			&texture_pack->wall.east.width,
-// 			&texture_pack->wall.east.height);
-// 	init_image_data(&texture_pack->wall.east);
-// }
+static void	parse_texture_pack(t_gamedata *gamedata, t_texture_pack *texture_pack)
+{
+	texture_pack->wall.north.mlx_img
+		= mlx_xpm_file_to_image(gamedata->display, DFL_NORTH,
+			&texture_pack->wall.north.width,
+			&texture_pack->wall.north.height);
+	init_image_data(&texture_pack->wall.north);
+	texture_pack->wall.south.mlx_img
+		= mlx_xpm_file_to_image(gamedata->display, DFL_SOUTH,
+			&texture_pack->wall.south.width,
+			&texture_pack->wall.south.height);
+	init_image_data(&texture_pack->wall.south);
+	texture_pack->wall.west.mlx_img
+		= mlx_xpm_file_to_image(gamedata->display, DFL_WEST,
+			&texture_pack->wall.west.width,
+			&texture_pack->wall.west.height);
+	init_image_data(&texture_pack->wall.west);
+	texture_pack->wall.east.mlx_img
+		= mlx_xpm_file_to_image(gamedata->display, DFL_EAST,
+			&texture_pack->wall.east.width,
+			&texture_pack->wall.east.height);
+	init_image_data(&texture_pack->wall.east);
+}
 
 void	init_gamedata(t_gamedata *gamedata, char *map_path)
 {
