@@ -1,5 +1,5 @@
 CC		=	cc
-CFLAGS	=	#-Wall -Wextra -Werror -O3 -g3 #-fsanitize=address,leak
+CFLAGS	=	-Wall -Wextra -Werror -O3 -g3 #-fsanitize=address,leak
 
 LIBDIR	=	libft
 MLXDIR	=	minilibx-linux
