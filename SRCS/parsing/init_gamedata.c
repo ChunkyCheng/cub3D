@@ -49,8 +49,8 @@ static void	arr_to_map_cell(t_gamedata *gamedata, t_map *pmap, int **mask)
 				gamedata->map[y][x].e_type = EMPTY;
 			if (pmap->content[y][x] == 'D' || t_idx)
 				set_wall_cell(gamedata, x, y, t_idx);
-			// if (pmap->content[y][x] == 'C')
-			// 	add_coin(&gamedata->coins, x, y);
+			if (pmap->content[y][x] == 'C')
+				add_coin(&gamedata->coins, x, y);
 			x++;
 		}
 		y++;
