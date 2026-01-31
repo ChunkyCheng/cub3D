@@ -7,7 +7,8 @@ MLXGIT	=	https://github.com/42paris/minilibx-linux.git
 
 IFLAGS	=	-I$(LIBDIR) -I$(MLXDIR) -IHEADERS
 LFLAGS	=	-L$(MLXDIR) -lX11 -lXext -lbsd -lm
-LIBS	=	$(LIBDIR)/libft.a $(MLXDIR)/libmlx.a
+LIBFT	=	$(LIBDIR)/libft.a
+MLXLIB	=	$(MLXDIR)/libmlx.a
 
 
 ####################################===SOURCE FILES===####################################
@@ -18,6 +19,7 @@ PARSE_FILES	=	init_gamedata.c		init_image_data.c		init_cache.c
 INPUT_DIR	=	inputs
 INPUT_FILES	=	handle_key_event.c	handle_mouse_event.c	handle_focus_event.c		\
 				handle_movement.c	handle_rotation.c		handle_use_key.c			\
+				handle_minimap_toggle.c													\
 				check_inputs.c		hitbox_utils.c			check_collisions.c
 
 RENDER_DIR	=	rendering
@@ -28,9 +30,10 @@ RENDER_FILES=	render_frame.c			render_background.c		init_ray.c				\
 				image_put_pixel.c		image_get_pixel.c		limit_framerate.c		\
 				darken_pixel.c
 
-MINIMAP_DIR		=	minimap
+MINIMAP_DIR		=	$(RENDER_DIR)/minimap
 MINIMAP_FILES	=	init_minimap.c		draw_circle.c	draw_rectangle.c				\
-					render_minimap.c
+					draw_rectangle_masked.c		draw_triangle.c	\
+					rotate_minimap_player.c	render_minimap.c
 
 MODULES		=	PARSE	INPUT	RENDER	MINIMAP
 
@@ -70,17 +73,22 @@ RMLINE		=	\r\033[K
 
 #########################################################################################
 
-NAME	=	cub3D
+NAME = cub3D
 
 all: $(NAME)
 
-$(NAME): $(LIBS) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(LFLAGS) -o $(NAME)
-	@printf "$(RMLINE)$(BOLD)$(YELLOW)$(NAME) successfully compiled\n"
-
-$(LIBS): $(MLXDIR)
+$(NAME): $(LIBFT) $(MLXLIB) $(OBJS)
 	@make -s -C $(MLXDIR) >> /dev/null 2>&1
 	@make -s -C $(LIBDIR)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLXLIB) $(LFLAGS) -o $(NAME)
+	@printf "$(RMLINE)$(BOLD)$(YELLOW)$(NAME) successfully compiled\n"
+
+$(LIBFT):
+	@make -s -C $(LIBDIR)
+
+$(MLXLIB): $(MLXDIR)
+	@make -s -C $(MLXDIR)
+	@touch $(MLXLIB)
 
 $(MLXDIR):
 	@git clone $(MLXGIT) $(MLXDIR)
