@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:20:07 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/31 00:41:58 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/31 22:41:10 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ t_player *player)
 		col++;
 	}
 	render_coins(gamedata, &gamedata->player, &gamedata->coins);
-	render_minimap(gamedata, &gamedata->player, gamedata->minimap);
+	if (gamedata->minimap->visible)
+		render_minimap(gamedata, &gamedata->player, gamedata->minimap);
 	push_image(gamedata);
 	limit_framerate();
 }
