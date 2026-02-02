@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 10:55:15 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/30 11:45:37 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/02 19:50:01 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 int	handle_focus_in(t_gamedata *gamedata)
 {
 	gamedata->inputs->focused = 1;
+	mlx_mouse_move(gamedata->display, gamedata->window,
+		WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	return (0);
 }
 

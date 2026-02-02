@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 17:51:04 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/02 20:52:23 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 //1920x1080
 //960x540
 //768x480
-# define WIN_WIDTH		1920
-# define WIN_HEIGHT		1080
-# define IMG_WIDTH		1920
-# define IMG_HEIGHT		1080
+# define WIN_WIDTH		3840
+# define WIN_HEIGHT		2160
+# define IMG_WIDTH		640
+# define IMG_HEIGHT		480
 
 # define MAP_SIZE_MAX			128
 # define ANIMATION_FRAME_MAX	30

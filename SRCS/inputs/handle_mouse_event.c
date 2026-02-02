@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 08:30:39 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/30 11:45:37 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/02 19:48:25 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	handle_mouse_move(int x, int y, t_gamedata *gamedata)
 	t_inputs	*inputs;
 
 	inputs = gamedata->inputs;
+	if (inputs->focused == 0)
+		return (0);
 	inputs->x_move = x - WIN_WIDTH / 2;
 	inputs->y_move = y - WIN_HEIGHT / 2;
 	if (inputs->focused)

@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 19:34:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 16:06:25 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/02 20:46:28 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	darken_pixel(int pixel, float scale)
 	int	b;
 
 	if (scale < 0)
-		return (RED);
+		return (0);
 	if (scale >= 1)
 		return (pixel);
 	a = pixel & ALPHA;
