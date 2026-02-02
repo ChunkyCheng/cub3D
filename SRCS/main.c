@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:26:47 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 14:24:12 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/02 15:47:14 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,10 @@ int	main(int argc, char *argv[])
 	gamedata.minimap = &minimap;
 	gamedata.inputs = &inputs;
 	gamedata.cache = &cache;
-	gamedata.render_vals = &render_vals;
 	parsing(&gamedata, argv[1]);
 	init_mlx_displays(&gamedata, argv[1]);
 	init_mlx_imgs(&gamedata, &gamedata.img_main, &gamedata.img_buff);
-	init_gamedata(&gamedata, argv[1]);
+	init_gamedata(&gamedata);
 	init_minimap(&gamedata, gamedata.minimap);
 	hook_events(&gamedata);
 	mlx_loop(gamedata.display);

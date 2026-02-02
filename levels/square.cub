@@ -1,3 +1,11 @@
+F 39,58,64
+C 26,28,32
+NO1 ./textures/BrickWall.xpm
+SO1 ./textures/BrickWall.xpm
+WE1 ./textures/BrickWall.xpm
+EA1 ./textures/BrickWall.xpm
+
+
 11111111111
 1         1
 1    C    1
@@ -19,4 +27,3 @@
 1 CCCCCCC 1
 1         1
 11111111111
-

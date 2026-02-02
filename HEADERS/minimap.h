@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:30:00 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/31 22:40:42 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/02 18:14:07 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_circle
 	int	mid_x;
 	int	mid_y;
 	int	radius;
-	int colour;
+	int	colour;
 }	t_circle;
 
 typedef struct s_rectangle
@@ -73,14 +73,16 @@ typedef struct s_minimap
 	int			visible;
 }	t_minimap;
 
-void	init_minimap(t_gamedata *gamedata, t_minimap *minimap);
+void		init_minimap(t_gamedata *gamedata, t_minimap *minimap);
 
 void		draw_circle(t_image *dst, t_circle *circle);
 void		draw_rectangle(t_image *dst, t_rectangle *rect);
-void		draw_rectangle_masked(t_image *dst, t_rectangle *rect, t_circle *mask);
+void		draw_rectangle_masked(t_image *dst, t_rectangle *rect,
+				t_circle *mask);
 void		draw_triangle(t_image *dst, t_triangle *triangle);
 t_triangle	rotate_minimap_player(t_minimap *minimap, t_player *player);
 
-void	render_minimap(t_gamedata *gamedata, t_player *player, t_minimap *minimap);
+void		render_minimap(t_gamedata *gamedata, t_player *player,
+				t_minimap *minimap);
 
 #endif

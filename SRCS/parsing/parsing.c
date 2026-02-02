@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:19:44 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/30 16:53:36 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/02 15:52:22 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void	parse_map(t_gamedata *gamedata, t_parsing *p_data)
 	gamedata->pmap.mask = dup_mask(&p_data->map, p_data, gamedata);
 	if (!gamedata->pmap.mask)
 		clean_error(p_data, gamedata, "dup_mask failure");
-	ft_strarr_free(p_data->map.content);
 	p_data->map.content = NULL;
 	free_mask(p_data->map.mask, p_data->map.height);
 	p_data->map.mask = NULL;
@@ -93,5 +92,6 @@ void	parsing(t_gamedata *gamedata, char *map_path)
 	p_data.fd = -1;
 	if (p_data.e_state != MAP)
 		clean_error(&p_data, gamedata, "No map data found");
+	p_data.fd = open(map_path, O_RDONLY);
 	parse_map(gamedata, &p_data);
 }

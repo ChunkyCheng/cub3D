@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/30 16:45:38 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/02 17:32:23 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # define DFL_SOUTH		"textures/wall-default-south.xpm"
 # define DFL_WEST		"textures/wall-default-west.xpm"
 # define DFL_EAST		"textures/wall-default-east.xpm"
+
+# define COIN0	"textures/coin_animation/coin0.xpm"
+# define COIN1	"textures/coin_animation/coin1.xpm"
+# define COIN2	"textures/coin_animation/coin2.xpm"
+# define COIN3	"textures/coin_animation/coin3.xpm"
 
 typedef struct s_render_vals	t_render_vals;
 
@@ -57,6 +62,10 @@ void	validate_map(t_gamedata *gamedata, t_parsing *p_data);
 void	flood_fill(t_map *map, int **mask, int x, int y);
 int		check_edge_flood(t_map *map, int **mask, int x, int y);
 
-void	init_render_vals(t_render_vals *render_vals);
+void	init_image_data(t_image *image, t_gamedata *gamedata);
+
+void	add_coin(t_coins *coins, int x, int y);
+void	init_coin_animation(t_gamedata *gamedata, t_texture_pack *texutre_pack,
+			t_coins *coins);
 
 #endif

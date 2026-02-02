@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   add_coin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
+/*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/01 15:12:36 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 15:27:47 by jchuah           ###   ########.fr       */
+/*   Created: 2026/02/02 14:42:32 by jchuah            #+#    #+#             */
+/*   Updated: 2026/02/02 14:45:05 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "inputs.h"
-#include "rendering.h"
 
-int	game_loop(t_gamedata *gamedata)
+void	add_coin(t_coins *coins, int x, int y)
 {
-	check_inputs(gamedata, gamedata->inputs, &gamedata->player);
-	render_frame(gamedata, gamedata->cache, &gamedata->player);
-	update_animations(gamedata);
-	return (0);
+	coins->pos[coins->coin_total] = (t_vect){.x = x + 0.5, .y = y + 0.5};
+	coins->coin_total++;
 }

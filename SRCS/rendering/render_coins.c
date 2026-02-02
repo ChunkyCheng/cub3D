@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 13:49:29 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/30 01:46:08 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/02 17:49:42 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	render_coins(t_gamedata *gamedata, t_player *player, t_coins *coins)
 	i = 0;
 	while (i < visible)
 	{
-		place_coin(gamedata, &coins->frames[coins->frame_current],
+		place_coin(gamedata, &(*coins->frames)[coins->frame_current],
 			screen_pos[i].depth, screen_pos[i].screen_x);
 		i++;
 	}

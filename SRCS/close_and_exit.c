@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:58:36 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/30 16:55:57 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/02 17:41:52 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,25 @@ void	free_mask(int **arr, int height)
 		i++;
 	}
 	free(arr);
+}
+
+static void	free_coin_animation(t_gamedata *gamedata,
+t_texture_pack *texture_pack)
+{
+	t_image	*frame;
+
+	frame = &texture_pack->coin_frames[0];
+	if (frame->mlx_img)
+		mlx_destroy_image(gamedata->display, frame->mlx_img);
+	frame = &texture_pack->coin_frames[1];
+	if (frame->mlx_img)
+		mlx_destroy_image(gamedata->display, frame->mlx_img);
+	frame = &texture_pack->coin_frames[2];
+	if (frame->mlx_img)
+		mlx_destroy_image(gamedata->display, frame->mlx_img);
+	frame = &texture_pack->coin_frames[3];
+	if (frame->mlx_img)
+		mlx_destroy_image(gamedata->display, frame->mlx_img);
 }
 
 static void	free_texture_pack(t_gamedata *gamedata,
@@ -52,13 +71,12 @@ t_texture_pack *texture_pack)
 		}
 		i++;
 	}
+	free_coin_animation(gamedata, texture_pack);
 }
 
 int	close_and_exit(t_gamedata *gamedata)
 {
 	free_texture_pack(gamedata, &gamedata->texture_pack);
-	if (gamedata->pmap.content)
-		ft_strarr_free(gamedata->pmap.content);
 	if (gamedata->pmap.mask)
 		free_mask(gamedata->pmap.mask, gamedata->pmap.height);
 	if (gamedata->img_buff.mlx_img)

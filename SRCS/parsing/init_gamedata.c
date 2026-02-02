@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/30 16:57:57 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/02 17:42:30 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,7 @@ static void	arr_to_map_cell(t_gamedata *gamedata, t_map *pmap, int **mask)
 		}
 		y++;
 	}
-}
-
-static void	init_image_data(t_image *image, t_gamedata *gamedata)
-{
-	if (!image->mlx_img)
-	{
-		ft_putstr_fd("Error\nFailed to load texture: ", 2);
-		ft_putendl_fd(image->file_path, 2);
-		close_with_exit_code(gamedata, 127);
-	}
-	image->pixels = mlx_get_data_addr(image->mlx_img, &image->bitsperpixel,
-			&image->row_len, &image->endian);
-	if (!image->pixels)
-	{
-		ft_putstr_fd("Error\nFailed to get image data address", 2);
-		close_with_exit_code(gamedata, 127);
-	}
+	ft_strarr_free(pmap->content);
 }
 
 static void	init_tex_pack(t_gamedata *gamedata, t_texture_pack *texture_pack)
@@ -91,24 +75,27 @@ static void	init_tex_pack(t_gamedata *gamedata, t_texture_pack *texture_pack)
 		{
 			if (!gamedata->texture_pack.texture[i][j].file_path)
 				break ;
-			texture_pack->texture[i][j].mlx_img
-				= mlx_xpm_file_to_image(gamedata->display,
-					texture_pack->texture[i][j].file_path,
-					&texture_pack->texture[i][j].width,
-					&texture_pack->texture[i][j].height);
 			init_image_data(&texture_pack->texture[i][j], gamedata);
 			j++;
 		}
 		i++;
 	}
+	init_image_data(&texture_pack->coin_frames[0], gamedata);
+	init_image_data(&texture_pack->coin_frames[1], gamedata);
+	init_image_data(&texture_pack->coin_frames[2], gamedata);
+	init_image_data(&texture_pack->coin_frames[3], gamedata);
 }
 
-void	init_gamedata(t_gamedata *gamedata, char *map_path)
+void	init_gamedata(t_gamedata *gamedata)
 {
-	(void)map_path;
+	gamedata->texture_pack.coin_frames[0].file_path = COIN0;
+	gamedata->texture_pack.coin_frames[1].file_path = COIN1;
+	gamedata->texture_pack.coin_frames[2].file_path = COIN2;
+	gamedata->texture_pack.coin_frames[3].file_path = COIN3;
 	init_tex_pack(gamedata, &gamedata->texture_pack);
+	init_coin_animation(gamedata, &gamedata->texture_pack, &gamedata->coins);
 	arr_to_map_cell(gamedata, &gamedata->pmap, gamedata->pmap.mask);
-	init_render_vals(gamedata->render_vals);
+	init_cache(gamedata->cache);
 	mlx_mouse_move(gamedata->display, gamedata->window,
 		WIN_WIDTH / 2, WIN_HEIGHT / 2);
 }

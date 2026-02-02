@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 14:17:41 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/02 17:51:04 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_texture_pack
 	int			floor;
 	int			ceiling;
 	t_image		texture[9][4];
+	t_image		coin_frames[ANIMATION_FRAME_MAX];
 }	t_texture_pack;
 
 typedef struct s_map_cell
@@ -109,8 +110,8 @@ typedef struct s_player
 typedef struct s_coins
 {
 	t_vect	pos[COIN_MAX];
+	t_image	(*frames)[30];
 	int		coin_total;
-	t_image	frames[ANIMATION_FRAME_MAX];
 	int		frame_total;
 	int		frame_current;
 	int		frame_delay;
@@ -139,8 +140,7 @@ typedef struct s_gamedata
 
 void		init_cache(t_cache *cache);
 void		parsing(t_gamedata *gamedata, char *map_path);
-void		init_render_vals(t_render_vals *render_vals);
-void		init_gamedata(t_gamedata *gamedata, char *map_path);
+void		init_gamedata(t_gamedata *gamedata);
 int			game_loop(t_gamedata *gamedata);
 void		free_mask(int **arr, int height);
 int			close_and_exit(t_gamedata *gamedata);
