@@ -14,7 +14,10 @@ MLXLIB	=	$(MLXDIR)/libmlx.a
 ####################################===SOURCE FILES===####################################
 
 PARSE_DIR	=	parsing
-PARSE_FILES	=	init_gamedata.c		init_image_data.c		init_cache.c
+PARSE_FILES	=	parsing.c			parse_utils.c			parse_map_line.c		\
+				parse_element.c		parse_info.c			pad_trim_map.c			\
+				parse_player.c		validate_map.c			flood_fill.c			\
+				init_gamedata.c		init_cache.c
 
 INPUT_DIR	=	inputs
 INPUT_FILES	=	handle_key_event.c	handle_mouse_event.c	handle_focus_event.c		\

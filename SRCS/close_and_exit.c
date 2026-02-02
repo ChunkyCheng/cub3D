@@ -3,37 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   close_and_exit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
+/*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:58:36 by jchuah            #+#    #+#             */
-/*   Updated: 2025/12/16 14:09:24 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/01/30 16:55:57 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "inputs.h"
 
-static void	free_texture(t_gamedata *gamedata, t_texture *texture)
+void	free_mask(int **arr, int height)
 {
-	if (texture->north.mlx_img)
-		mlx_destroy_image(gamedata->display, texture->north.mlx_img);
-	if (texture->south.mlx_img)
-		mlx_destroy_image(gamedata->display, texture->south.mlx_img);
-	if (texture->west.mlx_img)
-		mlx_destroy_image(gamedata->display, texture->west.mlx_img);
-	if (texture->east.mlx_img)
-		mlx_destroy_image(gamedata->display, texture->east.mlx_img);
+	int	i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (i < height)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
 
 static void	free_texture_pack(t_gamedata *gamedata,
 t_texture_pack *texture_pack)
 {
-	free_texture(gamedata, &texture_pack->wall1);
+	int		i;
+	int		j;
+	t_image	*image;
+
+	i = 0;
+	while (i < 9)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			image = &texture_pack->texture[i][j];
+			if (i != 0 && image->file_path)
+				free(image->file_path);
+			if (image->mlx_img && gamedata && gamedata->display)
+				mlx_destroy_image(gamedata->display, image->mlx_img);
+			image->file_path = NULL;
+			image->mlx_img = NULL;
+			j++;
+		}
+		i++;
+	}
 }
 
 int	close_and_exit(t_gamedata *gamedata)
 {
 	free_texture_pack(gamedata, &gamedata->texture_pack);
+	if (gamedata->pmap.content)
+		ft_strarr_free(gamedata->pmap.content);
+	if (gamedata->pmap.mask)
+		free_mask(gamedata->pmap.mask, gamedata->pmap.height);
 	if (gamedata->img_buff.mlx_img)
 		mlx_destroy_image(gamedata->display, gamedata->img_buff.mlx_img);
 	if (gamedata->img_main.mlx_img)

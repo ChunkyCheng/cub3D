@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
+/*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/31 22:47:48 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/02 14:17:41 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <math.h>
+# include <fcntl.h>
 
 # define DEBUG			1
 
@@ -37,6 +38,14 @@
 
 # define PLAYER_RADIUS	0.2
 
+typedef struct s_map
+{
+	char	**content;
+	int		**mask;
+	int		height;
+	int		width;
+}	t_map;
+
 typedef struct s_vect
 {
 	double	x;
@@ -52,6 +61,7 @@ typedef struct s_image
 	int		endian;
 	int		width;
 	int		height;
+	char	*file_path;
 }	t_image;
 
 typedef struct s_texture
@@ -66,15 +76,7 @@ typedef struct s_texture_pack
 {
 	int			floor;
 	int			ceiling;
-	t_texture	wall1;
-	t_texture	wall2;
-	t_texture	wall3;
-	t_texture	wall4;
-	t_texture	wall5;
-	t_texture	wall6;
-	t_texture	wall7;
-	t_texture	wall8;
-	t_texture	wall9;
+	t_image		texture[9][4];
 }	t_texture_pack;
 
 typedef struct s_map_cell
@@ -83,7 +85,8 @@ typedef struct s_map_cell
 	{
 		EMPTY,
 		WALL,
-		DOOR
+		DOOR,
+		UNBOUND
 	}		e_type;
 	int		solid;
 	int		visible;
@@ -125,6 +128,7 @@ typedef struct s_gamedata
 	t_image			img_buff;
 	t_minimap		*minimap;
 	t_texture_pack	texture_pack;
+	t_map			pmap;
 	t_map_cell		map[MAP_SIZE_MAX][MAP_SIZE_MAX];
 	t_player		player;
 	t_coins			coins;
@@ -134,8 +138,11 @@ typedef struct s_gamedata
 }	t_gamedata;
 
 void		init_cache(t_cache *cache);
+void		parsing(t_gamedata *gamedata, char *map_path);
+void		init_render_vals(t_render_vals *render_vals);
 void		init_gamedata(t_gamedata *gamedata, char *map_path);
 int			game_loop(t_gamedata *gamedata);
+void		free_mask(int **arr, int height);
 int			close_and_exit(t_gamedata *gamedata);
 void		close_with_exit_code(t_gamedata *gamedata, int exit_code);
 

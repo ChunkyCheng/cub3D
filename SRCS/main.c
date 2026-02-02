@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
+/*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:26:47 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/30 23:16:19 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/02 14:24:12 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	init_mlx_displays(t_gamedata *gamedata, char *title)
 	if (!gamedata->display)
 	{
 		ft_putstr_fd("Error\nmlx init error", 2);
+		close_with_exit_code(gamedata, 127);
 	}
 	title = create_title(title);
 	gamedata->window
@@ -58,6 +59,11 @@ t_image *img_main, t_image *img_buff)
 			&img_main->bitsperpixel, &img_main->row_len, &img_main->endian);
 	img_buff->pixels = mlx_get_data_addr(img_buff->mlx_img,
 			&img_buff->bitsperpixel, &img_buff->row_len, &img_buff->endian);
+	if (!img_main->pixels || !img_buff->pixels)
+	{
+		ft_putstr_fd("Error\nimage data addr error", 2);
+		close_with_exit_code(gamedata, 127);
+	}
 	img_main->width = WIN_WIDTH;
 	img_main->height = WIN_HEIGHT;
 	img_buff->width = IMG_WIDTH;
@@ -91,19 +97,16 @@ int	main(int argc, char *argv[])
 	t_inputs	inputs;
 	t_cache		cache;
 
-	if (argc != 2)
-	{
-		ft_putstr_fd("Error\nUsage: ", 2);
-		ft_putstr_fd(argv[0], 2);
-		ft_putstr_fd(" <filename.cub>\n", 2);
-		return (1);
-	}
+	if (argc != 2 || !argv[1] || !*argv[1])
+		return (ft_putendl_fd("Error\nUsage: ./cub3D <filename.cub>", 2), 1);
 	gamedata = (t_gamedata){0};
 	inputs = (t_inputs){0};
 	cache = (t_cache){0};
 	gamedata.minimap = &minimap;
 	gamedata.inputs = &inputs;
 	gamedata.cache = &cache;
+	gamedata.render_vals = &render_vals;
+	parsing(&gamedata, argv[1]);
 	init_mlx_displays(&gamedata, argv[1]);
 	init_mlx_imgs(&gamedata, &gamedata.img_main, &gamedata.img_buff);
 	init_gamedata(&gamedata, argv[1]);
