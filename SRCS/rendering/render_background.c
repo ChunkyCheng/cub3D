@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 23:38:32 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/28 22:58:58 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/02 19:13:53 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,27 @@ static void	fill_remaining(t_image *img_buff, int y)
 	}
 }
 
+static void	fill_row(t_image *img_buff, t_texture_pack *texture_pack,
+int y, float darkness)
+{
+	int	ceiling;
+	int	floor;
+	int	x;
+
+	ceiling = darken_pixel(texture_pack->ceiling, darkness);
+	floor = darken_pixel(texture_pack->floor, darkness);
+	x = 0;
+	while (x < IMG_WIDTH)
+	{
+		image_put_pixel(img_buff, x, y, ceiling);
+		image_put_pixel(img_buff, x, IMG_HEIGHT - 1 - y, floor);
+		x++;
+	}
+}
+
 void	render_background(t_image *img_buff, t_texture_pack *texture_pack,
 t_cache *cache, t_player *player)
 {
-	int		x;
 	int		y;
 	int		y_limit;
 	float	darkness;
@@ -45,15 +62,7 @@ t_cache *cache, t_player *player)
 	{
 		darkness = (2.0 / (cache->min_wall_height - IMG_HEIGHT))
 			* y + 1.0;
-		x = 0;
-		while (x < IMG_WIDTH)
-		{
-			image_put_pixel(img_buff, x, y,
-				darken_pixel(texture_pack->ceiling, darkness));
-			image_put_pixel(img_buff, x, IMG_HEIGHT - 1 - y,
-				darken_pixel(texture_pack->floor, darkness));
-			x++;
-		}
+		fill_row(img_buff, texture_pack, y, darkness);
 		y++;
 	}
 	fill_remaining(img_buff, y);
