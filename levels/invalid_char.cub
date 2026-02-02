@@ -1,10 +1,10 @@
-F 39,58,64
-C 26,28,32
 NO1 ./textures/BrickWall.xpm
 SO1 ./textures/BrickWall.xpm
 WE1 ./textures/BrickWall.xpm
 EA1 ./textures/BrickWall.xpm
-
+#
+F            39,58,64
+C 26,28,32
 NO2 ./textures/wall-default-north.xpm
 SO2 ./textures/wall-default-south.xpm
 WE2 ./textures/wall-default-west.xpm

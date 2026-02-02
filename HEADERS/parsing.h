@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 17:32:23 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/02 23:04:49 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		check_edge_flood(t_map *map, int **mask, int x, int y);
 
 void	init_image_data(t_image *image, t_gamedata *gamedata);
 
-void	add_coin(t_coins *coins, int x, int y);
+void	add_coin(t_gamedata *gamedata, t_coins *coins, int x, int y);
 void	init_coin_animation(t_gamedata *gamedata, t_texture_pack *texutre_pack,
 			t_coins *coins);
 

@@ -5,7 +5,6 @@ SO1 ./textures/BrickWall.xpm
 WE1 ./textures/BrickWall.xpm
 EA1 ./textures/BrickWall.xpm
 
-NO2 ./textures/wall-default-north.xpm
 SO2 ./textures/wall-default-south.xpm
 WE2 ./textures/wall-default-west.xpm
 EA2 ./textures/wall-default-east.xpm

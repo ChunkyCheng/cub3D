@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 17:42:30 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/02 23:04:30 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	arr_to_map_cell(t_gamedata *gamedata, t_map *pmap, int **mask)
 			if (pmap->content[y][x] == 'D' || t_idx)
 				set_wall_cell(gamedata, x, y, t_idx);
 			if (pmap->content[y][x] == 'C')
-				add_coin(&gamedata->coins, x, y);
+				add_coin(gamedata, &gamedata->coins, x, y);
 			x++;
 		}
 		y++;
