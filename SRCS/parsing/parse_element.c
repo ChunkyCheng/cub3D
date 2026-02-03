@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:09:55 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/30 14:01:29 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/03 09:33:11 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	find_element(char **line, t_parsing *p_data, t_gamedata *gamedata)
 {
 	int			i;
 	int			found;
-	const char	*identifiers[6] = {"NO", "EA", "SO", "WE", "F", "C"};
+	const char	*identifiers[6] = {"NO", "SO", "WE", "EA", "F", "C"};
 
 	i = 0;
 	found = 0;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_texture.c                                    :+:      :+:    :+:   */
+/*   parse_info.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:09 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/30 09:25:32 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/03 09:33:11 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	parse_texture(t_gamedata *gamedata, t_parsing *p_data)
 {
 	int			i;
 	int			fd;
-	const char	*wall[4] = {"NO", "EA", "SO", "WE"};
+	const char	*wall[4] = {"NO", "SO", "WE", "EA"};
 
 	i = -1;
 	fd = -1;

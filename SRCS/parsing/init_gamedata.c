@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 23:04:30 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 11:33:42 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	arr_to_map_cell(t_gamedata *gamedata, t_map *pmap, int **mask)
 		y++;
 	}
 	ft_strarr_free(pmap->content);
+	pmap->content = NULL;
 }
 
 static void	init_tex_pack(t_gamedata *gamedata, t_texture_pack *texture_pack)
@@ -95,6 +96,8 @@ void	init_gamedata(t_gamedata *gamedata)
 	init_tex_pack(gamedata, &gamedata->texture_pack);
 	init_coin_animation(gamedata, &gamedata->texture_pack, &gamedata->coins);
 	arr_to_map_cell(gamedata, &gamedata->pmap, gamedata->pmap.mask);
+	free_mask(gamedata->pmap.mask, gamedata->pmap.height);
+	gamedata->pmap.mask = NULL;
 	init_cache(gamedata->cache);
 	mlx_mouse_move(gamedata->display, gamedata->window,
 		WIN_WIDTH / 2, WIN_HEIGHT / 2);

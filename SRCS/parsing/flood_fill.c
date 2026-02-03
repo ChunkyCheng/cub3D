@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 16:32:57 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/30 16:42:09 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/03 10:53:32 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_edge_flood(t_map *map, int **mask, int x, int y)
 {
 	if (x < 0 || x >= map->width || y < 0 || y >= map->height)
 		return (0);
-	if (mask[y][x] != 0)
+	if (mask[y][x] == 2 || mask[y][x] == 3)
 		return (0);
 	mask[y][x] = 3;
 	if (map->content[y][x] != ' ')

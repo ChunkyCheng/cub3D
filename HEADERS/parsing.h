@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 23:04:49 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 14:14:11 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ typedef struct s_parsing
 	int		fd;
 	char	*identifier;
 	int		wall_idx;
-	int		wall[8];
+	int		wall[9];
 	char	*info;
 	t_map	map;
+	char	*cur_line;
 }	t_parsing;
 
 int		open_valid_ext(char *path, char *extension, int *out_fd);
@@ -54,18 +55,19 @@ void	parse_element(char *line, t_gamedata *gamedata, t_parsing *p_data);
 void	parse_colour(t_gamedata *gamedata, t_parsing *p_data);
 void	parse_texture(t_gamedata *gamedata, t_parsing *p_data);
 void	element_checklist(t_gamedata *gamedata, t_parsing *p_data);
-int		add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata);
+void	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata);
 void	pad_map(t_map *map, t_parsing *p_data, t_gamedata *gamedata);
 void	trim_map(t_map *map, t_parsing *p_data, t_gamedata *gamedata);
 void	parse_player(t_gamedata *gamedata, t_parsing *p_data);
 void	validate_map(t_gamedata *gamedata, t_parsing *p_data);
 void	flood_fill(t_map *map, int **mask, int x, int y);
 int		check_edge_flood(t_map *map, int **mask, int x, int y);
+void	valid_coins_doors(t_map *map, t_parsing *p_data, t_gamedata *gamedata);
 
 void	init_image_data(t_image *image, t_gamedata *gamedata);
 
 void	add_coin(t_gamedata *gamedata, t_coins *coins, int x, int y);
-void	init_coin_animation(t_gamedata *gamedata, t_texture_pack *texutre_pack,
+void	init_coin_animation(t_gamedata *gamedata, t_texture_pack *texture_pack,
 			t_coins *coins);
 
 #endif

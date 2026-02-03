@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:58 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/30 16:46:20 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/03 15:54:32 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	element_checklist(t_gamedata *gamedata, t_parsing *p_data)
 	int	i;
 	int	j;
 
+	if (p_data->map.height > 0)
+		return ;
 	if (gamedata->texture_pack.floor == -1)
 		clean_error(p_data, gamedata, "Floor color not defined");
 	if (gamedata->texture_pack.ceiling == -1)
@@ -51,12 +53,9 @@ static char	**strarr_add_line(char **strarr, char *line, size_t line_len)
 	new_arr = (char **)malloc(sizeof(char *) * (arr_len + 2));
 	if (!new_arr)
 		return (ft_strarr_free(strarr), NULL);
-	i = 0;
-	while (i < arr_len)
-	{
+	i = -1;
+	while (++i < arr_len)
 		new_arr[i] = strarr[i];
-		i++;
-	}
 	new_arr[arr_len] = (char *)malloc(sizeof(char) * (line_len + 1));
 	if (!new_arr[arr_len])
 		return (ft_strarr_free(strarr), free(new_arr), NULL);
@@ -67,10 +66,17 @@ static char	**strarr_add_line(char **strarr, char *line, size_t line_len)
 	return (new_arr);
 }
 
-int	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata)
+void	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata)
 {
-	int	i;
+	int			i;
+	static int	first_nl = -1;
 
+	if (line[0] == '\n' && p_data->map.height > 0 && first_nl == -1)
+		first_nl = p_data->map.height;
+	if (line[0] == '\n' && p_data->map.height != first_nl)
+		clean_error(p_data, gamedata, "Empty line in map");
+	if (line[0] == '\n')
+		return ;
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
@@ -86,5 +92,5 @@ int	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata)
 		p_data->map.width = i;
 	if (!p_data->map.content)
 		clean_error(p_data, gamedata, "Map line allocation failure");
-	return (1);
+	return ;
 }

@@ -4,6 +4,7 @@
 OBJS/
 minilibx-linux/
 cub3D
+leak.log
 
 !.gitignore
 *.txt

@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 10:00:00 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/30 16:41:26 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:32:39 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ static int	check_disconnected(t_map *map, int **mask)
 	y = -1;
 	while (++y < map->height && !result)
 	{
-		if (mask[y][0] == 0)
+		if (mask[y][0] != 2)
 			result = check_edge_flood(map, mask, 0, y);
-		if (!result && mask[y][map->width - 1] == 0)
+		if (!result && mask[y][map->width - 1] != 2)
 			result = check_edge_flood(map, mask, map->width - 1, y);
 	}
 	x = -1;
 	while (++x < map->width && !result)
 	{
-		if (mask[0][x] == 0)
+		if (mask[0][x] != 2)
 			result = check_edge_flood(map, mask, x, 0);
-		if (!result && mask[map->height - 1][x] == 0)
+		if (!result && mask[map->height - 1][x] != 2)
 			result = check_edge_flood(map, mask, x, map->height - 1);
 	}
 	return (result);
@@ -75,4 +75,5 @@ void	validate_map(t_gamedata *gamedata, t_parsing *p_data)
 	flood_fill(&p_data->map, p_data->map.mask, x, y);
 	if (check_disconnected(&p_data->map, p_data->map.mask))
 		clean_error(p_data, gamedata, "Map is not closed/surrounded by walls");
+	valid_coins_doors(&p_data->map, p_data, gamedata);
 }

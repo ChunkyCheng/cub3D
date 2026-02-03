@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 23:13:22 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 13:54:42 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ typedef struct s_texture_pack
 {
 	int			floor;
 	int			ceiling;
-	t_image		texture[9][4];
+	t_image		texture[10][4];
 	t_image		coin_frames[ANIMATION_FRAME_MAX];
 }	t_texture_pack;
 

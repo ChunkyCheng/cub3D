@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   limit_framerate.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:09:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/26 16:53:28 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 14:45:26 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,17 @@ static void	print_fps(void)
 
 void	limit_framerate(void)
 {
-	/*static t_llong	prev = 0;
-	t_llong			elapsed;
+	// static t_llong	prev = 0;
+	// t_llong			elapsed;
 
-	if (prev == 0)
-	{
-		prev = get_usec();
-		return ;
-	}
-	elapsed = get_usec() - prev;
-	busy_sleep(elapsed);
-	prev = get_usec();*/
+	// if (prev == 0)
+	// {
+	// 	prev = get_usec();
+	// 	return ;
+	// }
+	// elapsed = get_usec() - prev;
+	// busy_sleep(elapsed);
+	// prev = get_usec();
 	if (DEBUG)
 		print_fps();
 }

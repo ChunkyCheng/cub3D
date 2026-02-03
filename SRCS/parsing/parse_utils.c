@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:27 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/01/30 16:05:06 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/03 11:39:34 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void	clean_error(t_parsing *p_data, t_gamedata *gamedata, char *message)
 	if (p_data->map.mask)
 		free_mask(p_data->map.mask, p_data->map.height);
 	p_data->map.content = NULL;
+	p_data->map.mask = NULL;
+	if (p_data->cur_line)
+		free(p_data->cur_line);
+	p_data->cur_line = NULL;
 	close_with_exit_code(gamedata, 1);
 }
 
