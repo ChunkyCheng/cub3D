@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/03 14:14:11 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/03 22:39:26 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # define DFL_FLOOR		0x393A40
 # define DFL_CEILING	0x1A1C20
 
-# define DFL_NORTH		"textures/wall-default-north.xpm"
-# define DFL_SOUTH		"textures/wall-default-south.xpm"
-# define DFL_WEST		"textures/wall-default-west.xpm"
-# define DFL_EAST		"textures/wall-default-east.xpm"
+# define DFL_NORTH		"textures/BrickWall-cracked.xpm"
+# define DFL_SOUTH		"textures/BrickWall-cracked.xpm"
+# define DFL_WEST		"textures/BrickWall-cracked.xpm"
+# define DFL_EAST		"textures/BrickWall-cracked.xpm"
 
 # define COIN0	"textures/coin_animation/coin0.xpm"
 # define COIN1	"textures/coin_animation/coin1.xpm"

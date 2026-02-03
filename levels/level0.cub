@@ -1,1 +1,69 @@
+NO1 textures/level0/BrickWall.xpm
+SO1 textures/level0/BrickWall.xpm
+WE1 textures/level0/BrickWall.xpm
+EA1 textures/level0/BrickWall.xpm
 
+SO2 textures/level0/BrickWall.xpm
+WE2 textures/level0/BrickWall.xpm
+NO2 textures/level0/BrickWall.xpm
+EA2 textures/level0/CreeperPainting1.xpm
+
+SO3 textures/level0/BrickWall.xpm
+WE3 textures/level0/BrickWall.xpm
+NO3 textures/level0/BrickWall-smallcracked.xpm
+EA3 textures/level0/CreeperPainting2.xpm
+
+SO4 textures/level0/BrickWall.xpm
+EA4 textures/level0/BrickWall.xpm
+NO4 textures/level0/BrickWall.xpm
+WE4 textures/level0/CreeperPainting1.xpm
+
+SO5 textures/level0/BrickWall.xpm
+EA5 textures/level0/BrickWall.xpm
+NO5 textures/level0/BrickWall.xpm
+WE5 textures/level0/CreeperPainting2.xpm
+
+NO6 textures/level0/BrickWall.xpm
+SO6 textures/level0/BrickWall-smallcracked.xpm
+WE6 textures/level0/BrickWall.xpm
+EA6 textures/level0/BrickWall.xpm
+
+NO7 textures/level0/BrickWall.xpm
+SO7 textures/level0/BrickWall.xpm
+WE7 textures/level0/BrickWall.xpm
+EA7 textures/level0/BrickWall-smallcracked.xpm
+
+NO8 textures/level0/BrickWall.xpm
+SO8 textures/level0/BrickWall.xpm
+WE8 textures/level0/BrickWall-smallcracked.xpm
+EA8 textures/level0/BrickWall.xpm
+
+NO9 textures/level0/BrickWall.xpm
+SO9 textures/level0/BrickWall.xpm
+EA9 textures/level0/BrickWall-face.xpm
+WE9 textures/level0/BrickWall.xpm
+
+F 39,60,64
+C 26,28,50
+
+                   111111111111111111111111111111
+                   1                            1
+                   1                            1
+11111111111        1             CCCCCCCCCCCCC  1
+1         1        1             CCCCCCCCCCCCC  1
+1     C   1        1             CCCCCCCCCCCCC  1
+1         1111111117D8111111     CCCCCCCCCCCCC  1
+1         3                1     CCCCCCCCCCCCC  1
+1   S   112                1     CCCCCCCCCCCCC  1
+1       1                  1     CCCCCCCCCCCCC  1
+1111117D8                  1                    1
+   1                1117D811                    1
+   1                1      4                    1
+   1                1      5                    1
+   1                1      1                    1
+   1                1      1                    1
+   1116             1      1117D81111111111111111
+   11 D             1            1
+   111311111111111111            1
+                    1            1
+                    11111111111111

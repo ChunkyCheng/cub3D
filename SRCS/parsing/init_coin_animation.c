@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 17:50:06 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 22:54:08 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ t_coins *coins)
 	coins->frames = &texture_pack->coin_frames;
 	coins->frame_total = 8;
 	coins->frame_current = 0;
-	coins->frame_delay = 10;
+	coins->frame_delay = 5;
 }
