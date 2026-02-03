@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:58:36 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/03 15:00:03 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/03 15:56:12 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ t_texture_pack *texture_pack)
 int	close_and_exit(t_gamedata *gamedata)
 {
 	free_texture_pack(gamedata, &gamedata->texture_pack);
-	if (gamedata->pmap.content)
-		ft_strarr_free(gamedata->pmap.content);
 	if (gamedata->pmap.mask)
 		free_mask(gamedata->pmap.mask, gamedata->pmap.height);
 	if (gamedata->img_buff.mlx_img)
