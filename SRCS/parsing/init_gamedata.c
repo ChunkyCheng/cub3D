@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/03 18:08:52 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 18:13:40 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void	set_map_cell(t_gamedata *gamedata, int **mask, int x, int y)
 {
 	int	t_idx;
 
-	t_idx = get_wall(gamedata->pmap->content[y][x]);
-	if (gamedata->pmap->content[y][x] == ' ' && mask[y][x] == 3)
+	t_idx = get_wall(gamedata->pmap.content[y][x]);
+	if (gamedata->pmap.content[y][x] == ' ' && mask[y][x] == 3)
 		gamedata->map[y][x].e_type = UNBOUND;
-	else if (ft_strchr(" 0", pmap->content[y][x]))
+	else if (ft_strchr(" 0", gamedata->pmap.content[y][x]))
 		gamedata->map[y][x].e_type = EMPTY;
-	if (gamedata->pmap->content[y][x] == 'D' || t_idx)
+	if (gamedata->pmap.content[y][x] == 'D' || t_idx)
 	{
 		if (gamedata->pmap.content[y][x] == 'D')
 			gamedata->map[y][x].e_type = DOOR;
@@ -38,7 +38,7 @@ static void	set_map_cell(t_gamedata *gamedata, int **mask, int x, int y)
 		gamedata->map[y][x].solid = 1;
 		gamedata->map[y][x].visible = 1;
 	}
-	if (gamedata->pmap->content[y][x] == 'C')
+	if (gamedata->pmap.content[y][x] == 'C')
 		add_coin(gamedata, &gamedata->coins, x, y);
 }
 
