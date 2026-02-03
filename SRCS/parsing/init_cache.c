@@ -6,15 +6,16 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:53:30 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/30 01:30:26 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 17:18:53 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "rendering.h"
 
-//for rendering. Do not change in parsing but use in parsing
+#define DARK_FACTOR 0.6
 
+//for rendering. Do not change in parsing but use in parsing
 static void	init_upscaling(t_upscaling *upscaling)
 {
 	if (WIN_HEIGHT < WIN_WIDTH)
@@ -65,11 +66,15 @@ static void	calculate_upscale_map(t_upscaling *upscaling)
 	}
 }
 
-void	init_cache(t_cache *cache)
+void	init_cache(t_gamedata *gamedata, t_cache *cache)
 {
 	calculate_upscale_map(&cache->upscaling);
 	cache->view_plane_len = tan(ft_deg_to_rad(DFL_FOV / 2));
 	cache->projection_dist = IMG_WIDTH / 2 / cache->view_plane_len;
 	cache->min_wall_height
 		= round(cache->projection_dist / DFL_VIEW_DIST);
+	cache->fog_colour
+		= pixel_blend(gamedata->texture_pack.floor,
+			gamedata->texture_pack.ceiling, 0.5);
+	cache->fog_colour = pixel_blend(cache->fog_colour, BLACK, DARK_FACTOR);
 }

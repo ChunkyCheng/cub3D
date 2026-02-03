@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 10:33:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 23:19:30 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 17:02:13 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	render_wall_column(t_gamedata *gamedata, t_ray *ray, int screen_col)
 	init_pix_col(&pix_col);
 	darkness = (2.0 / (gamedata->cache->min_wall_height - IMG_HEIGHT))
 		* pix_col.screen_y_top + 1.0;
-	draw_pix_col(&gamedata->img_buff, &pix_col, darkness);
+	draw_pix_col(&gamedata->img_buff, &pix_col,
+		gamedata->cache->fog_colour, darkness);
 	gamedata->cache->z_buffer[screen_col] = ray->len;
 }

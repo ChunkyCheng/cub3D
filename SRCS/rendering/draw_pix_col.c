@@ -6,14 +6,14 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 21:23:36 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/29 23:08:38 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 17:02:52 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "rendering.h"
 
-void	draw_pix_col(t_image *dst, t_pix_col *pix_col, float darkness)
+void	draw_pix_col(t_image *dst, t_pix_col *pix_col, int fog, float fog_scale)
 {
 	int	i;
 	int	tex_y_fp;
@@ -31,7 +31,7 @@ void	draw_pix_col(t_image *dst, t_pix_col *pix_col, float darkness)
 				pix_col->tex_x, tex_y_fp >> 16);
 		if ((pixel & ALPHA) != ALPHA)
 		{
-			pixel = darken_pixel(pixel, darkness);
+			pixel = pixel_blend(fog, pixel, fog_scale);
 			image_put_pixel(dst, pix_col->screen_x, screen_y, pixel);
 		}
 		screen_y++;

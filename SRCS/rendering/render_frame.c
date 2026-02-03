@@ -6,7 +6,7 @@
 /*   By: jchuah <jchuah@student.42kl.edu.my>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 11:20:07 by jchuah            #+#    #+#             */
-/*   Updated: 2026/01/31 22:41:10 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 17:08:57 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_player *player)
 	t_ray	ray;
 	int		col;
 
-	render_background(&gamedata->img_buff, &gamedata->texture_pack,
-		gamedata->cache, &gamedata->player);
+	render_background(gamedata, &gamedata->texture_pack,
+		gamedata->cache);
 	player->view_plane.x = -player->dir.y * cache->view_plane_len;
 	player->view_plane.y = player->dir.x * cache->view_plane_len;
 	col = 0;

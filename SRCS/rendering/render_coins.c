@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 13:49:29 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 23:09:07 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 17:02:20 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ float depth, int screen_x)
 		{
 			pix_col.tex_x = x * pix_col.tex_step;
 			pix_col.screen_x = screen_x;
-			draw_pix_col(&gamedata->img_buff, &pix_col, darkness);
+			draw_pix_col(&gamedata->img_buff, &pix_col,
+				gamedata->cache->fog_colour, darkness);
 		}
 		screen_x++;
 		x++;

@@ -6,7 +6,7 @@
 /*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:25:58 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/02 20:51:51 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/03 17:08:41 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,21 @@ typedef struct s_cache
 	double		projection_dist;
 	int			min_wall_height;
 	float		z_buffer[IMG_WIDTH];
+	int			fog_colour;
 	t_upscaling	upscaling;
 }	t_cache;
 
+typedef struct t_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
 void	render_frame(t_gamedata *gamedata, t_cache *cache,
 			t_player *player);
-void	render_background(t_image *img_buff, t_texture_pack *texture_pack,
-			t_cache *cache, t_player *player);
+void	render_background(t_gamedata *gamedata, t_texture_pack *texture_pack,
+			t_cache *cache);
 void	init_ray(t_ray *ray, t_player *player, int col);
 void	cast_ray(t_gamedata *gamedata, t_ray *ray, t_player *player);
 void	render_wall_column(t_gamedata *gamedata, t_ray *ray, int screen_col);
@@ -104,8 +112,11 @@ void	update_animations(t_gamedata *gamedata);
 void	image_put_pixel(t_image *image, int x, int y, int colour);
 int		image_get_pixel(t_image *image, int x, int y);
 int		darken_pixel(int pixel, float scale);
+int		pixel_blend(int pix1, int pix2, float scale);
+
 void	init_pix_col(t_pix_col *pix_col);
-void	draw_pix_col(t_image *dst, t_pix_col *pix_col, float darkness);
+void	draw_pix_col(t_image *dst, t_pix_col *pix_col, int fog,
+			float fog_scale);
 
 void	limit_framerate(void);
 

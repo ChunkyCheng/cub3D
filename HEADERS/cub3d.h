@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/03 13:54:42 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/03 17:56:29 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ typedef struct s_gamedata
 	int				exit_code;
 }	t_gamedata;
 
-void		init_cache(t_cache *cache);
+void		init_cache(t_gamedata *gamedata, t_cache *cache);
 void		parsing(t_gamedata *gamedata, char *map_path);
 void		init_gamedata(t_gamedata *gamedata);
 int			game_loop(t_gamedata *gamedata);

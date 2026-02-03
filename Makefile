@@ -33,7 +33,7 @@ RENDER_FILES=	render_frame.c			render_background.c		init_ray.c				\
 				push_image.c			init_pix_col.c			draw_pix_col.c			\
 				update_animations.c														\
 				image_put_pixel.c		image_get_pixel.c		limit_framerate.c		\
-				darken_pixel.c
+				darken_pixel.c			pixel_blend.c
 
 MINIMAP_DIR		=	$(RENDER_DIR)/minimap
 MINIMAP_FILES	=	init_minimap.c		draw_circle.c	draw_rectangle.c				\
