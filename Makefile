@@ -13,34 +13,36 @@ MLXLIB	=	$(MLXDIR)/libmlx.a
 
 ####################################===SOURCE FILES===####################################
 
-PARSE_DIR	=	parsing
-PARSE_FILES	=	parsing.c			parse_utils.c			parse_map_line.c		\
-				parse_element.c		parse_info.c			pad_trim_map.c			\
-				parse_player.c		validate_map.c			flood_fill.c			\
-				init_gamedata.c		init_cache.c									\
-				init_image_data.c	add_coin.c			init_coin_animation.c		\
-				valid_coins_doors.c
+PARSE_DIR		=	parsing
+PARSE_FILES		=	parsing.c				parse_utils.c			parse_map_line.c		\
+					parse_element.c			parse_info.c			pad_trim_map.c			\
+					parse_player.c			validate_map.c			flood_fill.c			\
+					init_gamedata.c			init_cache.c									\
+					init_image_data.c		add_coin.c				init_coin_animation.c	\
+					valid_coins_doors.c
 
-INPUT_DIR	=	inputs
-INPUT_FILES	=	handle_key_event.c	handle_mouse_event.c	handle_focus_event.c		\
-				handle_movement.c	handle_rotation.c		handle_use_key.c			\
-				handle_minimap_toggle.c													\
-				check_inputs.c		hitbox_utils.c			check_collisions.c
+INPUT_DIR		=	inputs
+INPUT_FILES		=	handle_key_event.c		handle_mouse_event.c	handle_focus_event.c	\
+					handle_movement.c		handle_rotation.c		handle_use_key.c		\
+					check_inputs.c			hitbox_utils.c			check_collisions.c		\
+					handle_minimap_toggle.c													
 
-RENDER_DIR	=	rendering
-RENDER_FILES=	render_frame.c			render_background.c		init_ray.c				\
-				cast_ray.c				render_wall_column.c	render_coins.c			\
-				push_image.c			init_pix_col.c			draw_pix_col.c			\
-				update_animations.c														\
-				image_put_pixel.c		image_get_pixel.c		limit_framerate.c		\
-				darken_pixel.c			pixel_blend.c
+RENDER_DIR		=	rendering
+RENDER_FILES	=	render_frame.c			render_background.c		init_ray.c				\
+					cast_ray.c				render_wall_column.c	render_coins.c			\
+					push_image.c															\
+					update_animations.c		limit_framerate.c
 
 MINIMAP_DIR		=	$(RENDER_DIR)/minimap
-MINIMAP_FILES	=	init_minimap.c		draw_circle.c	draw_rectangle.c				\
-					draw_rectangle_masked.c		draw_triangle.c	\
-					rotate_minimap_player.c	render_minimap.c
+MINIMAP_FILES	=	init_minimap.c			rotate_minimap_player.c		render_minimap.c
 
-MODULES		=	PARSE	INPUT	RENDER	MINIMAP
+DRAW_DIR		=	$(RENDER_DIR)/draw_utils
+DRAW_FILES		=	image_get_pixel.c		image_put_pixel.c 			draw_circle.c		\
+					draw_rectangle.c		draw_rectangle_masked.c		draw_triangle.c		\
+					init_pix_col.c			draw_pix_col.c									\
+					darken_pixel.c			pixel_blend.c
+
+MODULES		=	PARSE	INPUT	RENDER	MINIMAP	DRAW
 
 $(foreach M,$(MODULES), $(eval $(M)_SRCS = $(addprefix $($(M)_DIR)/, $($(M)_FILES))))
 
