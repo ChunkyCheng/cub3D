@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/04 15:45:37 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/04 16:33:02 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	valid_coins_doors(t_map *map, t_parsing *p_data, t_gamedata *gamedata);
 
 void	init_image_data(t_image *image, t_gamedata *gamedata);
 
-void	add_coin(t_gamedata *gamedata, t_coins *coins, int x, int y);
+void	add_coin(t_gamedata *gamedata, t_parsing *p_data, int x, int y);
 void	init_coin_animation(t_gamedata *gamedata, t_texture_pack *texture_pack,
 			t_coins *coins);
 
