@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/04 14:47:18 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/04 15:45:37 by jchuah           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 # define DFL_FLOOR		0x393A40
 # define DFL_CEILING	0x1A1C20
 
-# define DOOR_N			"textures/BrickWall-cracke.xpm"
+# define DOOR_N			"textures/BrickWall-cracked.xpm"
 # define DOOR_S			"textures/BrickWall-cracked.xpm"
 # define DOOR_W			"textures/BrickWall-cracked.xpm"
 # define DOOR_E			"textures/BrickWall-cracked.xpm"
 
 # define COIN0			"textures/coin_animation/coin0.xpm"
-# define COIN1			"textures/coin_animation/con1.xpm"
+# define COIN1			"textures/coin_animation/coin1.xpm"
 # define COIN2			"textures/coin_animation/coin2.xpm"
 # define COIN3			"textures/coin_animation/coin3.xpm"
 

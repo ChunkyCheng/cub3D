@@ -1,0 +1,34 @@
+F 39,58,64
+C 26,28,32
+NO1 ./textures/BrickWall.xpm
+SO1 ./textures/BrickWall.xpm
+WE1 ./textures/BrickWall.xpm
+EA1 ./textures/BrickWall.xpm
+
+NO2 ./textures/wall-default-north.xpm
+SO2 ./textures/wall-default-south.xpm
+WE2 ./textures/wall-default-west.xpm
+EA2 ./textures/wall-default-east.xpm
+
+
+111111111111111111111
+1CCCCCCCCC1         1
+1CCCCCCCCC1         1
+1CCCCCCCCC1         1
+1CCC111CCC1   222   1
+1CCC111CCCD   222   1
+1CCC111CCC1   222   1
+1CCCCCCCCC1         1
+1CCCCNCCCC1         1
+1CCCCCCCCC1         1
+11111D11111         1
+1CCCCCCCCC1         1
+1CCCCCCCCC1         1
+1CCCCCCCCC1         1
+1CCC111   1         1
+1   111   1         1
+1   111   1         1
+1CCCCCCCCC1         1
+1CCCCCCCCC1         1
+1CCCCCCCCC1         1
+111111111111111111111
