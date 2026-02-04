@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:23:36 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/03 15:40:29 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:07:43 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@ void	valid_coins_doors(t_map *map, t_parsing *p_data, t_gamedata *gamedata)
 {
 	int		x;
 	int		y;
-	int		coins;
 
 	y = 0;
-	coins = 0;
 	while (y < map->height)
 	{
 		x = 0;
@@ -70,11 +68,9 @@ void	valid_coins_doors(t_map *map, t_parsing *p_data, t_gamedata *gamedata)
 					clean_error(p_data, gamedata, "Invalid door placement");
 			}
 			if (map->content[y][x] == 'C')
-				coins++;
+				add_coin(gamedata, &gamedata->coins, x, y);
 			x++;
 		}
 		y++;
 	}
-	if (coins > COIN_MAX)
-		clean_error(p_data, gamedata, "Too many coins");
 }

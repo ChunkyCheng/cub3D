@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:58:36 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/03 15:56:12 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:56:42 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,55 +28,44 @@ void	free_mask(int **arr, int height)
 	free(arr);
 }
 
-static void	free_coin_animation(t_gamedata *gamedata,
-t_texture_pack *texture_pack)
-{
-	t_image	*frame;
-
-	frame = &texture_pack->coin_frames[0];
-	if (frame->mlx_img)
-		mlx_destroy_image(gamedata->display, frame->mlx_img);
-	frame = &texture_pack->coin_frames[1];
-	if (frame->mlx_img)
-		mlx_destroy_image(gamedata->display, frame->mlx_img);
-	frame = &texture_pack->coin_frames[2];
-	if (frame->mlx_img)
-		mlx_destroy_image(gamedata->display, frame->mlx_img);
-	frame = &texture_pack->coin_frames[3];
-	if (frame->mlx_img)
-		mlx_destroy_image(gamedata->display, frame->mlx_img);
-}
-
-static void	free_texture_pack(t_gamedata *gamedata,
-t_texture_pack *texture_pack)
+static void	free_image(t_gamedata *gamedata, t_image *texture)
 {
 	int		i;
-	int		j;
 	t_image	*image;
 
 	i = 0;
-	while (i < 9)
+	while (i < 4)
 	{
-		j = 0;
-		while (j < 4)
-		{
-			image = &texture_pack->texture[i][j];
-			if (i != 0 && image->file_path)
-				free(image->file_path);
-			if (image->mlx_img && gamedata && gamedata->display)
-				mlx_destroy_image(gamedata->display, image->mlx_img);
-			image->file_path = NULL;
-			image->mlx_img = NULL;
-			j++;
-		}
+		image = &texture[i];
+		if (image->file_path)
+			free(image->file_path);
+		if (image->mlx_img)
+			mlx_destroy_image(gamedata->display, image->mlx_img);
+		image->file_path = NULL;
+		image->mlx_img = NULL;
 		i++;
 	}
-	free_coin_animation(gamedata, texture_pack);
+}
+
+static void	free_textures(t_gamedata *gamedata,
+t_texture_pack *texture_pack)
+{
+	int		i;
+
+	i = 0;
+	while (i < TEXTURES)
+	{
+		free_image(gamedata, texture_pack->texture[i]);
+		i++;
+	}
+	free_image(gamedata, texture_pack->coin_frames);
 }
 
 int	close_and_exit(t_gamedata *gamedata)
 {
-	free_texture_pack(gamedata, &gamedata->texture_pack);
+	free_textures(gamedata, &gamedata->texture_pack);
+	if (gamedata->pmap.content)
+		ft_strarr_free(gamedata->pmap.content);
 	if (gamedata->pmap.mask)
 		free_mask(gamedata->pmap.mask, gamedata->pmap.height);
 	if (gamedata->img_buff.mlx_img)

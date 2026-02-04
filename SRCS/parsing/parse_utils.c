@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:27 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/03 11:39:34 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/04 11:44:20 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ int	open_valid_ext(char *path, char *extension, int *out_fd)
 	*out_fd = open(path, O_RDONLY);
 	if (*out_fd < 0)
 	{
-		perror("Error\ncub3D");
+		ft_putstr_fd("Error\ncub3D: ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(path, 2);
 		return (0);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:09:55 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/03 09:33:11 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/04 13:30:05 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	parse_found(t_parsing *p_data, t_gamedata *gamedata, char **line)
 			p_data->wall_idx = 1;
 		else
 			clean_error(p_data, gamedata, "Invalid wall texture suffix");
-		p_data->wall[p_data->wall_idx] = 1;
+		p_data->txt[p_data->wall_idx] = 1;
 	}
 	if (**line != ' ')
 		clean_error(p_data, gamedata, "No separator after type identifier");

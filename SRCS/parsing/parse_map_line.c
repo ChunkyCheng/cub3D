@@ -6,39 +6,11 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:58 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/03 15:54:32 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:44:45 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-void	element_checklist(t_gamedata *gamedata, t_parsing *p_data)
-{
-	int	i;
-	int	j;
-
-	if (p_data->map.height > 0)
-		return ;
-	if (gamedata->texture_pack.floor == -1)
-		clean_error(p_data, gamedata, "Floor color not defined");
-	if (gamedata->texture_pack.ceiling == -1)
-		clean_error(p_data, gamedata, "Ceiling color not defined");
-	i = 0;
-	while (i + 1 < 9)
-	{
-		j = 0;
-		if (p_data->wall[i])
-		{
-			while (j < 4)
-			{
-				if (!gamedata->texture_pack.texture[i][j].file_path)
-					clean_error(p_data, gamedata, "Incomplete wall set");
-				j++;
-			}
-		}
-		i++;
-	}
-}
 
 static char	**strarr_add_line(char **strarr, char *line, size_t line_len)
 {
@@ -66,23 +38,72 @@ static char	**strarr_add_line(char **strarr, char *line, size_t line_len)
 	return (new_arr);
 }
 
-void	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata)
+static void	set_coin_door(t_gamedata *gamedata, t_parsing *p_data,
+		t_image *textures, char **paths)
 {
-	int			i;
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (paths[i] == NULL)
+			clean_error(p_data, gamedata, "Texture path undefined");
+		set_texture(gamedata, p_data, &textures[i], paths[i]);
+		i++;
+	}
+}
+
+static void	init_coin_door(t_gamedata *gamedata, t_parsing *p_data, char c)
+{
+	char	*paths[4];
+
+	if (!gamedata->texture_pack.coin_frames[0].file_path && c == 'C')
+	{
+		paths[0] = COIN0;
+		paths[1] = COIN1;
+		paths[2] = COIN2;
+		paths[3] = COIN3;
+		set_coin_door(gamedata, p_data,
+			gamedata->texture_pack.coin_frames, paths);
+	}
+	else if (!gamedata->texture_pack.texture[0][0].file_path && c == 'D')
+	{
+		paths[0] = DOOR_N;
+		paths[1] = DOOR_S;
+		paths[2] = DOOR_W;
+		paths[3] = DOOR_E;
+		set_coin_door(gamedata, p_data,
+			gamedata->texture_pack.texture[0], paths);
+	}
+}
+
+static void	empty_map_line(t_parsing *p_data, t_gamedata *gamedata, int height)
+{
 	static int	first_nl = -1;
 
-	if (line[0] == '\n' && p_data->map.height > 0 && first_nl == -1)
+	if (height > 0 && first_nl == -1)
 		first_nl = p_data->map.height;
-	if (line[0] == '\n' && p_data->map.height != first_nl)
+	if (height != first_nl)
 		clean_error(p_data, gamedata, "Empty line in map");
-	if (line[0] == '\n')
-		return ;
+}
+
+void	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata)
+{
+	int	i;
+
 	i = 0;
+	if (line[0] == '\n')
+	{
+		empty_map_line(p_data, gamedata, p_data->map.height);
+		return ;
+	}
 	while (line[i] && line[i] != '\n')
 	{
 		if (!ft_isdigit(line[i]) && ft_strchr(" NSEWCD", line[i]) == NULL)
 			clean_error(p_data, gamedata, "Invalid character in map");
-		if (get_wall(line[i]) != 0 && !p_data->wall[get_wall(line[i])])
+		if (ft_strchr("CD", line[i]))
+			init_coin_door(gamedata, p_data, line[i]);
+		if (get_wall(line[i]) != 0 && !p_data->txt[get_wall(line[i])])
 			clean_error(p_data, gamedata, "Undefined wall texture used in map");
 		i++;
 	}

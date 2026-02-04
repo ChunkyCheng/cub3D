@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/03 17:56:29 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/04 10:41:49 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define MAP_SIZE_MAX			128
 # define ANIMATION_FRAME_MAX	30
 # define COIN_MAX				128
+# define TEXTURES				10
 
 # define PLAYER_RADIUS	0.2
 
@@ -76,7 +77,7 @@ typedef struct s_texture_pack
 {
 	int			floor;
 	int			ceiling;
-	t_image		texture[10][4];
+	t_image		texture[TEXTURES][4];
 	t_image		coin_frames[ANIMATION_FRAME_MAX];
 }	t_texture_pack;
 

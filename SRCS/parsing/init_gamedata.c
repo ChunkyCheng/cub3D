@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/03 18:13:40 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/04 14:24:27 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static void	set_map_cell(t_gamedata *gamedata, int **mask, int x, int y)
 		gamedata->map[y][x].solid = 1;
 		gamedata->map[y][x].visible = 1;
 	}
-	if (gamedata->pmap.content[y][x] == 'C')
-		add_coin(gamedata, &gamedata->coins, x, y);
 }
 
 static void	arr_to_map_cell(t_gamedata *gamedata, t_map *pmap, int **mask)
@@ -70,12 +68,8 @@ static void	init_tex_pack(t_gamedata *gamedata, t_texture_pack *texture_pack)
 	int	i;
 	int	j;
 
-	gamedata->texture_pack.texture[0][0].file_path = DFL_NORTH;
-	gamedata->texture_pack.texture[0][1].file_path = DFL_SOUTH;
-	gamedata->texture_pack.texture[0][2].file_path = DFL_WEST;
-	gamedata->texture_pack.texture[0][3].file_path = DFL_EAST;
 	i = 0;
-	while (i < 9)
+	while (i < TEXTURES)
 	{
 		j = 0;
 		while (j < 4)
@@ -87,20 +81,19 @@ static void	init_tex_pack(t_gamedata *gamedata, t_texture_pack *texture_pack)
 		}
 		i++;
 	}
-	init_image_data(&texture_pack->coin_frames[0], gamedata);
-	init_image_data(&texture_pack->coin_frames[1], gamedata);
-	init_image_data(&texture_pack->coin_frames[2], gamedata);
-	init_image_data(&texture_pack->coin_frames[3], gamedata);
+	if (gamedata->texture_pack.coin_frames[0].file_path)
+	{
+		init_image_data(&texture_pack->coin_frames[0], gamedata);
+		init_image_data(&texture_pack->coin_frames[1], gamedata);
+		init_image_data(&texture_pack->coin_frames[2], gamedata);
+		init_image_data(&texture_pack->coin_frames[3], gamedata);
+		init_coin_animation(gamedata, texture_pack, &gamedata->coins);
+	}
 }
 
 void	init_gamedata(t_gamedata *gamedata)
 {
-	gamedata->texture_pack.coin_frames[0].file_path = COIN0;
-	gamedata->texture_pack.coin_frames[1].file_path = COIN1;
-	gamedata->texture_pack.coin_frames[2].file_path = COIN2;
-	gamedata->texture_pack.coin_frames[3].file_path = COIN3;
 	init_tex_pack(gamedata, &gamedata->texture_pack);
-	init_coin_animation(gamedata, &gamedata->texture_pack, &gamedata->coins);
 	arr_to_map_cell(gamedata, &gamedata->pmap, gamedata->pmap.mask);
 	free_mask(gamedata->pmap.mask, gamedata->pmap.height);
 	gamedata->pmap.mask = NULL;

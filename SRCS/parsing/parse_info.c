@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:09 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/03 09:33:11 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:44:06 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,26 @@ void	parse_colour(t_gamedata *gamedata, t_parsing *p_data)
 		gamedata->texture_pack.ceiling = colour;
 }
 
+void	set_texture(t_gamedata *gamedata, t_parsing *p_data,
+	t_image *texture, char *path)
+{
+	int			fd;
+
+	fd = -1;
+	if (open_valid_ext(path, ".xpm", &fd) == 0)
+		clean_error(p_data, gamedata, NULL);
+	close(fd);
+	texture->file_path = ft_strdup(path);
+	if (!texture->file_path)
+		clean_error(p_data, gamedata, "ft_strdup failure");
+}
+
 void	parse_texture(t_gamedata *gamedata, t_parsing *p_data)
 {
 	int			i;
-	int			fd;
 	const char	*wall[4] = {"NO", "SO", "WE", "EA"};
 
 	i = -1;
-	fd = -1;
 	if (!ft_strchr(p_data->info, '/'))
 		clean_error(p_data, gamedata, "Texture information is not a path");
 	while (i++ < 3)
@@ -96,13 +108,10 @@ void	parse_texture(t_gamedata *gamedata, t_parsing *p_data)
 		{
 			if (gamedata->texture_pack.texture[p_data->wall_idx][i].file_path)
 				clean_error(p_data, gamedata, "Duplicate wall definition");
-			if (open_valid_ext(p_data->info, ".xpm", &fd) == 0)
-				clean_error(p_data, gamedata, NULL);
-			close(fd);
-			gamedata->texture_pack.texture[p_data->wall_idx][i].file_path
-				= ft_strdup(p_data->info);
-			if (!gamedata->texture_pack.texture[p_data->wall_idx][i].file_path)
-				clean_error(p_data, gamedata, "ft_strdup failure");
+			set_texture(gamedata, p_data,
+				&gamedata->texture_pack.texture[p_data->wall_idx][i],
+				p_data->info);
+			return ;
 		}
 	}
 }

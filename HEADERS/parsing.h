@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/03 22:39:26 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/04 14:47:18 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 # define PARSING_H
 
 # include "cub3d.h"
+# include <string.h>
+# include <errno.h>
 
 # define DFL_FLOOR		0x393A40
 # define DFL_CEILING	0x1A1C20
 
-# define DFL_NORTH		"textures/BrickWall-cracked.xpm"
-# define DFL_SOUTH		"textures/BrickWall-cracked.xpm"
-# define DFL_WEST		"textures/BrickWall-cracked.xpm"
-# define DFL_EAST		"textures/BrickWall-cracked.xpm"
+# define DOOR_N			"textures/BrickWall-cracke.xpm"
+# define DOOR_S			"textures/BrickWall-cracked.xpm"
+# define DOOR_W			"textures/BrickWall-cracked.xpm"
+# define DOOR_E			"textures/BrickWall-cracked.xpm"
 
-# define COIN0	"textures/coin_animation/coin0.xpm"
-# define COIN1	"textures/coin_animation/coin1.xpm"
-# define COIN2	"textures/coin_animation/coin2.xpm"
-# define COIN3	"textures/coin_animation/coin3.xpm"
+# define COIN0			"textures/coin_animation/coin0.xpm"
+# define COIN1			"textures/coin_animation/con1.xpm"
+# define COIN2			"textures/coin_animation/coin2.xpm"
+# define COIN3			"textures/coin_animation/coin3.xpm"
 
 typedef struct s_render_vals	t_render_vals;
 
@@ -40,7 +42,7 @@ typedef struct s_parsing
 	int		fd;
 	char	*identifier;
 	int		wall_idx;
-	int		wall[9];
+	int		txt[TEXTURES];
 	char	*info;
 	t_map	map;
 	char	*cur_line;
@@ -53,6 +55,8 @@ void	clean_error(t_parsing *p_data, t_gamedata *gamedata, char *message);
 
 void	parse_element(char *line, t_gamedata *gamedata, t_parsing *p_data);
 void	parse_colour(t_gamedata *gamedata, t_parsing *p_data);
+void	set_texture(t_gamedata *gamedata, t_parsing *p_data,
+			t_image *texture, char *path);
 void	parse_texture(t_gamedata *gamedata, t_parsing *p_data);
 void	element_checklist(t_gamedata *gamedata, t_parsing *p_data);
 void	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata);
