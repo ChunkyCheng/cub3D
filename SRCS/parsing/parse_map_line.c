@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:58 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/04 14:44:45 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/04 18:05:04 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,18 @@ static void	init_coin_door(t_gamedata *gamedata, t_parsing *p_data, char c)
 	}
 }
 
-static void	empty_map_line(t_parsing *p_data, t_gamedata *gamedata, int height)
+static int	is_map_nl(char c, t_parsing *p_data, t_gamedata *gamedata)
 {
-	static int	first_nl = -1;
+	static int	first_nl = 0;
 
-	if (height > 0 && first_nl == -1)
-		first_nl = p_data->map.height;
-	if (height != first_nl)
-		clean_error(p_data, gamedata, "Empty line in map");
+	if (c == '\n')
+	{
+		first_nl = 1;
+		return (1);
+	}
+	if (first_nl == 1)
+		clean_error(p_data, gamedata, "Data after empty line(s) in map");
+	return (0);
 }
 
 void	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata)
@@ -92,11 +96,8 @@ void	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata)
 	int	i;
 
 	i = 0;
-	if (line[0] == '\n')
-	{
-		empty_map_line(p_data, gamedata, p_data->map.height);
+	if (is_map_nl(*line, p_data, gamedata))
 		return ;
-	}
 	while (line[i] && line[i] != '\n')
 	{
 		if (!ft_isdigit(line[i]) && ft_strchr(" NSEWCD", line[i]) == NULL)

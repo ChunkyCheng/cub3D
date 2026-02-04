@@ -6,71 +6,88 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 11:23:36 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/04 16:29:19 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/04 18:26:16 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-static int	check_door_chain(t_map *map, int x, int y, int direction)
+static int	is_wall(t_map *map, int x, int y)
 {
-	int	nx;
-	int	ny;
-
-	nx = x;
-	ny = y;
-	while (nx >= 0 && nx < map->width && ny >= 0 && ny < map->height)
-	{
-		if (map->content[ny][nx] != 'D')
-			return (get_wall(map->content[ny][nx]));
-		if (direction == 0)
-			ny--;
-		else if (direction == 1)
-			ny++;
-		else if (direction == 2)
-			nx--;
-		else if (direction == 3)
-			nx++;
-	}
-	return (0);
+	if (x < 0 || x >= map->width || y < 0 || y >= map->height)
+		return (0);
+	return (get_wall(map->content[y][x]));
 }
 
-static int	connected_door(t_map *map, int x, int y)
+static int	check_door_valid(t_map *map, int x, int y)
 {
-	int	top;
-	int	bottom;
-	int	left;
-	int	right;
+	int	d[4];
 
-	top = check_door_chain(map, x, y - 1, 0);
-	bottom = check_door_chain(map, x, y + 1, 1);
-	left = check_door_chain(map, x - 1, y, 2);
-	right = check_door_chain(map, x + 1, y, 3);
-	if ((top && bottom) || (left && right))
-		return (1);
-	return (0);
+	d[2] = 0;
+	d[3] = 0;
+	d[1] = -2;
+	while (++d[1] <= 1)
+	{
+		d[0] = -2;
+		while (++d[0] <= 1)
+		{
+			if (!(d[0] || d[1]))
+				continue ;
+			if (is_wall(map, x + d[0], y + d[1]))
+				d[3]++;
+			else if (x + d[0] >= 0 && x + d[0] < map->width
+				&& y + d[1] >= 0 && y + d[1] < map->height
+				&& map->content[y + d[1]][x + d[0]] == 'D')
+				d[2]++;
+		}
+	}
+	return (!((d[2] == 0 && d[3] < 2) || (d[2] == 1 && d[3] < 1)));
+}
+
+static void	flood_fill_doors(t_map *map, int x, int y, int *valid)
+{
+	int	d[2];
+
+	if (x < 0 || x >= map->width || y < 0 || y >= map->height)
+		return ;
+	if ((map->mask[y][x] & 4) || map->content[y][x] != 'D')
+		return ;
+	map->mask[y][x] |= 4;
+	if (!check_door_valid(map, x, y))
+		*valid = 0;
+	d[1] = -2;
+	while (++d[1] <= 1)
+	{
+		d[0] = -2;
+		while (++d[0] <= 1)
+			if ((d[0] || d[1]) && x + d[0] >= 0 && x + d[0] < map->width
+				&& y + d[1] >= 0 && y + d[1] < map->height
+				&& map->content[y + d[1]][x + d[0]] == 'D')
+				flood_fill_doors(map, x + d[0], y + d[1], valid);
+	}
 }
 
 void	valid_coins_doors(t_map *map, t_parsing *p_data, t_gamedata *gamedata)
 {
 	int		x;
 	int		y;
+	int		valid;
 
-	y = 0;
-	while (y < map->height)
+	y = -1;
+	while (++y < map->height)
 	{
-		x = 0;
-		while (x < map->width)
+		x = -1;
+		while (++x < map->width)
 		{
-			if (map->content[y][x] == 'D')
+			if (map->content[y][x] == 'D' && !(map->mask[y][x] & 4))
 			{
-				if (!connected_door(map, x, y))
+				valid = 1;
+				flood_fill_doors(map, x, y, &valid);
+				if (!valid)
 					clean_error(p_data, gamedata, "Invalid door placement");
 			}
 			if (map->content[y][x] == 'C')
 				add_coin(gamedata, p_data, x, y);
-			x++;
 		}
-		y++;
 	}
 }

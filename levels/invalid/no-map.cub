@@ -1,0 +1,7 @@
+NO textures/wall-default-north.xpm
+SO textures/wall-default-south.xpm
+WE textures/wall-default-west.xpm
+EA textures/wall-default-east.xpm
+
+F 220,100,0
+C 225,30,0

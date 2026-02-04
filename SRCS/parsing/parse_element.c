@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:09:55 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/04 13:30:05 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/04 17:08:11 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	parse_found(t_parsing *p_data, t_gamedata *gamedata, char **line)
 		else if (**line == ' ')
 			p_data->wall_idx = 1;
 		else
-			clean_error(p_data, gamedata, "Invalid wall texture suffix");
+			clean_error(p_data, gamedata, "Invalid element line");
 		p_data->txt[p_data->wall_idx] = 1;
 	}
 	if (**line != ' ')
@@ -34,11 +34,11 @@ static void	parse_found(t_parsing *p_data, t_gamedata *gamedata, char **line)
 static int	find_element(char **line, t_parsing *p_data, t_gamedata *gamedata)
 {
 	int			i;
-	int			found;
+	int			element;
 	const char	*identifiers[6] = {"NO", "SO", "WE", "EA", "F", "C"};
 
 	i = 0;
-	found = 0;
+	element = 0;
 	while (i < 6)
 	{
 		if (ft_strncmp(*line, identifiers[i], ft_strlen(identifiers[i])) == 0)
@@ -47,15 +47,15 @@ static int	find_element(char **line, t_parsing *p_data, t_gamedata *gamedata)
 			if (!p_data->identifier)
 				clean_error(p_data, gamedata, "ft_substr failure");
 			*line += ft_strlen(identifiers[i]);
-			found = 1;
+			element = 1;
 		}
 		i++;
 	}
-	if (found)
+	if (element)
 		parse_found(p_data, gamedata, line);
 	while (line && **line == ' ')
 		(*line)++;
-	return (found);
+	return (element);
 }
 
 void	parse_element(char *line, t_gamedata *gamedata, t_parsing *p_data)

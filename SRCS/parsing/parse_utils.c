@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:27 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/04 11:44:20 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/04 17:31:00 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ int	open_valid_ext(char *path, char *extension, int *out_fd)
 	int		len;
 	int		extlen;
 
-	len = ft_strlen(path);
 	extlen = ft_strlen(extension);
-	if (len < extlen || ft_strncmp(&path[len - extlen], extension, extlen) != 0)
+	len = ft_strlen(path) - extlen;
+	if (len <= 0 || ft_strncmp(&path[len], extension, extlen)
+		|| ft_strchr(&path[len - 1], '/'))
 	{
 		ft_putstr_fd("Error\nInvalid file extension. Expected [", 2);
 		ft_putstr_fd(extension, 2);
