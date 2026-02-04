@@ -1,1 +1,1 @@
-valgrind --leak-check=full --show-leak-kinds=all -s --suppressions=mouse.supp --log-file=$PWD/leak.log ./cub3D levels/
+valgrind --leak-check=full --show-leak-kinds=all -s --suppressions=mouse.supp --log-file=/home/lming-ha/42KL/Core/Rank04/CUB3D/submission/leak.log ./cub3D levels/

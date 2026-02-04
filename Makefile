@@ -130,6 +130,11 @@ clean:
 	@printf "$(RED)"
 	@make fclean -s -C $(LIBDIR)
 	@printf "$(RED)"
+	@if [ -d $(MLXDIR) ]; then						\
+		rm -rf $(MLXDIR);							\
+		printf "Removed $(MLXDIR)\n";				\
+	else											\
+		printf "$(MLXDIR) not found\n"; fi;	
 	@if [ -d $(OBJDIR) ]; then						\
 		rm -rf $(OBJDIR);							\
 		printf "Removed $(NAME) OBJS directory\n";	\
