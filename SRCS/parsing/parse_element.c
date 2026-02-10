@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:09:55 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/04 17:08:11 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/02/10 14:42:09 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,8 @@ void	parse_element(char *line, t_gamedata *gamedata, t_parsing *p_data)
 {
 	int	element;
 
-	if (*line == ' ' || *line == '1')
-	{
-		p_data->e_state = MAP;
-		return ;
-	}
 	element = find_element(&line, p_data, gamedata);
-	if (!element && (ft_strchr("123456789\n", *line) || *line == '\0'))
+	if (!element && (get_wall(*line) || *line == '\n' || *line == '\0'))
 	{
 		p_data->e_state = MAP;
 		return ;
