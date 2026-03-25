@@ -1,0 +1,82 @@
+NO1 textures/level0/BrickWall.xpm
+SO1 textures/level0/BrickWall.xpm
+WE1 textures/level0/BrickWall.xpm
+EA1 textures/level0/BrickWall.xpm
+
+SO2 textures/level0/BrickWall.xpm
+WE2 textures/level0/BrickWall.xpm
+NO2 textures/level0/BrickWall.xpm
+EA2 textures/level0/CreeperPainting1.xpm
+
+SO3 textures/level0/BrickWall.xpm
+WE3 textures/level0/BrickWall.xpm
+NO3 textures/level0/BrickWall-smallcracked.xpm
+EA3 textures/level0/CreeperPainting2.xpm
+
+SO4 textures/level0/BrickWall.xpm
+EA4 textures/level0/BrickWall.xpm
+NO4 textures/level0/BrickWall.xpm
+WE4 textures/level0/CreeperPainting1.xpm
+
+SO5 textures/level0/BrickWall.xpm
+EA5 textures/level0/BrickWall.xpm
+NO5 textures/level0/BrickWall.xpm
+WE5 textures/level0/CreeperPainting2.xpm
+
+NO6 textures/level0/BrickWall.xpm
+SO6 textures/level0/BrickWall-smallcracked.xpm
+WE6 textures/level0/BrickWall.xpm
+EA6 textures/level0/BrickWall.xpm
+
+NO7 textures/level0/BrickWall.xpm
+SO7 textures/level0/BrickWall.xpm
+WE7 textures/level0/BrickWall.xpm
+EA7 textures/level0/BrickWall-smallcracked.xpm
+
+NO8 textures/level0/BrickWall.xpm
+SO8 textures/level0/BrickWall.xpm
+WE8 textures/level0/BrickWall-smallcracked.xpm
+EA8 textures/level0/BrickWall.xpm
+
+NO9 textures/level0/BrickWall.xpm
+SO9 textures/level0/BrickWall.xpm
+EA9 textures/level0/BrickWall-face.xpm
+WE9 textures/level0/BrickWall.xpm
+
+F 255,0,0
+C 0,0,0
+
+1111111111111111111111111111111111
+1S                               1
+1                                1
+1                                1
+1                                1
+1             000000             1
+1          00000DD00000          1
+1         00000DDDD00000         1
+1        00000DDDDD000000        1
+1       00000DDDDD00000000       1
+1      00000DDDDD0000D00000      1
+1     00000DDDDD0000DDD00000     1
+1     0000DDDDD0000DDDDD0000     1
+1     00000DDDDD00DDDDDDD000     1
+1    0000000DDDDDDDDDDDDDD000    1
+1    00DD0000DDDDDDDD0DDDDD00    1
+1    0DDDD0000DDDDDD000DDDDD0    1
+1    0DDDDD000DDDDDD0000DDDD0    1
+1    00DDDDD0DDDDDDDD0000DD00    1
+1    000DDDDDDDDDDDDDD0000000    1
+1     000DDDDDDD00DDDDD00000     1
+1     0000DDDDD0000DDDDD0000     1
+1     00000DDD0000DDDDD00000     1
+1      00000D0000DDDDD00000      1
+1       00000000DDDDD00000       1
+1        000000DDDDD00000        1
+1         00000DDDD00000         1
+1          00000DD00000          1
+1             000000             1
+1                                1
+1                                1
+1                                1
+1                                1
+1111111111111111111111111111111111

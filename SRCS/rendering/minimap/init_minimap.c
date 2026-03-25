@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchuah <jeremychuahtm@gmail.com>           +#+  +:+       +#+        */
+/*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 15:40:28 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/01 00:32:02 by jchuah           ###   ########.fr       */
+/*   Updated: 2026/02/10 14:47:59 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "rendering.h"
 #include "minimap.h"
 
-static void	init_map_player(t_minimap *minimap, t_triangle *player)
+static void	init_map_player(t_minimap *minimap, t_triangle *player,
+		t_gamedata *gamedata)
 {
 	int	tip_dist;
 	int	base_dist;
@@ -29,14 +30,13 @@ static void	init_map_player(t_minimap *minimap, t_triangle *player)
 	player->p1.y = minimap->screen_y + base_dist;
 	player->p2.x = minimap->screen_x + base_len;
 	player->p2.y = player->p1.y;
-	player->colour = RED;
+	player->colour = gamedata->texture_pack.floor ^ 0xFFFFFF;
 }
 
 void	init_minimap(t_gamedata *gamedata, t_minimap *minimap)
 {
 	int	smaller_axis;
 
-	(void)gamedata;
 	if (IMG_HEIGHT < IMG_WIDTH)
 		smaller_axis = IMG_HEIGHT;
 	else
@@ -51,5 +51,5 @@ void	init_minimap(t_gamedata *gamedata, t_minimap *minimap)
 	minimap->outline.mid_y = minimap->screen_y;
 	minimap->outline.colour = 0xFFFFFF;
 	minimap->visible = 0;
-	init_map_player(minimap, &minimap->player);
+	init_map_player(minimap, &minimap->player, gamedata);
 }
