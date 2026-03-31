@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 17:10:58 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/04 18:05:04 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/03/31 21:16:54 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,27 +77,34 @@ static void	init_coin_door(t_gamedata *gamedata, t_parsing *p_data, char c)
 	}
 }
 
-static int	is_map_nl(char c, t_parsing *p_data, t_gamedata *gamedata)
+static void	check_empty_line(char *line, t_parsing *p_data, t_gamedata *gamedata)
 {
-	static int	first_nl = 0;
+	static int	content = 0;
+	static int	gap = 0;
+	char		*check;
 
-	if (c == '\n')
+	check = ft_strtrim(line, " ");
+	if (*check == '\n')
 	{
-		first_nl = 1;
-		return (1);
+		free(check);
+		if (content)
+			gap = 1;
 	}
-	if (first_nl == 1)
-		clean_error(p_data, gamedata, "Data after empty line(s) in map");
-	return (0);
+	else
+	{
+		free(check);
+		if (gap)
+			clean_error(p_data, gamedata, "Empty line in map");
+		content = 1;
+	}
 }
 
 void	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata)
 {
 	int	i;
 
+	check_empty_line(line, p_data, gamedata);
 	i = 0;
-	if (is_map_nl(*line, p_data, gamedata))
-		return ;
 	while (line[i] && line[i] != '\n')
 	{
 		if (!ft_isdigit(line[i]) && ft_strchr(" NSEWCD", line[i]) == NULL)
@@ -109,9 +116,9 @@ void	add_map_line(char *line, t_parsing *p_data, t_gamedata *gamedata)
 		i++;
 	}
 	p_data->map.height++;
-	p_data->map.content = strarr_add_line(p_data->map.content, line, i);
 	if (p_data->map.width < i)
 		p_data->map.width = i;
+	p_data->map.content = strarr_add_line(p_data->map.content, line, i);
 	if (!p_data->map.content)
 		clean_error(p_data, gamedata, "Map line allocation failure");
 	return ;

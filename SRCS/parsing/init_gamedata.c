@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 01:51:14 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/04 14:24:27 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/04/01 02:53:04 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	set_map_cell(t_gamedata *gamedata, int **mask, int x, int y)
 	int	t_idx;
 
 	t_idx = get_wall(gamedata->pmap.content[y][x]);
-	if (gamedata->pmap.content[y][x] == ' ' && mask[y][x] == 3)
+	if (gamedata->pmap.content[y][x] == ' ' && mask[y][x] == 2)
 		gamedata->map[y][x].e_type = UNBOUND;
 	else if (ft_strchr(" 0", gamedata->pmap.content[y][x]))
 		gamedata->map[y][x].e_type = EMPTY;

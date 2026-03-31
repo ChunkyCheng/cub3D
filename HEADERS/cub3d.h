@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:26:42 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/04 10:41:49 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/04/01 04:11:10 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_map
 	int		**mask;
 	int		height;
 	int		width;
+	int		mode;
 }	t_map;
 
 typedef struct s_vect

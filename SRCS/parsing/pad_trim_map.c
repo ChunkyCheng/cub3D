@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 08:36:58 by lming-ha          #+#    #+#             */
-/*   Updated: 2026/02/03 15:35:01 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/03/31 21:22:38 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ void	pad_map(t_map *map, t_parsing *p_data, t_gamedata *gamedata)
 			if (!padded)
 				clean_error(p_data, gamedata, "ft_calloc failure");
 			ft_memcpy(padded, map->content[y], len);
-			ft_memset(padded + len, ' ', map->width - len);
 			free(map->content[y]);
+			ft_memset(padded + len, ' ', map->width - len);
 			map->content[y] = padded;
 		}
 		y++;

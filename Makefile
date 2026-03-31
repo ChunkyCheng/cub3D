@@ -16,10 +16,9 @@ MLXLIB	=	$(MLXDIR)/libmlx.a
 PARSE_DIR		=	parsing
 PARSE_FILES		=	parsing.c				parse_utils.c			parse_map_line.c		\
 					parse_element.c			parse_info.c			pad_trim_map.c			\
-					parse_player.c			validate_map.c			flood_fill.c			\
-					init_gamedata.c			init_cache.c									\
-					init_image_data.c		add_coin.c				init_coin_animation.c	\
-					valid_coins_doors.c		element_checklist.c
+					parse_player.c			validate_map.c			init_gamedata.c			\
+					init_cache.c			init_image_data.c		add_coin.c				\
+					init_coin_animation.c	element_checklist.c
 
 INPUT_DIR		=	inputs
 INPUT_FILES		=	handle_key_event.c		handle_mouse_event.c	handle_focus_event.c	\

@@ -6,7 +6,7 @@
 /*   By: lming-ha <lming-ha@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 13:31:35 by jchuah            #+#    #+#             */
-/*   Updated: 2026/02/04 19:20:46 by lming-ha         ###   ########.fr       */
+/*   Updated: 2026/04/01 03:32:58 by lming-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,6 @@ void	pad_map(t_map *map, t_parsing *p_data, t_gamedata *gamedata);
 void	trim_map(t_map *map, t_parsing *p_data, t_gamedata *gamedata);
 void	parse_player(t_gamedata *gamedata, t_parsing *p_data);
 void	validate_map(t_gamedata *gamedata, t_parsing *p_data);
-void	flood_fill(t_map *map, int **mask, int x, int y);
-int		check_edge_flood(t_map *map, int **mask, int x, int y);
-void	valid_coins_doors(t_map *map, t_parsing *p_data, t_gamedata *gamedata);
 
 void	init_image_data(t_image *image, t_gamedata *gamedata);
 
